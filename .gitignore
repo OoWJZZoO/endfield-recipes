@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.pyc
+
+# 本机运行状态（含本机绝对路径与 MaaEnd 实例 id）
+.endfield-state.json
+
+# 一次性迁移脚本，改动已并入 build_chain.py
+patch4.py
+
+# 第三方站点的原样镜像，需要时用 fetch_modules.py 重新抓取
+modules/
+snapshot/
+
+# 开发过程产物（截图、UI 探测、探索脚本）
+dev/
+probe/
+shots/
+
+# 构建暂存目录
+_site/
+
+# 系统杂项
+.DS_Store
+Thumbs.db

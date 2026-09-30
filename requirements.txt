@@ -1,0 +1,6 @@
+# build_chain.py 的全部依赖：读 endfield_recipes.json + assets/items/*.webp，
+# 裁紧 alpha 包围盒、归一化尺寸后编码为 webp 并内联。
+# 固定版本是为了让 CI 构建出的 HTML 与本地逐字节一致（Pillow 的 webp 编码器
+# 随版本变化会改变输出字节）。
+numpy==2.4.6
+pillow==12.2.0

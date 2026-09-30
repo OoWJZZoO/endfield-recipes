@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>终末地 · 制造链路</title>
+<style>
+/*__CSS__*/
+</style>
+</head>
+<body>
+
+<div id="stage">
+  <svg id="contour" preserveAspectRatio="none"></svg>
+  <div id="dotribbon"></div>
+  <div id="world">
+    <svg id="edges" xmlns="http://www.w3.org/2000/svg"></svg>
+    <div id="nodes"></div>
+  </div>
+</div>
+
+<div id="topbar">
+  <div class="crumb">
+    <svg class="folder" id="crumb-home" viewBox="0 0 24 24" title="物品图鉴"><path d="M3 5.6A1.6 1.6 0 0 1 4.6 4h4.8l2 2.6h8A1.6 1.6 0 0 1 21 8.2v10.2A1.6 1.6 0 0 1 19.4 20H4.6A1.6 1.6 0 0 1 3 18.4z"/></svg>
+    <span class="sep">›</span>
+    <div class="c-pill" id="crumb-home-pill">终末地百科</div>
+    <span class="sep">›</span>
+    <div class="c-pill" id="crumb-codex">物品图鉴</div>
+    <span class="sep" id="crumb-sep2">›</span>
+    <span class="c-cur" id="crumb-item">—</span>
+  </div>
+  <div id="toolbar">
+    <div class="tg on" id="tg-ratio">配方比例</div>
+    <div class="tg on" id="tg-amount">需求数量</div>
+    <div class="tg" id="tg-2s">按2秒记</div>
+  </div>
+  <div id="searchwrap">
+    <input id="search" placeholder="搜索物品 · 输入中文 / 英文 / ID" autocomplete="off" spellcheck="false">
+    <span class="mag"><svg viewBox="0 0 24 24" fill="none"><circle cx="10.6" cy="10.6" r="6.6"/><path d="M15.7 15.7 21 21"/></svg></span>
+  </div>
+  <div id="backbtn" title="返回上一级链路">
+    <svg viewBox="0 0 24 24"><path d="M11.4 4.6 3.9 12l7.5 7.4v-4.8h9V9.4h-9z"/></svg>
+  </div>
+</div>
+<div id="results"></div>
+
+<div id="codex">
+  <div class="cx-head">
+    <div class="cx-bar" id="cx-bar"></div>
+    <div class="cx-note" id="cx-note"></div>
+  </div>
+  <div class="cx-grid" id="cx-grid"></div>
+</div>
+
+<div id="panel"></div>
+
+<div id="zoomctl">
+  <div class="mouse" id="zoomfit" title="适应窗口（点击）">
+    <span class="tri up"></span><span class="body"><span class="wheel"></span></span><span class="tri dn"></span>
+  </div>
+  <span class="lbl">缩放</span>
+  <div class="slider"><input id="zoomrange" type="range" min="15" max="260" value="100" aria-label="缩放"></div>
+  <span class="pct" id="pct">100%</span>
+</div>
+
+<script>
+/*__GLYPHS__*/
+</script>
+<script>
+/*__DATA__*/
+/*__ICON__*/
+</script>
+<script>
+/*__APP__*/
+</script>
+</body>
+</html>

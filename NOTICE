@@ -1,0 +1,21 @@
+# 版权与来源说明
+
+本项目是《明日方舟：终末地》的非官方同人资料工具，与鹰角网络 / GRYPHLINE 无任何关联，
+未获其授权或认可。
+
+## 代码
+
+`*.py`、`*.mjs`、`src/`、`.github/` 下的代码以 MIT 许可发布，见 `LICENSE`。
+
+## 游戏美术资源与数据（不在 MIT 许可范围内）
+
+- `assets/` 下的物品图标、机具图标，以及 `endfield_chain.html` 中内联的同名图标，
+  均为《明日方舟：终末地》的游戏美术资源，版权归鹰角网络 / GRYPHLINE 所有。
+  此处仅用于非商业的同人资料展示。
+- `endfield_recipes.json` 及其他派生产物中的配方数据，抓取自 `gameheads.gg` 的终末地条目页。
+  再分发时请保留该来源标注。
+- 物品图标的原始文件来自 `https://gameheads.gg/images/endfield/`。
+
+## 游戏名称
+
+《明日方舟：终末地》/ Arknights: Endfield 及相关名称、标识为其各自权利人的商标或注册商标。

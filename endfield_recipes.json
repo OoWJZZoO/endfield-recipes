@@ -1,0 +1,8041 @@
+{
+  "source": "https://gameheads.gg/zh/g/endfield/items",
+  "extractedAt": "2026-09-29T11:51:15.960Z",
+  "stats": {
+    "items": 190,
+    "recipes": 288,
+    "facilities": 21
+  },
+  "items": [
+    {
+      "id": "item_acridgen",
+      "names": {
+        "zh": "酸气",
+        "en": "Acridgen",
+        "ja": "酸性ガス"
+      },
+      "category": "industrial_product",
+      "tier": 2,
+      "isBaseResource": false,
+      "transportMode": "pipe"
+    },
+    {
+      "id": "item_activity_copper_poly",
+      "names": {
+        "zh": "实验息壤铜锭",
+        "en": "Proto Xiran-Cuprium",
+        "ja": "実験用息壌銅塊"
+      },
+      "category": "industrial_product",
+      "tier": 4,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_activity_copper_poly_cmpt",
+      "names": {
+        "zh": "实验息壤铜零件",
+        "en": "Proto Xiran-Cuprium Part",
+        "ja": "実験用息壌銅部品"
+      },
+      "category": "industrial_product",
+      "tier": 4,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_activity_copper_poly_gas",
+      "names": {
+        "zh": "实验息壤铜气",
+        "en": "Proto Xiran-Cuprium Gas",
+        "ja": "実験用息壌銅ガス"
+      },
+      "category": "industrial_product",
+      "tier": 4,
+      "isBaseResource": false,
+      "transportMode": "pipe"
+    },
+    {
+      "id": "item_activity_copper_poly_tool",
+      "names": {
+        "zh": "实验息壤铜骨骼",
+        "en": "Proto Xiran-Cuprium Frame",
+        "ja": "実験用息壌銅フレーム"
+      },
+      "category": "industrial_product",
+      "tier": 4,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_activity_copper_xiranite_tool",
+      "names": {
+        "zh": "实验铜骨骼",
+        "en": "Proto Cuprium Frame",
+        "ja": "実験用銅フレーム"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_activity_xiranite_box",
+      "names": {
+        "zh": "实验龙泡泡外壳",
+        "en": "Proto Chubby Lung Shell",
+        "ja": "実験用龍泡泡シェル"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_activity_xiranite_enr_box",
+      "names": {
+        "zh": "实验龙泡泡重壳",
+        "en": "Proto Chubby Lung Heavy Shell",
+        "ja": "実験用龍泡泡ヘビーシェル"
+      },
+      "category": "industrial_product",
+      "tier": 4,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_activity_xiranite_enr_lung",
+      "names": {
+        "zh": "重息壤龙泡泡",
+        "en": "Heavy Xiranite Chubby Lung",
+        "ja": "重息壌龍泡泡"
+      },
+      "category": "industrial_product",
+      "tier": 5,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_activity_xiranite_enr_nugget",
+      "names": {
+        "zh": "实验重息壤块",
+        "en": "Proto Heavy Xiranite",
+        "ja": "実験用重息壌ブロック"
+      },
+      "category": "industrial_product",
+      "tier": 4,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_activity_xiranite_lung",
+      "names": {
+        "zh": "息壤龙泡泡",
+        "en": "Xiranite Chubby Lung",
+        "ja": "息壌龍泡泡"
+      },
+      "category": "industrial_product",
+      "tier": 4,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_activity_xiranite_nugget",
+      "names": {
+        "zh": "实验息壤块",
+        "en": "Proto Xiranite",
+        "ja": "実験用息壌ブロック"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_aquagen",
+      "names": {
+        "zh": "水蒸气",
+        "en": "Aquagen",
+        "ja": "水蒸気"
+      },
+      "category": "industrial_product",
+      "tier": 2,
+      "isBaseResource": false,
+      "transportMode": "pipe"
+    },
+    {
+      "id": "item_bottled_food_1",
+      "names": {
+        "zh": "柑实罐头",
+        "en": "Canned Citrome [C]",
+        "ja": "シトロームの缶詰Ⅰ"
+      },
+      "category": "consumable_item",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_bottled_food_2",
+      "names": {
+        "zh": "优质柑实罐头",
+        "en": "Canned Citrome [B]",
+        "ja": "シトロームの缶詰Ⅱ"
+      },
+      "category": "consumable_item",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_bottled_food_3",
+      "names": {
+        "zh": "精选柑实罐头",
+        "en": "Canned Citrome [A]",
+        "ja": "シトロームの缶詰Ⅲ"
+      },
+      "category": "consumable_item",
+      "tier": 4,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_bottled_food_4",
+      "names": {
+        "zh": "锦草软饮",
+        "en": "Jincao Drink",
+        "ja": "錦草ソーダⅠ"
+      },
+      "category": "consumable_item",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_bottled_food_5",
+      "names": {
+        "zh": "优质锦草软饮",
+        "en": "Jincao Tea",
+        "ja": "錦草ソーダⅡ"
+      },
+      "category": "consumable_item",
+      "tier": 4,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_bottled_rec_hp_1",
+      "names": {
+        "zh": "荞愈胶囊",
+        "en": "Buck Capsule [C]",
+        "ja": "蕎花カプセルⅠ"
+      },
+      "category": "consumable_item",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_bottled_rec_hp_2",
+      "names": {
+        "zh": "优质荞愈胶囊",
+        "en": "Buck Capsule [B]",
+        "ja": "蕎花カプセルⅡ"
+      },
+      "category": "consumable_item",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_bottled_rec_hp_3",
+      "names": {
+        "zh": "精选荞愈胶囊",
+        "en": "Buck Capsule [A]",
+        "ja": "蕎花カプセルⅢ"
+      },
+      "category": "consumable_item",
+      "tier": 4,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_bottled_rec_hp_4",
+      "names": {
+        "zh": "芽针针剂",
+        "en": "Yazhen Syringe [C]",
+        "ja": "芽針注射剤Ⅰ"
+      },
+      "category": "consumable_item",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_bottled_rec_hp_5",
+      "names": {
+        "zh": "优质芽针针剂",
+        "en": "Yazhen Syringe [A]",
+        "ja": "芽針注射剤Ⅱ"
+      },
+      "category": "consumable_item",
+      "tier": 4,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_carbon_enr",
+      "names": {
+        "zh": "稳定碳块",
+        "en": "Stabilized Carbon",
+        "ja": "安定炭塊"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_carbon_enr_powder",
+      "names": {
+        "zh": "致密碳粉末",
+        "en": "Dense Carbon Powder",
+        "ja": "高密度炭塊粉末"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_carbon_mtl",
+      "names": {
+        "zh": "碳块",
+        "en": "Carbon",
+        "ja": "炭塊"
+      },
+      "category": "industrial_product",
+      "tier": 2,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_carbon_powder",
+      "names": {
+        "zh": "碳粉末",
+        "en": "Carbon Powder",
+        "ja": "炭塊粉末"
+      },
+      "category": "industrial_product",
+      "tier": 2,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_crystal_enr",
+      "names": {
+        "zh": "密制晶体",
+        "en": "Packed Origocrust",
+        "ja": "特製結晶"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_crystal_enr_powder",
+      "names": {
+        "zh": "致密晶体粉末",
+        "en": "Dense Origocrust Powder",
+        "ja": "高密度結晶粉末"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_crystal_powder",
+      "names": {
+        "zh": "晶体外壳粉末",
+        "en": "Origocrust Powder",
+        "ja": "結晶外殻粉末"
+      },
+      "category": "industrial_product",
+      "tier": 2,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_crystal_shell",
+      "names": {
+        "zh": "晶体外壳",
+        "en": "Origocrust",
+        "ja": "結晶外殻"
+      },
+      "category": "industrial_product",
+      "tier": 2,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_cuprium",
+      "names": {
+        "zh": "赤铜块",
+        "en": "Cuprium",
+        "ja": "赤銅塊"
+      },
+      "category": "industrial_product",
+      "tier": 2,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_cuprium_bottle",
+      "names": {
+        "zh": "赤铜瓶",
+        "en": "Cuprium Bottle",
+        "ja": "赤銅ボトル"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_cuprium_canister",
+      "names": {
+        "zh": "赤铜耐压罐",
+        "en": "Cuprium Canister",
+        "ja": "赤銅圧力タンク"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_cuprium_cmpt",
+      "names": {
+        "zh": "赤铜零件",
+        "en": "Cuprium Part",
+        "ja": "赤銅部品"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_cuprium_enr_cmpt",
+      "names": {
+        "zh": "赤铜装备原件",
+        "en": "Cuprium Component",
+        "ja": "赤銅装備部品"
+      },
+      "category": "industrial_product",
+      "tier": 4,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_cuprium_gas",
+      "names": {
+        "zh": "气态赤铜",
+        "en": "Cuprium Gas",
+        "ja": "赤銅ガス"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false,
+      "transportMode": "pipe"
+    },
+    {
+      "id": "item_cuprium_ore",
+      "names": {
+        "zh": "赤铜矿石",
+        "en": "Cuprium Ore",
+        "ja": "赤銅鉱物"
+      },
+      "category": "natural_resource",
+      "tier": 1,
+      "isBaseResource": true
+    },
+    {
+      "id": "item_cuprium_powder",
+      "names": {
+        "zh": "赤铜粉末",
+        "en": "Cuprium Powder",
+        "ja": "赤銅粉末"
+      },
+      "category": "industrial_product",
+      "tier": 2,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_cuprium_solution",
+      "names": {
+        "zh": "赤铜溶液",
+        "en": "Cuprium Solution",
+        "ja": "赤銅溶液"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false,
+      "transportMode": "pipe"
+    },
+    {
+      "id": "item_equip_script_1",
+      "names": {
+        "zh": "紫晶装备原件",
+        "en": "Amethyst Component",
+        "ja": "紫晶装備部品"
+      },
+      "category": "industrial_product",
+      "tier": 2,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_equip_script_2",
+      "names": {
+        "zh": "蓝铁装备原件",
+        "en": "Ferrium Component",
+        "ja": "青鉄装備部品"
+      },
+      "category": "industrial_product",
+      "tier": 2,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_equip_script_3",
+      "names": {
+        "zh": "高晶装备原件",
+        "en": "Cryston Component",
+        "ja": "高晶装備部品"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_equip_script_4",
+      "names": {
+        "zh": "息壤装备原件",
+        "en": "Xiranite Component",
+        "ja": "息壌装備部品"
+      },
+      "category": "industrial_product",
+      "tier": 4,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_event_fbottle_heavy_xiranite_grass_2",
+      "names": {
+        "zh": "实验重息壤瓶（芽针溶液）",
+        "en": "Experimental Heavy Xiranite Bottle (Yazhen Solution)",
+        "ja": "実験用重息壌ボトル（芽針エキス入り）"
+      },
+      "category": "industrial_product",
+      "tier": 4,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_event_heavy_xiranite_bottle",
+      "names": {
+        "zh": "实验重息壤瓶",
+        "en": "Experimental Heavy Xiranite Bottle",
+        "ja": "実験用重息壌ボトル"
+      },
+      "category": "industrial_product",
+      "tier": 4,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_event_heavy_xiranite_cmpt",
+      "names": {
+        "zh": "实验重息壤零件",
+        "en": "Experimental Heavy Xiranite Part",
+        "ja": "実験用重息壌部品"
+      },
+      "category": "industrial_product",
+      "tier": 4,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_event_xiran_hue_atomizer",
+      "names": {
+        "zh": "实验玉铜发散器",
+        "en": "Experimental Xiran-Hue Atomizer",
+        "ja": "実験用玉銅拡散装置"
+      },
+      "category": "industrial_product",
+      "tier": 4,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_event_xiranite_bottle",
+      "names": {
+        "zh": "实验息壤瓶",
+        "en": "Experimental Xiranite Bottle",
+        "ja": "実験用息壌ボトル"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_event_xiranite_cmpt",
+      "names": {
+        "zh": "实验息壤零件",
+        "en": "Experimental Xiranite Part",
+        "ja": "実験用息壌部品"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_event_xiranite_gourd",
+      "names": {
+        "zh": "息壤葫芦",
+        "en": "Xiranite Gourd",
+        "ja": "息壌ひょうたん"
+      },
+      "category": "industrial_product",
+      "tier": 4,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_event_xiranite_jade_gourd",
+      "names": {
+        "zh": "息壤玉葫芦",
+        "en": "Xiranite Jade Gourd",
+        "ja": "息壌玉ひょうたん"
+      },
+      "category": "industrial_product",
+      "tier": 5,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_fbottle_cuprium_grass_1",
+      "names": {
+        "zh": "赤铜瓶（锦草溶液）",
+        "en": "Cuprium Bottle (Jincao Solution)",
+        "ja": "赤銅ボトル（錦草エキス入り）"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_fbottle_cuprium_grass_2",
+      "names": {
+        "zh": "赤铜瓶（芽针溶液）",
+        "en": "Cuprium Bottle (Yazhen Solution)",
+        "ja": "赤銅ボトル（芽針エキス入り）"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_fbottle_cuprium_inert_xircon_effluent",
+      "names": {
+        "zh": "赤铜瓶（惰性壤晶废液）",
+        "en": "Cuprium Bottle (Inert Xircon Effluent)",
+        "ja": "赤銅ボトル（不活性壌晶廃液入り）"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_fbottle_cuprium_precip_acid",
+      "names": {
+        "zh": "赤铜瓶（沉积酸）",
+        "en": "Cuprium Bottle (Precipitation Acid)",
+        "ja": "赤銅ボトル（沈殿酸入り）"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_fbottle_cuprium_sewage",
+      "names": {
+        "zh": "赤铜瓶（污水）",
+        "en": "Cuprium Bottle (Sewage)",
+        "ja": "赤銅ボトル（汚水入り）"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_fbottle_cuprium_water",
+      "names": {
+        "zh": "赤铜瓶（清水）",
+        "en": "Cuprium Bottle (Clean Water)",
+        "ja": "赤銅ボトル（水入り）"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_fbottle_cuprium_xiranite",
+      "names": {
+        "zh": "赤铜瓶（液化息壤）",
+        "en": "Cuprium Bottle (Liquid Xiranite)",
+        "ja": "赤銅ボトル（液化息壌入り）"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_fbottle_cuprium_xircon_effluent",
+      "names": {
+        "zh": "赤铜瓶（壤晶废液）",
+        "en": "Cuprium Bottle (Xircon Effluent)",
+        "ja": "赤銅ボトル（壌晶廃液入り）"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_fbottle_ferrium_heavy_xiranite",
+      "names": {
+        "zh": "蓝铁瓶（液化重息壤）",
+        "en": "Ferrium Bottle (Liquid Heavy Xiranite)",
+        "ja": "青鉄製ボトル（液化重息壌入り）"
+      },
+      "category": "industrial_product",
+      "tier": 2,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_fbottle_glass_grass_1",
+      "names": {
+        "zh": "紫晶质瓶（锦草溶液）",
+        "en": "Amethyst Bottle (Jincao Solution)",
+        "ja": "紫晶製ボトル（錦草エキス入り）"
+      },
+      "category": "industrial_product",
+      "tier": 2,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_fbottle_glass_grass_2",
+      "names": {
+        "zh": "紫晶质瓶（芽针溶液）",
+        "en": "Amethyst Bottle (Yazhen Solution)",
+        "ja": "紫晶製ボトル（芽針エキス入り）"
+      },
+      "category": "industrial_product",
+      "tier": 2,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_fbottle_glass_inert_xircon_effluent",
+      "names": {
+        "zh": "紫晶质瓶（惰性壤晶废液）",
+        "en": "Amethyst Bottle (Inert Xircon Effluent)",
+        "ja": "紫晶製ボトル（不活性壌晶廃液入り）"
+      },
+      "category": "industrial_product",
+      "tier": 2,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_fbottle_glass_sewage",
+      "names": {
+        "zh": "紫晶质瓶（污水）",
+        "en": "Amethyst Bottle (Sewage)",
+        "ja": "紫晶製ボトル（汚水入り）"
+      },
+      "category": "industrial_product",
+      "tier": 2,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_fbottle_glass_water",
+      "names": {
+        "zh": "紫晶质瓶（清水）",
+        "en": "Amethyst Bottle (Clean Water)",
+        "ja": "紫晶製ボトル（水入り）"
+      },
+      "category": "industrial_product",
+      "tier": 2,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_fbottle_glass_xiranite",
+      "names": {
+        "zh": "紫晶质瓶（液化息壤）",
+        "en": "Amethyst Bottle (Liquid Xiranite)",
+        "ja": "紫晶製ボトル（液化息壌入り）"
+      },
+      "category": "industrial_product",
+      "tier": 2,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_fbottle_glass_xircon_effluent",
+      "names": {
+        "zh": "紫晶质瓶（壤晶废液）",
+        "en": "Amethyst Bottle (Xircon Effluent)",
+        "ja": "紫晶製ボトル（壌晶廃液入り）"
+      },
+      "category": "industrial_product",
+      "tier": 2,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_fbottle_glassenr_grass_1",
+      "names": {
+        "zh": "高晶质瓶（锦草溶液）",
+        "en": "Cryston Bottle (Jincao Solution)",
+        "ja": "高晶製ボトル（錦草エキス入り）"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_fbottle_glassenr_grass_2",
+      "names": {
+        "zh": "高晶质瓶（芽针溶液）",
+        "en": "Cryston Bottle (Yazhen Solution)",
+        "ja": "高晶製ボトル（芽針エキス入り）"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_fbottle_glassenr_inert_xircon_effluent",
+      "names": {
+        "zh": "高晶质瓶（惰性壤晶废液）",
+        "en": "Cryston Bottle (Inert Xircon Effluent)",
+        "ja": "高晶製ボトル（不活性壌晶廃液入り）"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_fbottle_glassenr_sewage",
+      "names": {
+        "zh": "高晶质瓶（污水）",
+        "en": "Cryston Bottle (Sewage)",
+        "ja": "高晶製ボトル（汚水入り）"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_fbottle_glassenr_water",
+      "names": {
+        "zh": "高晶质瓶（清水）",
+        "en": "Cryston Bottle (Clean Water)",
+        "ja": "高晶製ボトル（水入り）"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_fbottle_glassenr_xiranite",
+      "names": {
+        "zh": "高晶质瓶（液化息壤）",
+        "en": "Cryston Bottle (Liquid Xiranite)",
+        "ja": "高晶製ボトル（液化息壌入り）"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_fbottle_glassenr_xircon_effluent",
+      "names": {
+        "zh": "高晶质瓶（壤晶废液）",
+        "en": "Cryston Bottle (Xircon Effluent)",
+        "ja": "高晶製ボトル（壌晶廃液入り）"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_fbottle_hetonite_grass_1",
+      "names": {
+        "zh": "赫铜瓶（锦草溶液）",
+        "en": "Hetonite Bottle (Jincao Solution)",
+        "ja": "緋銅ボトル（錦草エキス入り）"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_fbottle_hetonite_grass_2",
+      "names": {
+        "zh": "赫铜瓶（芽针溶液）",
+        "en": "Hetonite Bottle (Yazhen Solution)",
+        "ja": "緋銅ボトル（芽針エキス入り）"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_fbottle_hetonite_heavy_xiranite",
+      "names": {
+        "zh": "赫铜瓶（液化重息壤）",
+        "en": "Hetonite Bottle (Liquid Heavy Xiranite)",
+        "ja": "緋銅ボトル（液化重息壌入り）"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_fbottle_hetonite_inert_xircon_effluent",
+      "names": {
+        "zh": "赫铜瓶（惰性壤晶废液）",
+        "en": "Hetonite Bottle (Inert Xircon Effluent)",
+        "ja": "緋銅ボトル（不活性壌晶廃液入り）"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_fbottle_hetonite_precip_acid",
+      "names": {
+        "zh": "赫铜瓶（沉积酸）",
+        "en": "Hetonite Bottle (Precipitation Acid)",
+        "ja": "緋銅ボトル（沈殿酸入り）"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_fbottle_hetonite_sewage",
+      "names": {
+        "zh": "赫铜瓶（污水）",
+        "en": "Hetonite Bottle (Sewage)",
+        "ja": "緋銅ボトル（汚水入り）"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_fbottle_hetonite_water",
+      "names": {
+        "zh": "赫铜瓶（清水）",
+        "en": "Hetonite Bottle (Clean Water)",
+        "ja": "緋銅ボトル（水入り）"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_fbottle_hetonite_xiranite",
+      "names": {
+        "zh": "赫铜瓶（液化息壤）",
+        "en": "Hetonite Bottle (Liquid Xiranite)",
+        "ja": "緋銅ボトル（液化息壌入り）"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_fbottle_hetonite_xircon_effluent",
+      "names": {
+        "zh": "赫铜瓶（壤晶废液）",
+        "en": "Hetonite Bottle (Xircon Effluent)",
+        "ja": "緋銅ボトル（壌晶廃液入り）"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_fbottle_iron_grass_1",
+      "names": {
+        "zh": "蓝铁瓶（锦草溶液）",
+        "en": "Ferrium Bottle (Jincao Solution)",
+        "ja": "青鉄製ボトル（錦草エキス入り）"
+      },
+      "category": "industrial_product",
+      "tier": 2,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_fbottle_iron_grass_2",
+      "names": {
+        "zh": "蓝铁瓶（芽针溶液）",
+        "en": "Ferrium Bottle (Yazhen Solution)",
+        "ja": "青鉄製ボトル（芽針エキス入り）"
+      },
+      "category": "industrial_product",
+      "tier": 2,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_fbottle_iron_inert_xircon_effluent",
+      "names": {
+        "zh": "蓝铁瓶（惰性壤晶废液）",
+        "en": "Ferrium Bottle (Inert Xircon Effluent)",
+        "ja": "青鉄製ボトル（不活性壌晶廃液入り）"
+      },
+      "category": "industrial_product",
+      "tier": 2,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_fbottle_iron_sewage",
+      "names": {
+        "zh": "蓝铁瓶（污水）",
+        "en": "Ferrium Bottle (Sewage)",
+        "ja": "青鉄製ボトル（汚水入り）"
+      },
+      "category": "industrial_product",
+      "tier": 2,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_fbottle_iron_water",
+      "names": {
+        "zh": "蓝铁瓶（清水）",
+        "en": "Ferrium Bottle (Clean Water)",
+        "ja": "青鉄製ボトル（水入り）"
+      },
+      "category": "industrial_product",
+      "tier": 2,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_fbottle_iron_xiranite",
+      "names": {
+        "zh": "蓝铁瓶（液化息壤）",
+        "en": "Ferrium Bottle (Liquid Xiranite)",
+        "ja": "青鉄製ボトル（液化息壌入り）"
+      },
+      "category": "industrial_product",
+      "tier": 2,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_fbottle_iron_xircon_effluent",
+      "names": {
+        "zh": "蓝铁瓶（壤晶废液）",
+        "en": "Ferrium Bottle (Xircon Effluent)",
+        "ja": "青鉄製ボトル（壌晶廃液入り）"
+      },
+      "category": "industrial_product",
+      "tier": 2,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_fbottle_ironenr_grass_1",
+      "names": {
+        "zh": "钢质瓶（锦草溶液）",
+        "en": "Steel Bottle (Jincao Solution)",
+        "ja": "鋼製ボトル（錦草エキス入り）"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_fbottle_ironenr_grass_2",
+      "names": {
+        "zh": "钢质瓶（芽针溶液）",
+        "en": "Steel Bottle (Yazhen Solution)",
+        "ja": "鋼製ボトル（芽針エキス入り）"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_fbottle_ironenr_inert_xircon_effluent",
+      "names": {
+        "zh": "钢质瓶（惰性壤晶废液）",
+        "en": "Steel Bottle (Inert Xircon Effluent)",
+        "ja": "鋼製ボトル（不活性壌晶廃液入り）"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_fbottle_ironenr_sewage",
+      "names": {
+        "zh": "钢质瓶（污水）",
+        "en": "Steel Bottle (Sewage)",
+        "ja": "鋼製ボトル（汚水入り）"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_fbottle_ironenr_water",
+      "names": {
+        "zh": "钢质瓶（清水）",
+        "en": "Steel Bottle (Clean Water)",
+        "ja": "鋼製ボトル（水入り）"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_fbottle_ironenr_xiranite",
+      "names": {
+        "zh": "钢质瓶（液化息壤）",
+        "en": "Steel Bottle (Liquid Xiranite)",
+        "ja": "鋼製ボトル（液化息壌入り）"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_fbottle_ironenr_xircon_effluent",
+      "names": {
+        "zh": "钢质瓶（壤晶废液）",
+        "en": "Steel Bottle (Xircon Effluent)",
+        "ja": "鋼製ボトル（壌晶廃液入り）"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_gasjar_cuprium_acridgen",
+      "names": {
+        "zh": "赤铜耐压罐（酸气）",
+        "en": "Cuprium Canister (Acridgen)",
+        "ja": "赤銅圧力タンク（酸性ガス入り）"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_gasjar_cuprium_aquagen",
+      "names": {
+        "zh": "赤铜耐压罐（水蒸气）",
+        "en": "Cuprium Canister (Aquagen)",
+        "ja": "赤銅圧力タンク（水蒸気入り）"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_gasjar_cuprium_cuprium_gas",
+      "names": {
+        "zh": "赤铜耐压罐（气态赤铜）",
+        "en": "Cuprium Canister (Cuprium Gas)",
+        "ja": "赤銅圧力タンク（赤銅ガス入り）"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_gasjar_cuprium_heavy_xiragen",
+      "names": {
+        "zh": "赤铜耐压罐（重息壤气）",
+        "en": "Cuprium Canister (Heavy Xiragen)",
+        "ja": "赤銅圧力タンク（重息壌ガス入り）"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_gasjar_cuprium_hetonite_gas",
+      "names": {
+        "zh": "赤铜耐压罐（气态赫铜）",
+        "en": "Cuprium Canister (Hetonite Gas)",
+        "ja": "赤銅圧力タンク（緋銅ガス入り）"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_gasjar_cuprium_inergen",
+      "names": {
+        "zh": "赤铜耐压罐（惰气）",
+        "en": "Cuprium Canister (Inergen)",
+        "ja": "赤銅圧力タンク（不活性ガス入り）"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_gasjar_cuprium_pyrrolite_gas",
+      "names": {
+        "zh": "赤铜耐压罐（气态灼铜）",
+        "en": "Cuprium Canister (Pyrrolite Gas)",
+        "ja": "赤銅圧力タンク（焔銅ガス入り）"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_gasjar_cuprium_xiragen",
+      "names": {
+        "zh": "赤铜耐压罐（息壤气）",
+        "en": "Cuprium Canister (Xiragen)",
+        "ja": "赤銅圧力タンク（息壌ガス入り）"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_glass_bottle",
+      "names": {
+        "zh": "紫晶质瓶",
+        "en": "Amethyst Bottle",
+        "ja": "紫晶製ボトル"
+      },
+      "category": "industrial_product",
+      "tier": 2,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_glass_cmpt",
+      "names": {
+        "zh": "紫晶零件",
+        "en": "Amethyst Part",
+        "ja": "紫晶部品"
+      },
+      "category": "industrial_product",
+      "tier": 2,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_glass_enr_bottle",
+      "names": {
+        "zh": "高晶质瓶",
+        "en": "Cryston Bottle",
+        "ja": "高晶製ボトル"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_glass_enr_cmpt",
+      "names": {
+        "zh": "高晶零件",
+        "en": "Cryston Part",
+        "ja": "高晶部品"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_heavy_xiragen",
+      "names": {
+        "zh": "重息壤气",
+        "en": "Heavy Xiragen",
+        "ja": "重息壌ガス"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false,
+      "transportMode": "pipe"
+    },
+    {
+      "id": "item_heavy_xiranite",
+      "names": {
+        "zh": "重息壤",
+        "en": "Heavy Xiranite",
+        "ja": "重息壌"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_hetonite",
+      "names": {
+        "zh": "赫铜块",
+        "en": "Hetonite",
+        "ja": "緋銅塊"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_hetonite_bottle",
+      "names": {
+        "zh": "赫铜瓶",
+        "en": "Hetonite Bottle",
+        "ja": "緋銅ボトル"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_hetonite_cmpt",
+      "names": {
+        "zh": "赫铜零件",
+        "en": "Hetonite Part",
+        "ja": "緋銅部品"
+      },
+      "category": "industrial_product",
+      "tier": 4,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_hetonite_enr_cmpt",
+      "names": {
+        "zh": "赫铜装备原件",
+        "en": "Hetonite Component",
+        "ja": "緋銅装備部品"
+      },
+      "category": "industrial_product",
+      "tier": 4,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_hetonite_gas",
+      "names": {
+        "zh": "气态赫铜",
+        "en": "Hetonite Gas",
+        "ja": "緋銅ガス"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false,
+      "transportMode": "pipe"
+    },
+    {
+      "id": "item_hetonite_solution",
+      "names": {
+        "zh": "赫铜溶液",
+        "en": "Hetonite Solution",
+        "ja": "緋銅溶液"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false,
+      "transportMode": "pipe"
+    },
+    {
+      "id": "item_inergen",
+      "names": {
+        "zh": "惰气",
+        "en": "Inergen",
+        "ja": "不活性ガス"
+      },
+      "category": "natural_resource",
+      "tier": 1,
+      "isBaseResource": true,
+      "transportMode": "pipe"
+    },
+    {
+      "id": "item_inert_xircon_effluent",
+      "names": {
+        "zh": "惰性壤晶废液",
+        "en": "Inert Zircon Effluent",
+        "ja": "不活性壌晶廃液"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false,
+      "transportMode": "pipe"
+    },
+    {
+      "id": "item_iron_bottle",
+      "names": {
+        "zh": "蓝铁瓶",
+        "en": "Ferrium Bottle",
+        "ja": "青鉄製ボトル"
+      },
+      "category": "industrial_product",
+      "tier": 2,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_iron_cmpt",
+      "names": {
+        "zh": "铁制零件",
+        "en": "Ferrium Part",
+        "ja": "鉄製部品"
+      },
+      "category": "industrial_product",
+      "tier": 2,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_iron_enr",
+      "names": {
+        "zh": "钢块",
+        "en": "Steel",
+        "ja": "鋼"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_iron_enr_bottle",
+      "names": {
+        "zh": "钢质瓶",
+        "en": "Steel Bottle",
+        "ja": "鋼製ボトル"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_iron_enr_cmpt",
+      "names": {
+        "zh": "钢制零件",
+        "en": "Steel Part",
+        "ja": "鋼製部品"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_iron_enr_powder",
+      "names": {
+        "zh": "致密蓝铁粉末",
+        "en": "Dense Ferrium Powder",
+        "ja": "高密度青鉄粉末"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_iron_nugget",
+      "names": {
+        "zh": "蓝铁块",
+        "en": "Ferrium",
+        "ja": "青鉄塊"
+      },
+      "category": "industrial_product",
+      "tier": 2,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_iron_ore",
+      "names": {
+        "zh": "蓝铁矿",
+        "en": "Ferrium Ore",
+        "ja": "青鉄鉱物"
+      },
+      "category": "natural_resource",
+      "tier": 1,
+      "isBaseResource": true
+    },
+    {
+      "id": "item_iron_powder",
+      "names": {
+        "zh": "蓝铁粉末",
+        "en": "Ferrium Powder",
+        "ja": "青鉄粉末"
+      },
+      "category": "industrial_product",
+      "tier": 2,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_liquid_heavy_xiranite",
+      "names": {
+        "zh": "液化重息壤",
+        "en": "Liquid Heavy Xiranite",
+        "ja": "液化重息壌"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false,
+      "transportMode": "pipe"
+    },
+    {
+      "id": "item_liquid_plant_grass_1",
+      "names": {
+        "zh": "锦草溶液",
+        "en": "Jincao Solution",
+        "ja": "錦草エキス"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false,
+      "transportMode": "pipe"
+    },
+    {
+      "id": "item_liquid_plant_grass_2",
+      "names": {
+        "zh": "芽针溶液",
+        "en": "Yazhen Solution",
+        "ja": "芽針エキス"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false,
+      "transportMode": "pipe"
+    },
+    {
+      "id": "item_liquid_water",
+      "names": {
+        "zh": "清水",
+        "en": "Clean Water",
+        "ja": "水"
+      },
+      "category": "natural_resource",
+      "tier": 1,
+      "isBaseResource": true,
+      "transportMode": "pipe"
+    },
+    {
+      "id": "item_liquid_xiranite",
+      "names": {
+        "zh": "液化息壤",
+        "en": "Liquid Xiranite",
+        "ja": "液化息壌"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false,
+      "transportMode": "pipe"
+    },
+    {
+      "id": "item_muck_feces_1",
+      "names": {
+        "zh": "驮兽粪便",
+        "en": "Burdo-Muck",
+        "ja": "駄獣のフン"
+      },
+      "category": "collection_material",
+      "tier": 1,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_muck_xiranite_1",
+      "names": {
+        "zh": "膨地啪",
+        "en": "Bumper-Rich",
+        "ja": "ポンポン肥料"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_originium_enr_powder",
+      "names": {
+        "zh": "致密源石粉末",
+        "en": "Dense Originium Powder",
+        "ja": "高密度源石粉末"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_originium_ore",
+      "names": {
+        "zh": "源矿",
+        "en": "Originium Ore",
+        "ja": "源石鉱物"
+      },
+      "category": "natural_resource",
+      "tier": 1,
+      "isBaseResource": true
+    },
+    {
+      "id": "item_originium_powder",
+      "names": {
+        "zh": "源石粉末",
+        "en": "Originium Powder",
+        "ja": "源石粉末"
+      },
+      "category": "industrial_product",
+      "tier": 2,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_plant_bbflower_1",
+      "names": {
+        "zh": "酮化灌木",
+        "en": "Aketine",
+        "ja": "アケトン樹木"
+      },
+      "category": "natural_resource",
+      "tier": 1,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_plant_bbflower_powder_1",
+      "names": {
+        "zh": "酮化灌木粉末",
+        "en": "Aketine Powder",
+        "ja": "アケトン粉末"
+      },
+      "category": "industrial_product",
+      "tier": 2,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_plant_bbflower_seed_1",
+      "names": {
+        "zh": "酮化树种",
+        "en": "Aketine Seed",
+        "ja": "アケトンの種"
+      },
+      "category": "natural_resource",
+      "tier": 1,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_plant_grass_1",
+      "names": {
+        "zh": "锦草",
+        "en": "Jincao",
+        "ja": "錦草"
+      },
+      "category": "natural_resource",
+      "tier": 1,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_plant_grass_2",
+      "names": {
+        "zh": "芽针",
+        "en": "Yazhen",
+        "ja": "芽針"
+      },
+      "category": "natural_resource",
+      "tier": 1,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_plant_grass_powder_1",
+      "names": {
+        "zh": "锦草粉末",
+        "en": "Jincao Powder",
+        "ja": "錦草粉末"
+      },
+      "category": "consumable_item",
+      "tier": 2,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_plant_grass_powder_2",
+      "names": {
+        "zh": "芽针粉末",
+        "en": "Yazhen Powder",
+        "ja": "芽針粉末"
+      },
+      "category": "consumable_item",
+      "tier": 2,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_plant_grass_seed_1",
+      "names": {
+        "zh": "锦草种子",
+        "en": "Jincao Seed",
+        "ja": "錦草の種"
+      },
+      "category": "natural_resource",
+      "tier": 1,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_plant_grass_seed_2",
+      "names": {
+        "zh": "芽针种子",
+        "en": "Yazhen Seed",
+        "ja": "芽針の種"
+      },
+      "category": "natural_resource",
+      "tier": 1,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_plant_moss_1",
+      "names": {
+        "zh": "荞花",
+        "en": "Buckflower",
+        "ja": "蕎花"
+      },
+      "category": "natural_resource",
+      "tier": 1,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_plant_moss_2",
+      "names": {
+        "zh": "柑实",
+        "en": "Citrome",
+        "ja": "シトローム"
+      },
+      "category": "natural_resource",
+      "tier": 1,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_plant_moss_3",
+      "names": {
+        "zh": "砂叶",
+        "en": "Sandleaf",
+        "ja": "サンドリーフ"
+      },
+      "category": "natural_resource",
+      "tier": 1,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_plant_moss_enr_powder_1",
+      "names": {
+        "zh": "细磨荞花粉末",
+        "en": "Ground Buckflower Powder",
+        "ja": "蕎花細粉"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_plant_moss_enr_powder_2",
+      "names": {
+        "zh": "细磨柑实粉末",
+        "en": "Ground Citrome Powder",
+        "ja": "シトローム細粉"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_plant_moss_powder_1",
+      "names": {
+        "zh": "荞花粉末",
+        "en": "Buckflower Powder",
+        "ja": "蕎花粉末"
+      },
+      "category": "consumable_item",
+      "tier": 2,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_plant_moss_powder_2",
+      "names": {
+        "zh": "柑实粉末",
+        "en": "Citrome Powder",
+        "ja": "シトローム粉末"
+      },
+      "category": "consumable_item",
+      "tier": 2,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_plant_moss_powder_3",
+      "names": {
+        "zh": "砂叶粉末",
+        "en": "Sandleaf Powder",
+        "ja": "サンドリーフ粉末"
+      },
+      "category": "industrial_product",
+      "tier": 2,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_plant_moss_seed_1",
+      "names": {
+        "zh": "荞花种子",
+        "en": "Buckflower Seed",
+        "ja": "蕎花の種"
+      },
+      "category": "natural_resource",
+      "tier": 1,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_plant_moss_seed_2",
+      "names": {
+        "zh": "柑实种子",
+        "en": "Citrome Seed",
+        "ja": "シトロームの種"
+      },
+      "category": "natural_resource",
+      "tier": 1,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_plant_moss_seed_3",
+      "names": {
+        "zh": "砂叶种子",
+        "en": "Sandleaf Seed",
+        "ja": "サンドリーフの種"
+      },
+      "category": "natural_resource",
+      "tier": 1,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_plant_sp_1",
+      "names": {
+        "zh": "灰芦麦",
+        "en": "Reed Rye",
+        "ja": "灰麦"
+      },
+      "category": "natural_resource",
+      "tier": 2,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_plant_sp_2",
+      "names": {
+        "zh": "苦叶椒",
+        "en": "Tartpepper",
+        "ja": "苦葉椒"
+      },
+      "category": "natural_resource",
+      "tier": 2,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_plant_sp_3",
+      "names": {
+        "zh": "琼叶参",
+        "en": "Redjade Ginseng",
+        "ja": "玉葉人参"
+      },
+      "category": "natural_resource",
+      "tier": 2,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_plant_sp_4",
+      "names": {
+        "zh": "金石稻",
+        "en": "Amber Rice",
+        "ja": "金石稲"
+      },
+      "category": "natural_resource",
+      "tier": 2,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_plant_sp_seed_1",
+      "names": {
+        "zh": "灰芦麦种子",
+        "en": "Reed Rye Seed",
+        "ja": "灰麦の種"
+      },
+      "category": "natural_resource",
+      "tier": 2,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_plant_sp_seed_2",
+      "names": {
+        "zh": "苦叶椒种子",
+        "en": "Tartpepper Seed",
+        "ja": "苦葉椒の種"
+      },
+      "category": "natural_resource",
+      "tier": 2,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_plant_sp_seed_3",
+      "names": {
+        "zh": "琼叶参种子",
+        "en": "Redjade Ginseng Seed",
+        "ja": "玉葉人参の種"
+      },
+      "category": "natural_resource",
+      "tier": 2,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_plant_sp_seed_4",
+      "names": {
+        "zh": "金石稻种子",
+        "en": "Amber Rice Seed",
+        "ja": "金石稲の種"
+      },
+      "category": "natural_resource",
+      "tier": 2,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_plant_tundra_wood",
+      "names": {
+        "zh": "原木",
+        "en": "Wood",
+        "ja": "木材"
+      },
+      "category": "natural_resource",
+      "tier": 1,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_precipitation_acid",
+      "names": {
+        "zh": "沉积酸",
+        "en": "Precipitation Acid",
+        "ja": "沈殿酸"
+      },
+      "category": "natural_resource",
+      "tier": 1,
+      "isBaseResource": true,
+      "transportMode": "pipe"
+    },
+    {
+      "id": "item_proc_battery_1",
+      "names": {
+        "zh": "低容谷地电池",
+        "en": "LC Valley Battery",
+        "ja": "小容量谷地バッテリー"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_proc_battery_2",
+      "names": {
+        "zh": "中容谷地电池",
+        "en": "SC Valley Battery",
+        "ja": "中容量谷地バッテリー"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_proc_battery_3",
+      "names": {
+        "zh": "高容谷地电池",
+        "en": "HC Valley Battery",
+        "ja": "大容量谷地バッテリー"
+      },
+      "category": "industrial_product",
+      "tier": 4,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_proc_battery_4",
+      "names": {
+        "zh": "低容武陵电池",
+        "en": "LC Wuling Battery",
+        "ja": "小容量武陵バッテリー"
+      },
+      "category": "industrial_product",
+      "tier": 4,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_proc_battery_5",
+      "names": {
+        "zh": "中容武陵电池",
+        "en": "SC Wuling Battery",
+        "ja": "中容量武陵バッテリー"
+      },
+      "category": "industrial_product",
+      "tier": 4,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_proc_bomb_1",
+      "names": {
+        "zh": "工业爆炸物",
+        "en": "Industrial Explosive",
+        "ja": "工業爆弾"
+      },
+      "category": "consumable_item",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_pyrrolite",
+      "names": {
+        "zh": "灼铜块",
+        "en": "Pyrrolite",
+        "ja": "焔銅塊"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_pyrrolite_cmpt",
+      "names": {
+        "zh": "灼铜零件",
+        "en": "Pyrrolite Part",
+        "ja": "焔銅部品"
+      },
+      "category": "industrial_product",
+      "tier": 4,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_pyrrolite_enr_cmpt",
+      "names": {
+        "zh": "灼铜装备原件",
+        "en": "Pyrrolite Component",
+        "ja": "焔銅装備部品"
+      },
+      "category": "industrial_product",
+      "tier": 4,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_pyrrolite_gas",
+      "names": {
+        "zh": "气态灼铜",
+        "en": "Pyrrolite Gas",
+        "ja": "焔銅ガス"
+      },
+      "category": "industrial_product",
+      "tier": 4,
+      "isBaseResource": false,
+      "transportMode": "pipe"
+    },
+    {
+      "id": "item_quartz_enr",
+      "names": {
+        "zh": "高晶纤维",
+        "en": "Cryston Fiber",
+        "ja": "高晶繊維"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_quartz_enr_powder",
+      "names": {
+        "zh": "高晶粉末",
+        "en": "Cryston Powder",
+        "ja": "高晶粉末"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_quartz_glass",
+      "names": {
+        "zh": "紫晶纤维",
+        "en": "Amethyst Fiber",
+        "ja": "紫晶繊維"
+      },
+      "category": "industrial_product",
+      "tier": 2,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_quartz_powder",
+      "names": {
+        "zh": "紫晶粉末",
+        "en": "Amethyst Powder",
+        "ja": "紫晶粉末"
+      },
+      "category": "industrial_product",
+      "tier": 2,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_quartz_sand",
+      "names": {
+        "zh": "紫晶矿",
+        "en": "Amethyst Ore",
+        "ja": "紫晶鉱物"
+      },
+      "category": "natural_resource",
+      "tier": 1,
+      "isBaseResource": true
+    },
+    {
+      "id": "item_separator_core",
+      "names": {
+        "zh": "分离芯",
+        "en": "Separator Core",
+        "ja": "分離コア"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_sewage",
+      "names": {
+        "zh": "污水",
+        "en": "Sewage",
+        "ja": "汚水"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false,
+      "transportMode": "pipe"
+    },
+    {
+      "id": "item_xiragen",
+      "names": {
+        "zh": "息壤气",
+        "en": "Xiragen",
+        "ja": "息壌ガス"
+      },
+      "category": "natural_resource",
+      "tier": 3,
+      "isBaseResource": false,
+      "transportMode": "pipe"
+    },
+    {
+      "id": "item_xiranite_powder",
+      "names": {
+        "zh": "息壤",
+        "en": "Xiranite",
+        "ja": "息壌"
+      },
+      "category": "industrial_product",
+      "tier": 2,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_xircon",
+      "names": {
+        "zh": "壤晶",
+        "en": "Xircon",
+        "ja": "壌晶"
+      },
+      "category": "industrial_product",
+      "tier": 3,
+      "isBaseResource": false
+    },
+    {
+      "id": "item_xircon_effluent",
+      "names": {
+        "zh": "壤晶废液",
+        "en": "Xircon Effluent",
+        "ja": "壌晶廃液"
+      },
+      "category": "industrial_product",
+      "tier": 4,
+      "isBaseResource": false,
+      "transportMode": "pipe"
+    }
+  ],
+  "facilities": [
+    {
+      "id": "item_port_cmpt_mc_1",
+      "names": {
+        "zh": "配件机",
+        "en": "Fitting Unit",
+        "ja": "組立機"
+      },
+      "category": "basic_production",
+      "tier": 2,
+      "powerConsumption": 20
+    },
+    {
+      "id": "item_port_dismantler_1",
+      "names": {
+        "zh": "拆解机",
+        "en": "Separating Unit",
+        "ja": "解体機"
+      },
+      "category": "synthesis_production",
+      "tier": 3,
+      "powerConsumption": 20
+    },
+    {
+      "id": "item_port_filling_pd_mc_1",
+      "names": {
+        "zh": "灌装机",
+        "en": "Filling Unit",
+        "ja": "充填機"
+      },
+      "category": "synthesis_production",
+      "tier": 3,
+      "powerConsumption": 20
+    },
+    {
+      "id": "item_port_furnance_1",
+      "names": {
+        "zh": "精炼炉",
+        "en": "Refining Unit",
+        "ja": "精錬炉"
+      },
+      "category": "basic_production",
+      "tier": 1,
+      "powerConsumption": 5
+    },
+    {
+      "id": "item_port_gas_reactor_1",
+      "names": {
+        "zh": "气体反应炉",
+        "en": "Gas Reactor Globe",
+        "ja": "ガス反応装置"
+      },
+      "category": "synthesis_production",
+      "tier": 4,
+      "powerConsumption": 50
+    },
+    {
+      "id": "item_port_grinder_1",
+      "names": {
+        "zh": "粉碎机",
+        "en": "Shredding Unit",
+        "ja": "粉砕機"
+      },
+      "category": "basic_production",
+      "tier": 1,
+      "powerConsumption": 5
+    },
+    {
+      "id": "item_port_mix_pool_1",
+      "names": {
+        "zh": "反应池",
+        "en": "Reactor Crucible",
+        "ja": "化学反応炉"
+      },
+      "category": "synthesis_production",
+      "tier": 3,
+      "powerConsumption": 50
+    },
+    {
+      "id": "item_port_mix_pool_2",
+      "names": {
+        "zh": "扩容反应池",
+        "en": "Expanded Crucible",
+        "ja": "大型化学反応炉"
+      },
+      "category": "synthesis_production",
+      "tier": 3,
+      "powerConsumption": 100
+    },
+    {
+      "id": "item_port_phase_trans_1",
+      "names": {
+        "zh": "液气转化机",
+        "en": "Fluid-Gas Transmuting Unit",
+        "ja": "ガス液体転換機"
+      },
+      "category": "synthesis_production",
+      "tier": 4,
+      "powerConsumption": 50
+    },
+    {
+      "id": "item_port_phase_trans_2",
+      "names": {
+        "zh": "固气转化机",
+        "en": "Solid-Gas Transmuting Unit",
+        "ja": "ガス固体転換機"
+      },
+      "category": "synthesis_production",
+      "tier": 4,
+      "powerConsumption": 50
+    },
+    {
+      "id": "item_port_planter_1",
+      "names": {
+        "zh": "种植机",
+        "en": "Planting Unit",
+        "ja": "栽培機"
+      },
+      "category": "basic_production",
+      "tier": 3,
+      "powerConsumption": 20
+    },
+    {
+      "id": "item_port_purification_1",
+      "names": {
+        "zh": "提纯机",
+        "en": "Purification Unit",
+        "ja": "精製機"
+      },
+      "category": "synthesis_production",
+      "tier": 4,
+      "powerConsumption": 50
+    },
+    {
+      "id": "item_port_seedcol_1",
+      "names": {
+        "zh": "采种机",
+        "en": "Seed-Picking Unit",
+        "ja": "採種機"
+      },
+      "category": "basic_production",
+      "tier": 3,
+      "powerConsumption": 10
+    },
+    {
+      "id": "item_port_shaper_1",
+      "names": {
+        "zh": "塑形机",
+        "en": "Moulding Unit",
+        "ja": "成形機"
+      },
+      "category": "basic_production",
+      "tier": 2,
+      "powerConsumption": 10
+    },
+    {
+      "id": "item_port_thickener_1",
+      "names": {
+        "zh": "研磨机",
+        "en": "Grinding Unit",
+        "ja": "研磨機"
+      },
+      "category": "synthesis_production",
+      "tier": 4,
+      "powerConsumption": 50
+    },
+    {
+      "id": "item_port_tools_asm_mc_1",
+      "names": {
+        "zh": "封装机",
+        "en": "Packaging Unit",
+        "ja": "包装機"
+      },
+      "category": "synthesis_production",
+      "tier": 3,
+      "powerConsumption": 20
+    },
+    {
+      "id": "item_port_vaporizer_1",
+      "names": {
+        "zh": "气体散布机",
+        "en": "Gas Dispersing Unit",
+        "ja": "ガス散布機"
+      },
+      "category": "synthesis_production",
+      "tier": 4,
+      "powerConsumption": 0
+    },
+    {
+      "id": "item_port_water_treatment_1",
+      "names": {
+        "zh": "废水处理机",
+        "en": "Water Treatment Unit",
+        "ja": "廃水処理機"
+      },
+      "category": "basic_production",
+      "tier": 3,
+      "powerConsumption": 50
+    },
+    {
+      "id": "item_port_winder_1",
+      "names": {
+        "zh": "装备原件机",
+        "en": "Gearing Unit",
+        "ja": "装備部品加工機"
+      },
+      "category": "synthesis_production",
+      "tier": 1,
+      "powerConsumption": 10
+    },
+    {
+      "id": "item_port_xiranite_oven_1",
+      "names": {
+        "zh": "天有洪炉",
+        "en": "Forge of the Sky",
+        "ja": "天有洪炉"
+      },
+      "category": "synthesis_production",
+      "tier": 4,
+      "powerConsumption": 50
+    },
+    {
+      "id": "thermal_bank_1",
+      "names": {
+        "zh": "热能池",
+        "en": "Thermal Bank",
+        "ja": "発電機"
+      },
+      "category": "power",
+      "tier": 2,
+      "powerConsumption": 0
+    }
+  ],
+  "recipes": [
+    {
+      "id": "component_glass_cmpt_1",
+      "facilityId": "item_port_cmpt_mc_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_quartz_glass",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_glass_cmpt",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "component_glass_enr_cmpt_1",
+      "facilityId": "item_port_cmpt_mc_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_quartz_enr",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_glass_enr_cmpt",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "component_iron_cmpt_1",
+      "facilityId": "item_port_cmpt_mc_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_iron_nugget",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_iron_cmpt",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "component_iron_enr_cmpt_1",
+      "facilityId": "item_port_cmpt_mc_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_iron_enr",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_iron_enr_cmpt",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_glass_grass_1_1",
+      "facilityId": "item_port_dismantler_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_fbottle_glass_grass_1",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_glass_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_liquid_plant_grass_1",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_glass_grass_2_1",
+      "facilityId": "item_port_dismantler_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_fbottle_glass_grass_2",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_glass_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_liquid_plant_grass_2",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_glass_water_1",
+      "facilityId": "item_port_dismantler_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_fbottle_glass_water",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_glass_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_liquid_water",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_glass_xiranite_1",
+      "facilityId": "item_port_dismantler_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_fbottle_glass_xiranite",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_glass_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_liquid_xiranite",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_glassenr_grass_1_1",
+      "facilityId": "item_port_dismantler_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_fbottle_glassenr_grass_1",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_glass_enr_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_liquid_plant_grass_1",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_glassenr_grass_2_1",
+      "facilityId": "item_port_dismantler_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_fbottle_glassenr_grass_2",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_glass_enr_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_liquid_plant_grass_2",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_glassenr_water_1",
+      "facilityId": "item_port_dismantler_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_fbottle_glassenr_water",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_glass_enr_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_liquid_water",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_glassenr_xiranite_1",
+      "facilityId": "item_port_dismantler_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_fbottle_glassenr_xiranite",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_glass_enr_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_liquid_xiranite",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_iron_grass_1_1",
+      "facilityId": "item_port_dismantler_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_fbottle_iron_grass_1",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_iron_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_liquid_plant_grass_1",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_iron_grass_2_1",
+      "facilityId": "item_port_dismantler_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_fbottle_iron_grass_2",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_iron_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_liquid_plant_grass_2",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_iron_water_1",
+      "facilityId": "item_port_dismantler_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_fbottle_iron_water",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_iron_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_liquid_water",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_iron_xiranite_1",
+      "facilityId": "item_port_dismantler_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_fbottle_iron_xiranite",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_iron_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_liquid_xiranite",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_ironenr_grass_1_1",
+      "facilityId": "item_port_dismantler_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_fbottle_ironenr_grass_1",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_iron_enr_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_liquid_plant_grass_1",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_ironenr_grass_2_1",
+      "facilityId": "item_port_dismantler_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_fbottle_ironenr_grass_2",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_iron_enr_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_liquid_plant_grass_2",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_ironenr_water_1",
+      "facilityId": "item_port_dismantler_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_fbottle_ironenr_water",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_iron_enr_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_liquid_water",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_ironenr_xiranite_1",
+      "facilityId": "item_port_dismantler_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_fbottle_ironenr_xiranite",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_iron_enr_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_liquid_xiranite",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_food_1_1",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "craftingTime": 10,
+      "inputs": [
+        {
+          "itemId": "item_glass_bottle",
+          "amount": 5
+        },
+        {
+          "itemId": "item_plant_moss_powder_2",
+          "amount": 5
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_bottled_food_1",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_food_2_1",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "craftingTime": 10,
+      "inputs": [
+        {
+          "itemId": "item_iron_bottle",
+          "amount": 10
+        },
+        {
+          "itemId": "item_plant_moss_powder_2",
+          "amount": 10
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_bottled_food_2",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_food_3_1",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "craftingTime": 10,
+      "inputs": [
+        {
+          "itemId": "item_iron_enr_bottle",
+          "amount": 10
+        },
+        {
+          "itemId": "item_plant_moss_enr_powder_2",
+          "amount": 10
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_bottled_food_3",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_glass_grass_1",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_glass_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_liquid_plant_grass_1",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_fbottle_glass_grass_1",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_glass_grass_2",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_glass_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_liquid_plant_grass_2",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_fbottle_glass_grass_2",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_glass_water",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_glass_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_liquid_water",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_fbottle_glass_water",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_glass_xiranite",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_glass_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_liquid_xiranite",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_fbottle_glass_xiranite",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_glassenr_grass_1",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_glass_enr_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_liquid_plant_grass_1",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_fbottle_glassenr_grass_1",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_glassenr_grass_2",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_glass_enr_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_liquid_plant_grass_2",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_fbottle_glassenr_grass_2",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_glassenr_water",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_glass_enr_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_liquid_water",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_fbottle_glassenr_water",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_glassenr_xiranite",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_glass_enr_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_liquid_xiranite",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_fbottle_glassenr_xiranite",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_iron_grass_1",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_iron_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_liquid_plant_grass_1",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_fbottle_iron_grass_1",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_iron_grass_2",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_iron_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_liquid_plant_grass_2",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_fbottle_iron_grass_2",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_iron_water",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_iron_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_liquid_water",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_fbottle_iron_water",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_iron_xiranite",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_iron_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_liquid_xiranite",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_fbottle_iron_xiranite",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_ironenr_grass_1",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_iron_enr_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_liquid_plant_grass_1",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_fbottle_ironenr_grass_1",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_ironenr_grass_2",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_iron_enr_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_liquid_plant_grass_2",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_fbottle_ironenr_grass_2",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_ironenr_water",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_iron_enr_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_liquid_water",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_fbottle_ironenr_water",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_ironenr_xiranite",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_iron_enr_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_liquid_xiranite",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_fbottle_ironenr_xiranite",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_glass_sewage",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_glass_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_sewage",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_fbottle_glass_sewage",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_glass_sewage_1",
+      "facilityId": "item_port_dismantler_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_fbottle_glass_sewage",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_glass_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_sewage",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_glass_xircon_effluent",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_glass_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_xircon_effluent",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_fbottle_glass_xircon_effluent",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_glass_xircon_effluent_1",
+      "facilityId": "item_port_dismantler_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_fbottle_glass_xircon_effluent",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_glass_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_xircon_effluent",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_glass_inert_xircon_effluent",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_glass_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_inert_xircon_effluent",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_fbottle_glass_inert_xircon_effluent",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_glass_inert_xircon_effluent_1",
+      "facilityId": "item_port_dismantler_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_fbottle_glass_inert_xircon_effluent",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_glass_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_inert_xircon_effluent",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_glassenr_sewage",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_glass_enr_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_sewage",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_fbottle_glassenr_sewage",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_glassenr_sewage_1",
+      "facilityId": "item_port_dismantler_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_fbottle_glassenr_sewage",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_glass_enr_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_sewage",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_glassenr_xircon_effluent",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_glass_enr_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_xircon_effluent",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_fbottle_glassenr_xircon_effluent",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_glassenr_xircon_effluent_1",
+      "facilityId": "item_port_dismantler_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_fbottle_glassenr_xircon_effluent",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_glass_enr_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_xircon_effluent",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_glassenr_inert_xircon_effluent",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_glass_enr_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_inert_xircon_effluent",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_fbottle_glassenr_inert_xircon_effluent",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_glassenr_inert_xircon_effluent_1",
+      "facilityId": "item_port_dismantler_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_fbottle_glassenr_inert_xircon_effluent",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_glass_enr_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_inert_xircon_effluent",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_iron_sewage",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_iron_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_sewage",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_fbottle_iron_sewage",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_iron_sewage_1",
+      "facilityId": "item_port_dismantler_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_fbottle_iron_sewage",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_iron_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_sewage",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_iron_xircon_effluent",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_iron_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_xircon_effluent",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_fbottle_iron_xircon_effluent",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_iron_xircon_effluent_1",
+      "facilityId": "item_port_dismantler_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_fbottle_iron_xircon_effluent",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_iron_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_xircon_effluent",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_iron_inert_xircon_effluent",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_iron_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_inert_xircon_effluent",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_fbottle_iron_inert_xircon_effluent",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_iron_inert_xircon_effluent_1",
+      "facilityId": "item_port_dismantler_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_fbottle_iron_inert_xircon_effluent",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_iron_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_inert_xircon_effluent",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_ironenr_sewage",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_iron_enr_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_sewage",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_fbottle_ironenr_sewage",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_ironenr_sewage_1",
+      "facilityId": "item_port_dismantler_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_fbottle_ironenr_sewage",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_iron_enr_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_sewage",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_ironenr_xircon_effluent",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_iron_enr_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_xircon_effluent",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_fbottle_ironenr_xircon_effluent",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_ironenr_xircon_effluent_1",
+      "facilityId": "item_port_dismantler_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_fbottle_ironenr_xircon_effluent",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_iron_enr_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_xircon_effluent",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_ironenr_inert_xircon_effluent",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_iron_enr_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_inert_xircon_effluent",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_fbottle_ironenr_inert_xircon_effluent",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_ironenr_inert_xircon_effluent_1",
+      "facilityId": "item_port_dismantler_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_fbottle_ironenr_inert_xircon_effluent",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_iron_enr_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_inert_xircon_effluent",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_rec_hp_1_1",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "craftingTime": 10,
+      "inputs": [
+        {
+          "itemId": "item_glass_bottle",
+          "amount": 5
+        },
+        {
+          "itemId": "item_plant_moss_powder_1",
+          "amount": 5
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_bottled_rec_hp_1",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_rec_hp_2_1",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "craftingTime": 10,
+      "inputs": [
+        {
+          "itemId": "item_iron_bottle",
+          "amount": 10
+        },
+        {
+          "itemId": "item_plant_moss_powder_1",
+          "amount": 10
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_bottled_rec_hp_2",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_rec_hp_3_1",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "craftingTime": 10,
+      "inputs": [
+        {
+          "itemId": "item_iron_enr_bottle",
+          "amount": 10
+        },
+        {
+          "itemId": "item_plant_moss_enr_powder_1",
+          "amount": 10
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_bottled_rec_hp_3",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "furnance_carbon_enr_1",
+      "facilityId": "item_port_furnance_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_carbon_enr_powder",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_carbon_enr",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "furnance_carbon_enr_powder_1",
+      "facilityId": "item_port_furnance_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_plant_moss_enr_powder_1",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_carbon_enr_powder",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "furnance_carbon_enr_powder_2",
+      "facilityId": "item_port_furnance_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_plant_moss_enr_powder_2",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_carbon_enr_powder",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "furnance_carbon_material_1",
+      "facilityId": "item_port_furnance_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_plant_moss_1",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_carbon_mtl",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "furnance_carbon_material_2",
+      "facilityId": "item_port_furnance_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_plant_moss_2",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_carbon_mtl",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "furnance_carbon_material_3",
+      "facilityId": "item_port_furnance_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_plant_moss_3",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_carbon_mtl",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "furnance_carbon_material_4",
+      "facilityId": "item_port_furnance_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_plant_tundra_wood",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_carbon_mtl",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "furnance_carbon_material_5",
+      "facilityId": "item_port_furnance_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_plant_grass_1",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_carbon_mtl",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "furnance_carbon_material_6",
+      "facilityId": "item_port_furnance_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_plant_grass_2",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_carbon_mtl",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "furnance_carbon_powder_1",
+      "facilityId": "item_port_furnance_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_plant_moss_powder_1",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_carbon_powder",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "furnance_carbon_powder_2",
+      "facilityId": "item_port_furnance_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_plant_moss_powder_2",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_carbon_powder",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "furnance_carbon_powder_3",
+      "facilityId": "item_port_furnance_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_plant_moss_powder_3",
+          "amount": 3
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_carbon_powder",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "furnance_carbon_powder_4",
+      "facilityId": "item_port_furnance_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_plant_grass_powder_1",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_carbon_powder",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "furnance_carbon_powder_5",
+      "facilityId": "item_port_furnance_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_plant_grass_powder_2",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_carbon_powder",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "furnance_crystal_enr_1",
+      "facilityId": "item_port_furnance_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_crystal_enr_powder",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_crystal_enr",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "furnance_crystal_enr_powder_1",
+      "facilityId": "item_port_furnance_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_originium_enr_powder",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_crystal_enr_powder",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "furnance_crystal_powder_1",
+      "facilityId": "item_port_furnance_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_originium_powder",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_crystal_powder",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "furnance_crystal_shell_1",
+      "facilityId": "item_port_furnance_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_originium_ore",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_crystal_shell",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "furnance_crystal_shell_2",
+      "facilityId": "item_port_furnance_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_crystal_powder",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_crystal_shell",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "furnance_iron_enr_1",
+      "facilityId": "item_port_furnance_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_iron_enr_powder",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_iron_enr",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "furnance_iron_nugget_1",
+      "facilityId": "item_port_furnance_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_iron_ore",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_iron_nugget",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "furnance_iron_nugget_2",
+      "facilityId": "item_port_furnance_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_iron_powder",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_iron_nugget",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "furnance_quartz_enr_1",
+      "facilityId": "item_port_furnance_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_quartz_enr_powder",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_quartz_enr",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "furnance_quartz_glass_1",
+      "facilityId": "item_port_furnance_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_quartz_sand",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_quartz_glass",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "furnance_quartz_glass_2",
+      "facilityId": "item_port_furnance_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_quartz_powder",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_quartz_glass",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "grinder_carbon_powder_1",
+      "facilityId": "item_port_grinder_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_carbon_mtl",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_carbon_powder",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "grinder_crystal_powder_1",
+      "facilityId": "item_port_grinder_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_crystal_shell",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_crystal_powder",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "grinder_iron_powder_1",
+      "facilityId": "item_port_grinder_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_iron_nugget",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_iron_powder",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "grinder_originium_powder_1",
+      "facilityId": "item_port_grinder_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_originium_ore",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_originium_powder",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "grinder_plant_bbflower_powder_1_1",
+      "facilityId": "item_port_grinder_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_plant_bbflower_1",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_plant_bbflower_powder_1",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "grinder_plant_grass_powder_1_1",
+      "facilityId": "item_port_grinder_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_plant_grass_1",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_plant_grass_powder_1",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "grinder_plant_grass_powder_2_1",
+      "facilityId": "item_port_grinder_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_plant_grass_2",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_plant_grass_powder_2",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "grinder_plant_moss_powder_1_1",
+      "facilityId": "item_port_grinder_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_plant_moss_1",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_plant_moss_powder_1",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "grinder_plant_moss_powder_2_1",
+      "facilityId": "item_port_grinder_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_plant_moss_2",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_plant_moss_powder_2",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "grinder_plant_moss_powder_3_1",
+      "facilityId": "item_port_grinder_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_plant_moss_3",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_plant_moss_powder_3",
+          "amount": 3
+        }
+      ]
+    },
+    {
+      "id": "grinder_quartz_powder_1",
+      "facilityId": "item_port_grinder_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_quartz_glass",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_quartz_powder",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "planter_plant_bbflower_1",
+      "facilityId": "item_port_planter_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_plant_bbflower_seed_1",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_plant_bbflower_1",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "planter_plant_grass_1_1",
+      "facilityId": "item_port_planter_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_plant_grass_seed_1",
+          "amount": 1
+        },
+        {
+          "itemId": "item_liquid_water",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_plant_grass_1",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "planter_plant_grass_2_1",
+      "facilityId": "item_port_planter_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_plant_grass_seed_2",
+          "amount": 1
+        },
+        {
+          "itemId": "item_liquid_water",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_plant_grass_2",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "planter_plant_moss_1_1",
+      "facilityId": "item_port_planter_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_plant_moss_seed_1",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_plant_moss_1",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "planter_plant_moss_2_1",
+      "facilityId": "item_port_planter_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_plant_moss_seed_2",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_plant_moss_2",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "planter_plant_moss_3_1",
+      "facilityId": "item_port_planter_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_plant_moss_seed_3",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_plant_moss_3",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "pool_liquid_liquid_xiranite_1",
+      "facilityId": "item_port_mix_pool_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_xiranite_powder",
+          "amount": 1
+        },
+        {
+          "itemId": "item_liquid_water",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_liquid_xiranite",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "pool_liquid_plant_grass_1_1",
+      "facilityId": "item_port_mix_pool_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_plant_grass_powder_1",
+          "amount": 1
+        },
+        {
+          "itemId": "item_liquid_water",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_liquid_plant_grass_1",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "pool_liquid_plant_grass_2_1",
+      "facilityId": "item_port_mix_pool_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_plant_grass_powder_2",
+          "amount": 1
+        },
+        {
+          "itemId": "item_liquid_water",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_liquid_plant_grass_2",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "seedcollector_plant_bbflower_1",
+      "facilityId": "item_port_seedcol_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_plant_bbflower_1",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_plant_bbflower_seed_1",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "seedcollector_plant_grass_1_1",
+      "facilityId": "item_port_seedcol_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_plant_grass_1",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_plant_grass_seed_1",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "seedcollector_plant_grass_2_1",
+      "facilityId": "item_port_seedcol_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_plant_grass_2",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_plant_grass_seed_2",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "seedcollector_plant_moss_1_1",
+      "facilityId": "item_port_seedcol_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_plant_moss_1",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_plant_moss_seed_1",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "seedcollector_plant_moss_2_1",
+      "facilityId": "item_port_seedcol_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_plant_moss_2",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_plant_moss_seed_2",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "seedcollector_plant_moss_3_1",
+      "facilityId": "item_port_seedcol_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_plant_moss_3",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_plant_moss_seed_3",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "seedcollector_plant_sp_1",
+      "facilityId": "item_port_seedcol_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_plant_sp_1",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_plant_sp_seed_1",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "seedcollector_plant_sp_2",
+      "facilityId": "item_port_seedcol_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_plant_sp_2",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_plant_sp_seed_2",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "seedcollector_plant_sp_3",
+      "facilityId": "item_port_seedcol_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_plant_sp_3",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_plant_sp_seed_3",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "seedcollector_plant_sp_4",
+      "facilityId": "item_port_seedcol_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_plant_sp_4",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_plant_sp_seed_4",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "shaper_glass_bottle_1",
+      "facilityId": "item_port_shaper_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_quartz_glass",
+          "amount": 2
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_glass_bottle",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "shaper_glass_enr_bottle_1",
+      "facilityId": "item_port_shaper_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_quartz_enr",
+          "amount": 2
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_glass_enr_bottle",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "shaper_iron_bottle_1",
+      "facilityId": "item_port_shaper_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_iron_nugget",
+          "amount": 2
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_iron_bottle",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "shaper_iron_enr_bottle_1",
+      "facilityId": "item_port_shaper_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_iron_enr",
+          "amount": 2
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_iron_enr_bottle",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "thickener_carbon_enr_powder_1",
+      "facilityId": "item_port_thickener_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_carbon_powder",
+          "amount": 2
+        },
+        {
+          "itemId": "item_plant_moss_powder_3",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_carbon_enr_powder",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "thickener_crystal_enr_powder_1",
+      "facilityId": "item_port_thickener_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_crystal_powder",
+          "amount": 2
+        },
+        {
+          "itemId": "item_plant_moss_powder_3",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_crystal_enr_powder",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "thickener_iron_enr_powder_1",
+      "facilityId": "item_port_thickener_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_iron_powder",
+          "amount": 2
+        },
+        {
+          "itemId": "item_plant_moss_powder_3",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_iron_enr_powder",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "thickener_originium_enr_powder_1",
+      "facilityId": "item_port_thickener_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_originium_powder",
+          "amount": 2
+        },
+        {
+          "itemId": "item_plant_moss_powder_3",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_originium_enr_powder",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "thickener_plant_moss_enr_powder_1_1",
+      "facilityId": "item_port_thickener_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_plant_moss_powder_1",
+          "amount": 2
+        },
+        {
+          "itemId": "item_plant_moss_powder_3",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_plant_moss_enr_powder_1",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "thickener_plant_moss_enr_powder_2_1",
+      "facilityId": "item_port_thickener_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_plant_moss_powder_2",
+          "amount": 2
+        },
+        {
+          "itemId": "item_plant_moss_powder_3",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_plant_moss_enr_powder_2",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "thickener_quartz_enr_powder_1",
+      "facilityId": "item_port_thickener_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_quartz_powder",
+          "amount": 2
+        },
+        {
+          "itemId": "item_plant_moss_powder_3",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_quartz_enr_powder",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "tools_proc_battery_1_1",
+      "facilityId": "item_port_tools_asm_mc_1",
+      "craftingTime": 10,
+      "inputs": [
+        {
+          "itemId": "item_glass_cmpt",
+          "amount": 5
+        },
+        {
+          "itemId": "item_originium_powder",
+          "amount": 10
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_proc_battery_1",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "tools_proc_battery_2_1",
+      "facilityId": "item_port_tools_asm_mc_1",
+      "craftingTime": 10,
+      "inputs": [
+        {
+          "itemId": "item_iron_cmpt",
+          "amount": 10
+        },
+        {
+          "itemId": "item_originium_powder",
+          "amount": 15
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_proc_battery_2",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "tools_proc_battery_3_1",
+      "facilityId": "item_port_tools_asm_mc_1",
+      "craftingTime": 10,
+      "inputs": [
+        {
+          "itemId": "item_iron_enr_cmpt",
+          "amount": 10
+        },
+        {
+          "itemId": "item_originium_enr_powder",
+          "amount": 15
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_proc_battery_3",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "tools_proc_battery_4_1",
+      "facilityId": "item_port_tools_asm_mc_1",
+      "craftingTime": 10,
+      "inputs": [
+        {
+          "itemId": "item_xiranite_powder",
+          "amount": 5
+        },
+        {
+          "itemId": "item_originium_enr_powder",
+          "amount": 15
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_proc_battery_4",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "tools_proc_bomb_1_1",
+      "facilityId": "item_port_tools_asm_mc_1",
+      "craftingTime": 10,
+      "inputs": [
+        {
+          "itemId": "item_glass_cmpt",
+          "amount": 5
+        },
+        {
+          "itemId": "item_plant_bbflower_powder_1",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_proc_bomb_1",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "tools_proc_food_4_1",
+      "facilityId": "item_port_tools_asm_mc_1",
+      "craftingTime": 10,
+      "inputs": [
+        {
+          "itemId": "item_iron_cmpt",
+          "amount": 10
+        },
+        {
+          "itemId": "item_fbottle_iron_grass_1",
+          "amount": 5
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_bottled_food_4",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "tools_proc_rec_hp_4_1",
+      "facilityId": "item_port_tools_asm_mc_1",
+      "craftingTime": 10,
+      "inputs": [
+        {
+          "itemId": "item_iron_cmpt",
+          "amount": 10
+        },
+        {
+          "itemId": "item_fbottle_iron_grass_2",
+          "amount": 5
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_bottled_rec_hp_4",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "winder_equip_script_1",
+      "facilityId": "item_port_winder_1",
+      "craftingTime": 10,
+      "inputs": [
+        {
+          "itemId": "item_crystal_shell",
+          "amount": 5
+        },
+        {
+          "itemId": "item_quartz_glass",
+          "amount": 5
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_equip_script_1",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "winder_equip_script_2",
+      "facilityId": "item_port_winder_1",
+      "craftingTime": 10,
+      "inputs": [
+        {
+          "itemId": "item_crystal_shell",
+          "amount": 10
+        },
+        {
+          "itemId": "item_iron_nugget",
+          "amount": 10
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_equip_script_2",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "winder_equip_script_3",
+      "facilityId": "item_port_winder_1",
+      "craftingTime": 10,
+      "inputs": [
+        {
+          "itemId": "item_crystal_enr",
+          "amount": 10
+        },
+        {
+          "itemId": "item_quartz_enr",
+          "amount": 10
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_equip_script_3",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "winder_equip_script_4",
+      "facilityId": "item_port_winder_1",
+      "craftingTime": 10,
+      "inputs": [
+        {
+          "itemId": "item_crystal_enr",
+          "amount": 10
+        },
+        {
+          "itemId": "item_xiranite_powder",
+          "amount": 10
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_equip_script_4",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "xiranite_oven_muck_xiranite_1",
+      "facilityId": "item_port_xiranite_oven_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_muck_feces_1",
+          "amount": 1
+        },
+        {
+          "itemId": "item_liquid_xiranite",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_muck_xiranite_1",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "xiranite_oven_xiranite_powder_1",
+      "facilityId": "item_port_xiranite_oven_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_carbon_enr",
+          "amount": 2
+        },
+        {
+          "itemId": "item_liquid_water",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_xiranite_powder",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "furnance_cuprium_1",
+      "facilityId": "item_port_furnance_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_cuprium_ore",
+          "amount": 1
+        },
+        {
+          "itemId": "item_liquid_water",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_cuprium",
+          "amount": 1
+        },
+        {
+          "itemId": "item_sewage",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "grinder_cuprium_powder_1",
+      "facilityId": "item_port_grinder_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_cuprium",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_cuprium_powder",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "component_cuprium_cmpt_1",
+      "facilityId": "item_port_cmpt_mc_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_cuprium",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_cuprium_cmpt",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "shaper_cuprium_bottle_1",
+      "facilityId": "item_port_shaper_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_cuprium",
+          "amount": 2
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_cuprium_bottle",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_cuprium_grass_1",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_cuprium_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_liquid_plant_grass_1",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_fbottle_cuprium_grass_1",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_cuprium_grass_2",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_cuprium_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_liquid_plant_grass_2",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_fbottle_cuprium_grass_2",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_cuprium_grass_1_1",
+      "facilityId": "item_port_dismantler_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_fbottle_cuprium_grass_1",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_cuprium_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_liquid_plant_grass_1",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_cuprium_grass_2_1",
+      "facilityId": "item_port_dismantler_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_fbottle_cuprium_grass_2",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_cuprium_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_liquid_plant_grass_2",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_cuprium_water",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_cuprium_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_liquid_water",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_fbottle_cuprium_water",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_cuprium_water_1",
+      "facilityId": "item_port_dismantler_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_fbottle_cuprium_water",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_cuprium_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_liquid_water",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_cuprium_sewage",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_cuprium_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_sewage",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_fbottle_cuprium_sewage",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_cuprium_sewage_1",
+      "facilityId": "item_port_dismantler_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_fbottle_cuprium_sewage",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_cuprium_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_sewage",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_cuprium_xiranite",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_cuprium_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_liquid_xiranite",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_fbottle_cuprium_xiranite",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_cuprium_xiranite_1",
+      "facilityId": "item_port_dismantler_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_fbottle_cuprium_xiranite",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_cuprium_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_liquid_xiranite",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_cuprium_xircon_effluent",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_cuprium_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_xircon_effluent",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_fbottle_cuprium_xircon_effluent",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_cuprium_xircon_effluent_1",
+      "facilityId": "item_port_dismantler_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_fbottle_cuprium_xircon_effluent",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_cuprium_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_xircon_effluent",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_cuprium_inert_xircon_effluent",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_cuprium_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_inert_xircon_effluent",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_fbottle_cuprium_inert_xircon_effluent",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_cuprium_inert_xircon_effluent_1",
+      "facilityId": "item_port_dismantler_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_fbottle_cuprium_inert_xircon_effluent",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_cuprium_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_inert_xircon_effluent",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "winder_cuprium_enr_cmpt_1",
+      "facilityId": "item_port_winder_1",
+      "craftingTime": 10,
+      "inputs": [
+        {
+          "itemId": "item_cuprium_cmpt",
+          "amount": 10
+        },
+        {
+          "itemId": "item_xiranite_powder",
+          "amount": 10
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_cuprium_enr_cmpt",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "tools_proc_battery_5_1",
+      "facilityId": "item_port_tools_asm_mc_1",
+      "craftingTime": 10,
+      "inputs": [
+        {
+          "itemId": "item_xircon",
+          "amount": 5
+        },
+        {
+          "itemId": "item_originium_enr_powder",
+          "amount": 20
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_proc_battery_5",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "tools_proc_rec_hp_5_1",
+      "facilityId": "item_port_tools_asm_mc_1",
+      "craftingTime": 10,
+      "inputs": [
+        {
+          "itemId": "item_cuprium_cmpt",
+          "amount": 10
+        },
+        {
+          "itemId": "item_fbottle_cuprium_grass_2",
+          "amount": 5
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_bottled_rec_hp_5",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "tools_proc_food_5_1",
+      "facilityId": "item_port_tools_asm_mc_1",
+      "craftingTime": 10,
+      "inputs": [
+        {
+          "itemId": "item_cuprium_cmpt",
+          "amount": 10
+        },
+        {
+          "itemId": "item_fbottle_cuprium_grass_1",
+          "amount": 5
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_bottled_food_5",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "pool_xircon_effluent_1",
+      "facilityId": "item_port_mix_pool_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_liquid_xiranite",
+          "amount": 1
+        },
+        {
+          "itemId": "item_sewage",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_xircon_effluent",
+          "amount": 1
+        },
+        {
+          "itemId": "item_inert_xircon_effluent",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "pool_xircon_1",
+      "facilityId": "item_port_mix_pool_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_xircon_effluent",
+          "amount": 2
+        },
+        {
+          "itemId": "item_iron_powder",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_xircon",
+          "amount": 1
+        },
+        {
+          "itemId": "item_sewage",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "water_treatment_sewage_1",
+      "facilityId": "item_port_water_treatment_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_sewage",
+          "amount": 1
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "id": "water_treatment_xircon_effluent_1",
+      "facilityId": "item_port_water_treatment_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_xircon_effluent",
+          "amount": 1
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "id": "water_treatment_inert_xircon_effluent_1",
+      "facilityId": "item_port_water_treatment_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_inert_xircon_effluent",
+          "amount": 1
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "id": "purification_hetonite_solution_1",
+      "facilityId": "item_port_purification_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_cuprium_solution",
+          "amount": 4
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_hetonite_solution",
+          "amount": 1
+        },
+        {
+          "itemId": "item_precipitation_acid",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "purification_xircon_effluent_1",
+      "facilityId": "item_port_purification_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_inert_xircon_effluent",
+          "amount": 4
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_xircon_effluent",
+          "amount": 1
+        },
+        {
+          "itemId": "item_liquid_water",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "expanded_pool_liquid_heavy_xiranite_1",
+      "facilityId": "item_port_mix_pool_2",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_heavy_xiranite",
+          "amount": 1
+        },
+        {
+          "itemId": "item_precipitation_acid",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_liquid_heavy_xiranite",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "expanded_pool_cuprium_solution_1",
+      "facilityId": "item_port_mix_pool_2",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_cuprium_powder",
+          "amount": 1
+        },
+        {
+          "itemId": "item_precipitation_acid",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_cuprium_solution",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "expanded_pool_hetonite_1",
+      "facilityId": "item_port_mix_pool_2",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_hetonite_solution",
+          "amount": 2
+        },
+        {
+          "itemId": "item_iron_powder",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_hetonite",
+          "amount": 1
+        },
+        {
+          "itemId": "item_sewage",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "expanded_pool_liquid_liquid_xiranite_1",
+      "facilityId": "item_port_mix_pool_2",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_xiranite_powder",
+          "amount": 1
+        },
+        {
+          "itemId": "item_liquid_water",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_liquid_xiranite",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "expanded_pool_liquid_plant_grass_1_1",
+      "facilityId": "item_port_mix_pool_2",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_plant_grass_powder_1",
+          "amount": 1
+        },
+        {
+          "itemId": "item_liquid_water",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_liquid_plant_grass_1",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "expanded_pool_liquid_plant_grass_2_1",
+      "facilityId": "item_port_mix_pool_2",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_plant_grass_powder_2",
+          "amount": 1
+        },
+        {
+          "itemId": "item_liquid_water",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_liquid_plant_grass_2",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "expanded_pool_xircon_effluent_1",
+      "facilityId": "item_port_mix_pool_2",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_liquid_xiranite",
+          "amount": 1
+        },
+        {
+          "itemId": "item_sewage",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_xircon_effluent",
+          "amount": 1
+        },
+        {
+          "itemId": "item_inert_xircon_effluent",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "expanded_pool_xircon_1",
+      "facilityId": "item_port_mix_pool_2",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_xircon_effluent",
+          "amount": 2
+        },
+        {
+          "itemId": "item_iron_powder",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_xircon",
+          "amount": 1
+        },
+        {
+          "itemId": "item_sewage",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "pool_liquid_heavy_xiranite_1",
+      "facilityId": "item_port_mix_pool_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_heavy_xiranite",
+          "amount": 1
+        },
+        {
+          "itemId": "item_precipitation_acid",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_liquid_heavy_xiranite",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "pool_cuprium_solution_1",
+      "facilityId": "item_port_mix_pool_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_cuprium_powder",
+          "amount": 1
+        },
+        {
+          "itemId": "item_precipitation_acid",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_cuprium_solution",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "pool_hetonite_1",
+      "facilityId": "item_port_mix_pool_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_hetonite_solution",
+          "amount": 2
+        },
+        {
+          "itemId": "item_iron_powder",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_hetonite",
+          "amount": 1
+        },
+        {
+          "itemId": "item_sewage",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "xiranite_oven_heavy_xiranite_1",
+      "facilityId": "item_port_xiranite_oven_1",
+      "craftingTime": 10,
+      "inputs": [
+        {
+          "itemId": "item_xiranite_powder",
+          "amount": 10
+        },
+        {
+          "itemId": "item_xircon_effluent",
+          "amount": 5
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_heavy_xiranite",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "component_hetonite_cmpt_1",
+      "facilityId": "item_port_cmpt_mc_1",
+      "craftingTime": 10,
+      "inputs": [
+        {
+          "itemId": "item_hetonite",
+          "amount": 5
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_hetonite_cmpt",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "shaper_hetonite_bottle_1",
+      "facilityId": "item_port_shaper_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_hetonite",
+          "amount": 2
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_hetonite_bottle",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_hetonite_water",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_hetonite_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_liquid_water",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_fbottle_hetonite_water",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_hetonite_sewage",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_hetonite_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_sewage",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_fbottle_hetonite_sewage",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_hetonite_grass_1",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_hetonite_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_liquid_plant_grass_1",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_fbottle_hetonite_grass_1",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_hetonite_grass_2",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_hetonite_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_liquid_plant_grass_2",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_fbottle_hetonite_grass_2",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_hetonite_xiranite",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_hetonite_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_liquid_xiranite",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_fbottle_hetonite_xiranite",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_hetonite_xircon_effluent",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_hetonite_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_xircon_effluent",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_fbottle_hetonite_xircon_effluent",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_hetonite_inert_xircon_effluent",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_hetonite_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_inert_xircon_effluent",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_fbottle_hetonite_inert_xircon_effluent",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_hetonite_precip_acid",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_hetonite_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_precipitation_acid",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_fbottle_hetonite_precip_acid",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_hetonite_heavy_xiranite",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_hetonite_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_liquid_heavy_xiranite",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_fbottle_hetonite_heavy_xiranite",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_hetonite_water",
+      "facilityId": "item_port_dismantler_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_fbottle_hetonite_water",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_hetonite_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_liquid_water",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_hetonite_sewage",
+      "facilityId": "item_port_dismantler_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_fbottle_hetonite_sewage",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_hetonite_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_sewage",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_hetonite_grass_1",
+      "facilityId": "item_port_dismantler_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_fbottle_hetonite_grass_1",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_hetonite_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_liquid_plant_grass_1",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_hetonite_grass_2",
+      "facilityId": "item_port_dismantler_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_fbottle_hetonite_grass_2",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_hetonite_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_liquid_plant_grass_2",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_hetonite_xiranite",
+      "facilityId": "item_port_dismantler_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_fbottle_hetonite_xiranite",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_hetonite_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_liquid_xiranite",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_hetonite_xircon_effluent",
+      "facilityId": "item_port_dismantler_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_fbottle_hetonite_xircon_effluent",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_hetonite_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_xircon_effluent",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_hetonite_inert_xircon_effluent",
+      "facilityId": "item_port_dismantler_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_fbottle_hetonite_inert_xircon_effluent",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_hetonite_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_inert_xircon_effluent",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_hetonite_precip_acid",
+      "facilityId": "item_port_dismantler_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_fbottle_hetonite_precip_acid",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_hetonite_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_precipitation_acid",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_hetonite_heavy_xiranite",
+      "facilityId": "item_port_dismantler_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_fbottle_hetonite_heavy_xiranite",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_hetonite_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_liquid_heavy_xiranite",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "winder_hetonite_enr_cmpt_1",
+      "facilityId": "item_port_winder_1",
+      "craftingTime": 10,
+      "inputs": [
+        {
+          "itemId": "item_hetonite_cmpt",
+          "amount": 2
+        },
+        {
+          "itemId": "item_heavy_xiranite",
+          "amount": 2
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_hetonite_enr_cmpt",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_cuprium_precip_acid",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_cuprium_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_precipitation_acid",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_fbottle_cuprium_precip_acid",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_bottled_ferrium_heavy_xiranite",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_iron_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_liquid_heavy_xiranite",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_fbottle_ferrium_heavy_xiranite",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_bottled_ferrium_heavy_xiranite",
+      "facilityId": "item_port_dismantler_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_fbottle_ferrium_heavy_xiranite",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_iron_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_liquid_heavy_xiranite",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "component_event_xiranite_cmpt_1",
+      "facilityId": "item_port_cmpt_mc_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_xiranite_powder",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_event_xiranite_cmpt",
+          "amount": 1
+        }
+      ],
+      "availability": {
+        "eventId": "aic_support_palm_top_savior",
+        "period": "production"
+      }
+    },
+    {
+      "id": "shaper_event_xiranite_bottle_1",
+      "facilityId": "item_port_shaper_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_xiranite_powder",
+          "amount": 2
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_event_xiranite_bottle",
+          "amount": 1
+        }
+      ],
+      "availability": {
+        "eventId": "aic_support_palm_top_savior",
+        "period": "production"
+      }
+    },
+    {
+      "id": "tools_event_xiranite_gourd_1",
+      "facilityId": "item_port_tools_asm_mc_1",
+      "craftingTime": 10,
+      "inputs": [
+        {
+          "itemId": "item_event_xiranite_bottle",
+          "amount": 5
+        },
+        {
+          "itemId": "item_event_xiranite_cmpt",
+          "amount": 5
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_event_xiranite_gourd",
+          "amount": 1
+        }
+      ],
+      "availability": {
+        "eventId": "aic_support_palm_top_savior",
+        "period": "production"
+      }
+    },
+    {
+      "id": "component_event_heavy_xiranite_cmpt_1",
+      "facilityId": "item_port_cmpt_mc_1",
+      "craftingTime": 20,
+      "inputs": [
+        {
+          "itemId": "item_heavy_xiranite",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_event_heavy_xiranite_cmpt",
+          "amount": 2
+        }
+      ],
+      "availability": {
+        "eventId": "aic_support_palm_top_savior",
+        "period": "production"
+      }
+    },
+    {
+      "id": "shaper_event_heavy_xiranite_bottle_1",
+      "facilityId": "item_port_shaper_1",
+      "craftingTime": 20,
+      "inputs": [
+        {
+          "itemId": "item_heavy_xiranite",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_event_heavy_xiranite_bottle",
+          "amount": 2
+        }
+      ],
+      "availability": {
+        "eventId": "aic_support_palm_top_savior",
+        "period": "production"
+      }
+    },
+    {
+      "id": "filling_event_heavy_xiranite_bottle_1",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "craftingTime": 10,
+      "inputs": [
+        {
+          "itemId": "item_event_heavy_xiranite_bottle",
+          "amount": 1
+        },
+        {
+          "itemId": "item_liquid_plant_grass_2",
+          "amount": 5
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_event_fbottle_heavy_xiranite_grass_2",
+          "amount": 1
+        }
+      ],
+      "availability": {
+        "eventId": "aic_support_palm_top_savior",
+        "period": "production"
+      }
+    },
+    {
+      "id": "tools_event_xiran_hue_atomizer_1",
+      "facilityId": "item_port_tools_asm_mc_1",
+      "craftingTime": 10,
+      "inputs": [
+        {
+          "itemId": "item_event_heavy_xiranite_cmpt",
+          "amount": 1
+        },
+        {
+          "itemId": "item_hetonite",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_event_xiran_hue_atomizer",
+          "amount": 1
+        }
+      ],
+      "availability": {
+        "eventId": "aic_support_palm_top_savior",
+        "period": "production"
+      }
+    },
+    {
+      "id": "tools_event_xiranite_jade_gourd_1",
+      "facilityId": "item_port_tools_asm_mc_1",
+      "craftingTime": 10,
+      "inputs": [
+        {
+          "itemId": "item_event_fbottle_heavy_xiranite_grass_2",
+          "amount": 1
+        },
+        {
+          "itemId": "item_event_xiran_hue_atomizer",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_event_xiranite_jade_gourd",
+          "amount": 1
+        }
+      ],
+      "availability": {
+        "eventId": "aic_support_palm_top_savior",
+        "period": "production"
+      }
+    },
+    {
+      "id": "fluid_transmuter_aquagen_1",
+      "facilityId": "item_port_phase_trans_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_liquid_water",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_aquagen",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "fluid_transmuter_acridgen_1",
+      "facilityId": "item_port_phase_trans_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_precipitation_acid",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_acridgen",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "fluid_transmuter_xiragen_1",
+      "facilityId": "item_port_phase_trans_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_liquid_xiranite",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_xiragen",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "fluid_transmuter_heavy_xiragen_1",
+      "facilityId": "item_port_phase_trans_1",
+      "craftingTime": 10,
+      "inputs": [
+        {
+          "itemId": "item_liquid_heavy_xiranite",
+          "amount": 2
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_heavy_xiragen",
+          "amount": 5
+        }
+      ]
+    },
+    {
+      "id": "fluid_transmuter_cuprium_gas_1",
+      "facilityId": "item_port_phase_trans_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_cuprium_solution",
+          "amount": 2
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_cuprium_gas",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "fluid_transmuter_hetonite_gas_1",
+      "facilityId": "item_port_phase_trans_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_hetonite_solution",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_hetonite_gas",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "fluid_transmuter_liquid_water_1",
+      "facilityId": "item_port_phase_trans_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_aquagen",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_liquid_water",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "fluid_transmuter_precipitation_acid_1",
+      "facilityId": "item_port_phase_trans_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_acridgen",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_precipitation_acid",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "fluid_transmuter_liquid_xiranite_1",
+      "facilityId": "item_port_phase_trans_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_xiragen",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_liquid_xiranite",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "fluid_transmuter_liquid_heavy_xiranite_1",
+      "facilityId": "item_port_phase_trans_1",
+      "craftingTime": 10,
+      "inputs": [
+        {
+          "itemId": "item_heavy_xiragen",
+          "amount": 5
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_liquid_heavy_xiranite",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "fluid_transmuter_cuprium_solution_1",
+      "facilityId": "item_port_phase_trans_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_cuprium_gas",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_cuprium_solution",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "fluid_transmuter_hetonite_solution_1",
+      "facilityId": "item_port_phase_trans_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_hetonite_gas",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_hetonite_solution",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "solid_transmuter_xiragen_1",
+      "facilityId": "item_port_phase_trans_2",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_xiranite_powder",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_xiragen",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "solid_transmuter_heavy_xiragen_1",
+      "facilityId": "item_port_phase_trans_2",
+      "craftingTime": 10,
+      "inputs": [
+        {
+          "itemId": "item_heavy_xiranite",
+          "amount": 2
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_heavy_xiragen",
+          "amount": 5
+        }
+      ]
+    },
+    {
+      "id": "solid_transmuter_cuprium_gas_1",
+      "facilityId": "item_port_phase_trans_2",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_cuprium",
+          "amount": 2
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_cuprium_gas",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "solid_transmuter_hetonite_gas_1",
+      "facilityId": "item_port_phase_trans_2",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_hetonite",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_hetonite_gas",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "solid_transmuter_pyrrolite_gas_1",
+      "facilityId": "item_port_phase_trans_2",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_pyrrolite",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_pyrrolite_gas",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "solid_transmuter_xiranite_powder_1",
+      "facilityId": "item_port_phase_trans_2",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_xiragen",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_xiranite_powder",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "solid_transmuter_heavy_xiranite_1",
+      "facilityId": "item_port_phase_trans_2",
+      "craftingTime": 10,
+      "inputs": [
+        {
+          "itemId": "item_heavy_xiragen",
+          "amount": 5
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_heavy_xiranite",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "solid_transmuter_cuprium_1",
+      "facilityId": "item_port_phase_trans_2",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_cuprium_gas",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_cuprium",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "solid_transmuter_hetonite_1",
+      "facilityId": "item_port_phase_trans_2",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_hetonite_gas",
+          "amount": 2
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_hetonite",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "solid_transmuter_pyrrolite_1",
+      "facilityId": "item_port_phase_trans_2",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_pyrrolite_gas",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_pyrrolite",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "vaporizer_stable_env_1",
+      "facilityId": "item_port_vaporizer_1",
+      "craftingTime": 10,
+      "inputs": [
+        {
+          "itemId": "item_inergen",
+          "amount": 1
+        }
+      ],
+      "outputs": [],
+      "producedGasEnv": "stable"
+    },
+    {
+      "id": "vaporizer_humid_env_1",
+      "facilityId": "item_port_vaporizer_1",
+      "craftingTime": 10,
+      "inputs": [
+        {
+          "itemId": "item_aquagen",
+          "amount": 1
+        }
+      ],
+      "outputs": [],
+      "producedGasEnv": "humid"
+    },
+    {
+      "id": "vaporizer_acidic_env_1",
+      "facilityId": "item_port_vaporizer_1",
+      "craftingTime": 10,
+      "inputs": [
+        {
+          "itemId": "item_acridgen",
+          "amount": 1
+        }
+      ],
+      "outputs": [],
+      "producedGasEnv": "acidic"
+    },
+    {
+      "id": "vaporizer_xiranite_env_1",
+      "facilityId": "item_port_vaporizer_1",
+      "craftingTime": 10,
+      "inputs": [
+        {
+          "itemId": "item_xiragen",
+          "amount": 1
+        }
+      ],
+      "outputs": [],
+      "producedGasEnv": "xiranite"
+    },
+    {
+      "id": "gas_reactor_pyrrolite_gas_1",
+      "facilityId": "item_port_gas_reactor_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_hetonite_gas",
+          "amount": 2
+        },
+        {
+          "itemId": "item_xiragen",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_pyrrolite_gas",
+          "amount": 1
+        }
+      ],
+      "requiredGasEnv": "acidic"
+    },
+    {
+      "id": "purification_hetonite_gas_1",
+      "facilityId": "item_port_purification_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_cuprium_gas",
+          "amount": 2
+        },
+        {
+          "itemId": "item_separator_core",
+          "amount": 2
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_hetonite_gas",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "purification_hetonite_gas_stable_1",
+      "facilityId": "item_port_purification_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_cuprium_gas",
+          "amount": 2
+        },
+        {
+          "itemId": "item_separator_core",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_hetonite_gas",
+          "amount": 2
+        }
+      ],
+      "requiredGasEnv": "stable",
+      "gasEnvBaseRecipeId": "purification_hetonite_gas_1"
+    },
+    {
+      "id": "purification_heavy_xiragen_1",
+      "facilityId": "item_port_purification_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_xiragen",
+          "amount": 2
+        },
+        {
+          "itemId": "item_separator_core",
+          "amount": 2
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_heavy_xiragen",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "purification_heavy_xiragen_stable_1",
+      "facilityId": "item_port_purification_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_xiragen",
+          "amount": 2
+        },
+        {
+          "itemId": "item_separator_core",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_heavy_xiragen",
+          "amount": 1
+        }
+      ],
+      "requiredGasEnv": "stable",
+      "gasEnvBaseRecipeId": "purification_heavy_xiragen_1"
+    },
+    {
+      "id": "shaper_cuprium_canister_1",
+      "facilityId": "item_port_shaper_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_cuprium",
+          "amount": 2
+        },
+        {
+          "itemId": "item_inergen",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_cuprium_canister",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "tools_separator_core_1",
+      "facilityId": "item_port_tools_asm_mc_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_cuprium_canister",
+          "amount": 1
+        },
+        {
+          "itemId": "item_xiranite_powder",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_separator_core",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "component_pyrrolite_cmpt_1",
+      "facilityId": "item_port_cmpt_mc_1",
+      "craftingTime": 10,
+      "inputs": [
+        {
+          "itemId": "item_pyrrolite",
+          "amount": 5
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_pyrrolite_cmpt",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "winder_pyrrolite_enr_cmpt_1",
+      "facilityId": "item_port_winder_1",
+      "craftingTime": 10,
+      "inputs": [
+        {
+          "itemId": "item_pyrrolite_cmpt",
+          "amount": 1
+        },
+        {
+          "itemId": "item_heavy_xiranite",
+          "amount": 2
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_pyrrolite_enr_cmpt",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "xiranite_oven_xiranite_powder_stable_1",
+      "facilityId": "item_port_xiranite_oven_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_carbon_mtl",
+          "amount": 1
+        },
+        {
+          "itemId": "item_liquid_water",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_xiranite_powder",
+          "amount": 1
+        }
+      ],
+      "requiredGasEnv": "stable",
+      "gasEnvBaseRecipeId": "xiranite_oven_xiranite_powder_1"
+    },
+    {
+      "id": "filling_gasjar_cuprium_inergen",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_cuprium_canister",
+          "amount": 1
+        },
+        {
+          "itemId": "item_inergen",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_gasjar_cuprium_inergen",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_gasjar_cuprium_inergen",
+      "facilityId": "item_port_dismantler_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_gasjar_cuprium_inergen",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_cuprium_canister",
+          "amount": 1
+        },
+        {
+          "itemId": "item_inergen",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_gasjar_cuprium_aquagen",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_cuprium_canister",
+          "amount": 1
+        },
+        {
+          "itemId": "item_aquagen",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_gasjar_cuprium_aquagen",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_gasjar_cuprium_aquagen",
+      "facilityId": "item_port_dismantler_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_gasjar_cuprium_aquagen",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_cuprium_canister",
+          "amount": 1
+        },
+        {
+          "itemId": "item_aquagen",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_gasjar_cuprium_acridgen",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_cuprium_canister",
+          "amount": 1
+        },
+        {
+          "itemId": "item_acridgen",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_gasjar_cuprium_acridgen",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_gasjar_cuprium_acridgen",
+      "facilityId": "item_port_dismantler_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_gasjar_cuprium_acridgen",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_cuprium_canister",
+          "amount": 1
+        },
+        {
+          "itemId": "item_acridgen",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_gasjar_cuprium_xiragen",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_cuprium_canister",
+          "amount": 1
+        },
+        {
+          "itemId": "item_xiragen",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_gasjar_cuprium_xiragen",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_gasjar_cuprium_xiragen",
+      "facilityId": "item_port_dismantler_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_gasjar_cuprium_xiragen",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_cuprium_canister",
+          "amount": 1
+        },
+        {
+          "itemId": "item_xiragen",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_gasjar_cuprium_heavy_xiragen",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_cuprium_canister",
+          "amount": 1
+        },
+        {
+          "itemId": "item_heavy_xiragen",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_gasjar_cuprium_heavy_xiragen",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_gasjar_cuprium_heavy_xiragen",
+      "facilityId": "item_port_dismantler_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_gasjar_cuprium_heavy_xiragen",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_cuprium_canister",
+          "amount": 1
+        },
+        {
+          "itemId": "item_heavy_xiragen",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_gasjar_cuprium_cuprium_gas",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_cuprium_canister",
+          "amount": 1
+        },
+        {
+          "itemId": "item_cuprium_gas",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_gasjar_cuprium_cuprium_gas",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_gasjar_cuprium_cuprium_gas",
+      "facilityId": "item_port_dismantler_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_gasjar_cuprium_cuprium_gas",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_cuprium_canister",
+          "amount": 1
+        },
+        {
+          "itemId": "item_cuprium_gas",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_gasjar_cuprium_hetonite_gas",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_cuprium_canister",
+          "amount": 1
+        },
+        {
+          "itemId": "item_hetonite_gas",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_gasjar_cuprium_hetonite_gas",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_gasjar_cuprium_hetonite_gas",
+      "facilityId": "item_port_dismantler_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_gasjar_cuprium_hetonite_gas",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_cuprium_canister",
+          "amount": 1
+        },
+        {
+          "itemId": "item_hetonite_gas",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "filling_gasjar_cuprium_pyrrolite_gas",
+      "facilityId": "item_port_filling_pd_mc_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_cuprium_canister",
+          "amount": 1
+        },
+        {
+          "itemId": "item_pyrrolite_gas",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_gasjar_cuprium_pyrrolite_gas",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "dismantler_gasjar_cuprium_pyrrolite_gas",
+      "facilityId": "item_port_dismantler_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_gasjar_cuprium_pyrrolite_gas",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_cuprium_canister",
+          "amount": 1
+        },
+        {
+          "itemId": "item_pyrrolite_gas",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "thermal_bank_originium_ore_1",
+      "facilityId": "thermal_bank_1",
+      "craftingTime": 8,
+      "inputs": [
+        {
+          "itemId": "item_originium_ore",
+          "amount": 1
+        }
+      ],
+      "outputs": [],
+      "producedPowerW": 50
+    },
+    {
+      "id": "thermal_bank_proc_battery_1_1",
+      "facilityId": "thermal_bank_1",
+      "craftingTime": 40,
+      "inputs": [
+        {
+          "itemId": "item_proc_battery_1",
+          "amount": 1
+        }
+      ],
+      "outputs": [],
+      "producedPowerW": 220
+    },
+    {
+      "id": "thermal_bank_proc_battery_2_1",
+      "facilityId": "thermal_bank_1",
+      "craftingTime": 40,
+      "inputs": [
+        {
+          "itemId": "item_proc_battery_2",
+          "amount": 1
+        }
+      ],
+      "outputs": [],
+      "producedPowerW": 420
+    },
+    {
+      "id": "thermal_bank_proc_battery_3_1",
+      "facilityId": "thermal_bank_1",
+      "craftingTime": 40,
+      "inputs": [
+        {
+          "itemId": "item_proc_battery_3",
+          "amount": 1
+        }
+      ],
+      "outputs": [],
+      "producedPowerW": 1100
+    },
+    {
+      "id": "thermal_bank_proc_battery_4_1",
+      "facilityId": "thermal_bank_1",
+      "craftingTime": 40,
+      "inputs": [
+        {
+          "itemId": "item_proc_battery_4",
+          "amount": 1
+        }
+      ],
+      "outputs": [],
+      "producedPowerW": 1600
+    },
+    {
+      "id": "thermal_bank_proc_battery_5_1",
+      "facilityId": "thermal_bank_1",
+      "craftingTime": 40,
+      "inputs": [
+        {
+          "itemId": "item_proc_battery_5",
+          "amount": 1
+        }
+      ],
+      "outputs": [],
+      "producedPowerW": 3200
+    },
+    {
+      "id": "furnance_activity_xiranite_nugget_1",
+      "facilityId": "item_port_furnance_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_xiranite_powder",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_activity_xiranite_nugget",
+          "amount": 1
+        }
+      ],
+      "availability": {
+        "eventId": "aic_support_chubby_lung_attacks",
+        "phaseId": "phase1",
+        "period": "production"
+      }
+    },
+    {
+      "id": "furnance_activity_xiranite_enr_nugget_1",
+      "facilityId": "item_port_furnance_1",
+      "craftingTime": 10,
+      "inputs": [
+        {
+          "itemId": "item_heavy_xiranite",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_activity_xiranite_enr_nugget",
+          "amount": 1
+        }
+      ],
+      "availability": {
+        "eventId": "aic_support_chubby_lung_attacks",
+        "phaseId": "phase2",
+        "period": "production"
+      }
+    },
+    {
+      "id": "component_activity_copper_poly_cmpt",
+      "facilityId": "item_port_cmpt_mc_1",
+      "craftingTime": 10,
+      "inputs": [
+        {
+          "itemId": "item_activity_copper_poly",
+          "amount": 5
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_activity_copper_poly_cmpt",
+          "amount": 1
+        }
+      ],
+      "availability": {
+        "eventId": "aic_support_chubby_lung_attacks",
+        "phaseId": "phase2",
+        "period": "production"
+      }
+    },
+    {
+      "id": "shaper_activity_xiranite_box_1",
+      "facilityId": "item_port_shaper_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_activity_xiranite_nugget",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_activity_xiranite_box",
+          "amount": 1
+        }
+      ],
+      "availability": {
+        "eventId": "aic_support_chubby_lung_attacks",
+        "phaseId": "phase1",
+        "period": "production"
+      }
+    },
+    {
+      "id": "tools_proc_activity_xiranite_copper_tool_1",
+      "facilityId": "item_port_tools_asm_mc_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_cuprium_cmpt",
+          "amount": 4
+        },
+        {
+          "itemId": "item_xiranite_powder",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_activity_copper_xiranite_tool",
+          "amount": 1
+        }
+      ],
+      "availability": {
+        "eventId": "aic_support_chubby_lung_attacks",
+        "phaseId": "phase1",
+        "period": "production"
+      }
+    },
+    {
+      "id": "tools_proc_activity_copper_poly_tool_1",
+      "facilityId": "item_port_tools_asm_mc_1",
+      "craftingTime": 10,
+      "inputs": [
+        {
+          "itemId": "item_activity_copper_poly_cmpt",
+          "amount": 1
+        },
+        {
+          "itemId": "item_heavy_xiranite",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_activity_copper_poly_tool",
+          "amount": 1
+        }
+      ],
+      "availability": {
+        "eventId": "aic_support_chubby_lung_attacks",
+        "phaseId": "phase2",
+        "period": "production"
+      }
+    },
+    {
+      "id": "tools_proc_activity_xiranite_lung",
+      "facilityId": "item_port_tools_asm_mc_1",
+      "craftingTime": 10,
+      "inputs": [
+        {
+          "itemId": "item_activity_xiranite_box",
+          "amount": 5
+        },
+        {
+          "itemId": "item_activity_copper_xiranite_tool",
+          "amount": 5
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_activity_xiranite_lung",
+          "amount": 1
+        }
+      ],
+      "availability": {
+        "eventId": "aic_support_chubby_lung_attacks",
+        "phaseId": "phase1",
+        "period": "production"
+      }
+    },
+    {
+      "id": "tools_proc_activity_xiranite_enr_lung",
+      "facilityId": "item_port_tools_asm_mc_1",
+      "craftingTime": 10,
+      "inputs": [
+        {
+          "itemId": "item_activity_xiranite_enr_box",
+          "amount": 1
+        },
+        {
+          "itemId": "item_activity_copper_poly_tool",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_activity_xiranite_enr_lung",
+          "amount": 1
+        }
+      ],
+      "availability": {
+        "eventId": "aic_support_chubby_lung_attacks",
+        "phaseId": "phase2",
+        "period": "production"
+      }
+    },
+    {
+      "id": "gas_reactor_activity_copper_poly_gas_1",
+      "facilityId": "item_port_gas_reactor_1",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_cuprium_gas",
+          "amount": 2
+        },
+        {
+          "itemId": "item_xiragen",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_activity_copper_poly_gas",
+          "amount": 1
+        }
+      ],
+      "availability": {
+        "eventId": "aic_support_chubby_lung_attacks",
+        "phaseId": "phase2",
+        "period": "production"
+      },
+      "requiredGasEnv": "stable"
+    },
+    {
+      "id": "liquid_transmuter_2_activity_copper_poly_1",
+      "facilityId": "item_port_phase_trans_2",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_activity_copper_poly_gas",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_activity_copper_poly",
+          "amount": 1
+        }
+      ],
+      "availability": {
+        "eventId": "aic_support_chubby_lung_attacks",
+        "phaseId": "phase2",
+        "period": "production"
+      }
+    },
+    {
+      "id": "shaper_gas_activity_xiranite_enr_box_1",
+      "facilityId": "item_port_shaper_1",
+      "craftingTime": 10,
+      "inputs": [
+        {
+          "itemId": "item_activity_xiranite_enr_nugget",
+          "amount": 1
+        },
+        {
+          "itemId": "item_inergen",
+          "amount": 5
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_activity_xiranite_enr_box",
+          "amount": 1
+        }
+      ],
+      "availability": {
+        "eventId": "aic_support_chubby_lung_attacks",
+        "phaseId": "phase2",
+        "period": "production"
+      }
+    },
+    {
+      "id": "liquid_transmuter_2_activity_copper_poly_gas_1",
+      "facilityId": "item_port_phase_trans_2",
+      "craftingTime": 2,
+      "inputs": [
+        {
+          "itemId": "item_activity_copper_poly",
+          "amount": 1
+        }
+      ],
+      "outputs": [
+        {
+          "itemId": "item_activity_copper_poly_gas",
+          "amount": 1
+        }
+      ],
+      "availability": {
+        "eventId": "aic_support_chubby_lung_attacks",
+        "phaseId": "phase2",
+        "period": "production"
+      }
+    }
+  ]
+}
