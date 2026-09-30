@@ -180,7 +180,9 @@ def main():
             .replace('/*__APP__*/', app))
 
     out = os.path.join(ROOT, 'endfield_chain.html')
-    with open(out, 'w', encoding='utf-8') as fh:
+    # newline='\n'：Windows 上默认会把 '\n' 翻译成 CRLF，导致同一份源码在
+    # Windows 与 Linux(CI) 产出的字节数不同，这里固定为 LF 以保证跨平台一致。
+    with open(out, 'w', encoding='utf-8', newline='\n') as fh:
         fh.write(html)
     size = os.path.getsize(out)
     print(f'wrote {out}  ({size/1024/1024:.2f} MB)')
