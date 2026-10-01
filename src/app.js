@@ -93,8 +93,38 @@
     r.ins.forEach(x => (BYIN[x.i] = BYIN[x.i] || []).push(r));
   });
 
-  const overrides = Object.assign({}, D.defaults);
-  const openDups = new Set(), openAlt = new Set(), userSet = new Set();
+  /* ---------------- 本地持久化 ----------------
+     localStorage 存：挂起的产线、边栏收起态、用户自定义默认配方（仅覆盖增量）、
+     图鉴筛选。键内带数据集版本，数据集重抓后旧状态自动作废；
+     隐私模式等不可用场景退化为仅内存。 */
+  const STORE_KEY = 'endfield_chain_ui_v1';
+  const store = (() => {
+    try {
+      const d = JSON.parse(localStorage.getItem(STORE_KEY) || 'null');
+      if (d && d.v === D.v) return d;
+    } catch (e) {}
+    return {};
+  })();
+  function saveStore() {
+    store.v = D.v;
+    store.pinned = pinned.slice();
+    store.fold = dock.classList.contains('fold');
+    store.defaults = {};
+    userSet.forEach(id => { store.defaults[id] = overrides[id]; });
+    store.cxFilter = cxFilter;
+    try { localStorage.setItem(STORE_KEY, JSON.stringify(store)); } catch (e) {}
+  }
+
+  const overrides = Object.assign({}, D.defaults, (() => {
+    const kept = {};
+    for (const id in store.defaults) {
+      const rid = store.defaults[id];
+      if (REC[rid] && REC[rid].outs.some(o => o.i === id)) kept[id] = rid;
+    }
+    return kept;
+  })());
+  const openDups = new Set(), openAlt = new Set(),
+        userSet = new Set(Object.keys(store.defaults || {}));
 
   /* ---------------- 视图状态 ---------------- */
   let curRoot = D.defaultRoot;
@@ -620,6 +650,7 @@
     if (tab) {
       overrides[tab.dataset.item] = tab.dataset.rid;
       userSet.add(tab.dataset.item);
+      saveStore();
       render(curRoot, { fit: false });
       toast('已将「' + facName(REC[tab.dataset.rid].fac) + '」设为 ' + itemName(tab.dataset.item) + ' 的默认配方');
       const n = nodes.find(z => z.itemId === tab.dataset.item && z.recipe);
@@ -748,6 +779,7 @@
     if (def) {
       overrides[def.dataset.item] = def.dataset.rid;
       userSet.add(def.dataset.item);
+      saveStore();
       const keep = panelPath;
       render(curRoot, { fit: false });
       const n = nodes.find(z => z.path === keep) || nodes.find(z => z.itemId === def.dataset.item && z.recipe);
@@ -798,13 +830,14 @@
     itemEl.style.display = inCodex ? 'none' : '';
     document.getElementById('crumb-sep2').style.display = inCodex ? 'none' : '';
     document.title = inCodex ? '物品图鉴 · 终末地' : it.zh + ' · 终末地';
+    renderDock();
   }
 
   /* ---------------- 物品图鉴 ---------------- */
   const codex = document.getElementById('codex');
   const cxGrid = document.getElementById('cx-grid');
   const cxBar = document.getElementById('cx-bar');
-  let cxFilter = 'all';
+  let cxFilter = (store.cxFilter === 'all' || FAM[store.cxFilter]) ? store.cxFilter : 'all';
 
   const CX_ORDER = ['ore', 'plant', 'seed', 'liquid', 'gas', 'powder', 'metal', 'crystal',
     'part', 'vessel', 'consum', 'event', 'misc'];
@@ -918,6 +951,7 @@
     if (!c) return;
     cxFilter = c.dataset.fam;
     buildCodex();
+    saveStore();
   });
   cxGrid.addEventListener('click', e => {
     const c = e.target.closest('.cx-card');
@@ -964,6 +998,91 @@
   document.getElementById('crumb-home').addEventListener('click', () => routeTo(''));
   document.getElementById('crumb-home-pill').addEventListener('click', () => routeTo(''));
   document.getElementById('crumb-codex').addEventListener('click', () => routeTo(''));
+
+  /* ---------------- 挂起边栏（dock） ----------------
+     把当前产线（主物品）挂起到屏幕左缘的白面板上；每条挂起项按游戏配方条的
+     样子渲染：使用 <机具> [环境] 头部 + 输入块 → 耗时▶▶ → 产出块。
+     收起时整条滑出屏幕、左缘留一个细条；仅存于本次会话内存。 */
+  const dock = document.getElementById('dock');
+  const dockTab = document.getElementById('dock-tab');
+  const dockList = document.getElementById('dock-list');
+  const dockEmpty = document.getElementById('dock-empty');
+  const pinBtn = document.getElementById('pinbtn');
+  const pinned = (store.pinned || []).filter(id => ITEMS[id]);   // 挂起的物品 id，按挂起顺序
+  if (store.fold) dock.classList.add('fold');
+
+  function syncDockFold() {
+    dockTab.classList.toggle('closed', dock.classList.contains('fold'));
+  }
+  function syncPinBtn() {
+    const on = view === 'chain' && pinned.includes(curRoot);
+    pinBtn.classList.toggle('on', on);
+    pinBtn.title = on ? '取消挂起当前产线' : '挂起当前产线';
+  }
+  function dkTile(iid, a) {
+    const t = ITEMS[iid], c = tierColor(t.tier);
+    return `<div class="dk-tile" style="--fam-dark:${famDark(c)}" title="${esc(t.zh)} · T${t.tier || 1}">` +
+      `<img src="${ICON.items[iid] || PH}" alt="">` +
+      (a !== undefined ? `<span class="dk-q">${trim(a)}</span>` : '') +
+      `<i style="background:${c}"></i></div>`;
+  }
+  function renderDock() {
+    dock.style.display = '';          // 空态也显示面板，用于展示挂起指引
+    dockEmpty.style.display = pinned.length ? 'none' : '';
+    dockList.style.display = pinned.length ? '' : 'none';
+    syncDockFold();
+    dockList.innerHTML = pinned.map(id => {
+      const it = ITEMS[id];
+      const r = overrides[id] ? REC[overrides[id]] : null;
+      const act = view === 'chain' && id === curRoot;
+      let head, flow;
+      if (r) {
+        head = `<div class="dk-use">使用` +
+          `<span class="dk-b fac" title="${esc(facName(r.fac))}"><svg viewBox="0 0 24 24"><path d="${FACGLYPH(r.fac)}"/></svg></span>${esc(facName(r.fac))}` +
+          (r.req ? `<span class="dk-b env" style="background:${envCol(r.req)}" title="需要${esc(envName(r.req))}">` +
+            `<svg viewBox="0 0 24 24"><path d="${ENV_ICON[r.req] || ENV_ICON.stable}"/></svg></span>` : '') +
+          `</div>`;
+        flow = `<div class="dk-flow">` +
+          `<div class="dk-grp ins">${r.ins.map(x => dkTile(x.i, x.a)).join('')}</div>` +
+          `<span class="dk-go"><b>${trim(r.t)}秒</b>` +
+          `<svg viewBox="0 0 28 16"><path d="M2 1.5 12.5 8 2 14.5ZM15.5 1.5 26 8 15.5 14.5Z"/></svg></span>` +
+          `<div class="dk-grp outs">${r.outs.map(x => dkTile(x.i, x.a)).join('')}</div>` +
+          `</div>`;
+      } else {
+        head = `<div class="dk-use">基础资源 · 采集获得</div>`;
+        flow = `<div class="dk-flow"><div class="dk-grp ins">${dkTile(id)}</div></div>`;
+      }
+      return `<div class="dk-card${act ? ' act' : ''}" data-id="${esc(id)}" title="跳到「${esc(it.zh)}」的产线">` +
+        `<div class="dk-x" data-unpin="${esc(id)}" title="取消挂起">✕</div>` +
+        head + flow + `</div>`;
+    }).join('');
+    syncPinBtn();
+  }
+  pinBtn.addEventListener('click', () => {
+    if (view !== 'chain') return;
+    const i = pinned.indexOf(curRoot);
+    if (i >= 0) { pinned.splice(i, 1); toast('已取消挂起「' + itemName(curRoot) + '」'); }
+    else { pinned.push(curRoot); toast('已把「' + itemName(curRoot) + '」挂起到左侧边栏'); }
+    renderDock();
+    saveStore();
+  });
+  dockList.addEventListener('click', e => {
+    const x = e.target.closest('[data-unpin]');
+    if (x) {
+      const i = pinned.indexOf(x.dataset.unpin);
+      if (i >= 0) pinned.splice(i, 1);
+      renderDock();
+      saveStore();
+      return;
+    }
+    const t = e.target.closest('.dk-card');
+    if (t) routeTo(t.dataset.id);
+  });
+  dockTab.addEventListener('click', () => {
+    dock.classList.toggle('fold');
+    syncDockFold();
+    saveStore();
+  });
 
   addEventListener('keydown', e => {
     if (e.key === 'Escape') {

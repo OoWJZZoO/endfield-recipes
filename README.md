@@ -33,7 +33,7 @@ python build_chain.py             # -> endfield_chain.html
 
 构建是**可复现**的：`build_chain.py` + `endfield_recipes.json` + `src/` + `assets/items/`
 在固定依赖版本下产出的 `endfield_chain.html` 逐字节一致（sha256
-`b0016115…89b95b27`），Windows 本地构建与 Linux CI 构建结果完全相同
+`6c371900…3425e06`），Windows 本地构建与 Linux CI 构建结果完全相同
 （输出固定写为 LF 换行），因此 CI 发布的站点与本地打开的文件是同一份字节。
 
 部署走 GitHub Actions（`.github/workflows/pages.yml`）：推送到 `main` 后自动构建，
@@ -123,6 +123,11 @@ python build_chain.py      # -> endfield_chain.html
 （`#/物品ID`，如 `#/item_carbon_mtl`，主页为 `#/`）。顶栏 ← / 面包屑 / 图鉴卡片 /
 搜索 / 「切换制造链路」的跳转全部写入浏览器历史，前进 / 后退按钮、刷新、
 分享链接均原生可用；子页链接也可直接打开（文件双击打开时同样支持）。
+
+**本地持久化**：挂起的产线、边栏收起状态、「设为默认配方」的覆盖、图鉴筛选
+自动存入 localStorage（键 `endfield_chain_ui_v1`，内含数据集日期版本），
+刷新 / 关闭后恢复；数据集重抓后版本不符，旧状态自动作废。
+隐私模式等 localStorage 不可用的场景退化为仅内存，不影响使用。
 
 顶栏正中的三个按钮：
 `配方比例` / `需求数量` 开关对应信息层；

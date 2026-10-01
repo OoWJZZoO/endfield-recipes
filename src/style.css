@@ -992,3 +992,162 @@ body.in-codex #toolbar, body.in-codex #zoomctl { display: none; }
   box-shadow: 0 6px 14px rgba(0,0,0,.3), inset 0 1px 0 rgba(255,255,255,.14);
 }
 #codex .cx-card:active .cx-thumb { transform: translateY(0); }
+
+/* ============================================================
+   挂起边栏（dock）：贴左缘的白色竖式面板，每条挂起项 = 游戏风格的配方条；
+   收起时面板恰好滑出屏幕，同一枚把手停在屏幕左缘（两态同尺寸、与面板连通）
+   ============================================================ */
+#pinbtn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(180deg, #fdfdfc, #e9e7e3);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, .22), inset 0 0 0 1px rgba(255, 255, 255, .8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex: none;
+}
+#pinbtn:hover { background: linear-gradient(180deg, #fff, #f0eeea); }
+#pinbtn svg { width: 16px; height: 16px; fill: #333; }
+#pinbtn.on {
+  background: linear-gradient(180deg, #fff6dd, #f7e3a8);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, .16), inset 0 0 0 1px rgba(185, 133, 20, .4);
+}
+#pinbtn.on svg { fill: #b07908; }
+
+#dock {
+  position: fixed;
+  left: 0;
+  top: 66px;
+  bottom: 14px;
+  width: 360px;
+  z-index: 38;
+  border-radius: 0 10px 10px 0;
+  background: linear-gradient(180deg, #fbfaf8, #edebe6);
+  box-shadow: 0 12px 34px rgba(0, 0, 0, .2);
+  transition: transform .2s ease;
+  display: flex;
+  flex-direction: column;
+}
+#dock.fold { transform: translateX(-100%); }
+
+/* 把手：短拉手，从面板右缘“长”出来（左缘直角、底色与面板一致、只朝右投影，
+   与面板之间无描边无缝隙）；收起时贴在屏幕左缘 */
+#dock-tab {
+  position: fixed;
+  left: 360px;
+  top: calc(50% + 26px);
+  transform: translateY(-50%);
+  width: 16px;
+  height: 120px;
+  z-index: 39;
+  border-radius: 0 10px 10px 0;
+  background: #f4f3ef;
+  box-shadow: 10px 0 20px -10px rgba(0, 0, 0, .28);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: left .2s ease;
+}
+#dock-tab.closed { left: 0; }
+#dock-tab:hover { filter: brightness(.97); }
+#dock-tab svg {
+  width: 12px; height: 12px; fill: none; stroke: #6b6862;
+  stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round;
+  transition: transform .2s;
+}
+#dock-tab:hover svg { stroke: #333; transform: translateX(-1.5px); }
+#dock-tab.closed svg { transform: rotate(180deg); }
+#dock-tab.closed:hover svg { transform: rotate(180deg) translateX(-1.5px); }
+
+#dock .dk-list {
+  flex: 1; overflow: auto; padding: 12px 12px 14px;
+  display: flex; flex-direction: column; gap: 12px;
+}
+#dock .dk-empty {
+  flex: 1; display: flex; align-items: center; justify-content: center;
+  padding: 20px 26px; text-align: center;
+  font-size: 12.5px; color: #8a8781; line-height: 2;
+}
+
+/* 配方条：对齐游戏内配方展示 —— 深炭头部 + 浅银灰机身 + 深色图块 */
+#dock .dk-card {
+  position: relative; flex: none;
+  border: 2px solid #3a3936; border-radius: 12px;
+  padding: 0 10px 10px; overflow: hidden;
+  background: linear-gradient(180deg, #edece8, #e2e1dc);
+  box-shadow: 0 3px 9px rgba(0, 0, 0, .16);
+  cursor: pointer;
+  transition: box-shadow .12s ease;
+}
+#dock .dk-card:hover {
+  box-shadow: 0 5px 13px rgba(0, 0, 0, .22);
+}
+#dock .dk-card.act {
+  box-shadow: inset 0 0 0 2px #e8b23c, 0 3px 9px rgba(0, 0, 0, .16);
+}
+#dock .dk-card.act:hover {
+  box-shadow: inset 0 0 0 2px #e8b23c, 0 5px 13px rgba(0, 0, 0, .22);
+}
+
+#dock .dk-use {
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  margin: 0 -10px; padding: 4px 30px 5px;
+  background: repeating-linear-gradient(-55deg, #41403b 0 3px, #33322e 3px 6px);
+  color: #fff; font-size: 15px; font-weight: 800;
+  white-space: nowrap; overflow: hidden;
+}
+#dock .dk-b {
+  display: flex; align-items: center; justify-content: center;
+  width: 21px; height: 21px; border-radius: 5px; flex: none;
+}
+#dock .dk-b.fac { background: #232322; box-shadow: inset 0 0 0 1px #6a6963; }
+#dock .dk-b svg { width: 15px; height: 15px; }
+#dock .dk-b svg path { fill: #fff; fill-rule: evenodd; }
+
+#dock .dk-flow {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 6px; padding-top: 9px;
+}
+#dock .dk-grp { display: flex; gap: 6px; }
+#dock .dk-grp.ins { flex-wrap: wrap; max-width: 128px; }
+#dock .dk-grp.outs { flex-wrap: wrap; max-width: 128px; justify-content: flex-end; }
+#dock .dk-tile {
+  position: relative; width: 60px; height: 66px; border-radius: 7px;
+  overflow: hidden; flex: none;
+  background:
+    linear-gradient(160deg, rgba(255, 255, 255, .18) 0%, rgba(255, 255, 255, .05) 42%, rgba(255, 255, 255, 0) 62%),
+    repeating-linear-gradient(-55deg, rgba(255, 255, 255, .05) 0 2px, rgba(255, 255, 255, 0) 2px 4px),
+    linear-gradient(180deg, #2e2e2e 0%, #191919 100%);
+  box-shadow: inset 0 0 0 1px #4c4c4c;
+}
+#dock .dk-tile img {
+  position: absolute; left: 50%; top: 44%; transform: translate(-50%, -50%);
+  width: 82%; height: 82%; object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, .6));
+}
+#dock .dk-tile .dk-q {
+  position: absolute; left: 0; right: 0; bottom: 6px; text-align: center; color: #fff;
+  font-size: 15px; font-weight: 800; line-height: 1;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, .95);
+}
+#dock .dk-tile i { position: absolute; left: 0; right: 0; bottom: 0; height: 5px; }
+#dock .dk-go { display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 0 3px; }
+#dock .dk-go b { color: #3a3936; font-size: 16px; font-weight: 800; white-space: nowrap; }
+#dock .dk-go svg { width: 28px; height: 16px; }
+#dock .dk-go svg path { fill: #3a3936; }
+
+#dock .dk-x {
+  position: absolute; top: 6px; right: 8px; width: 22px; height: 22px;
+  text-align: center; line-height: 21px;
+  color: rgba(255, 255, 255, .9); font-size: 20px; font-weight: 700;
+  transition: background .12s, color .12s;
+  z-index: 2;
+}
+#dock .dk-card:hover .dk-x { background: rgba(255, 255, 255, .14); color: #fff; }
+#dock .dk-x:hover { background: #e05a4a !important; color: #fff; }
+
+body.in-codex #dock, body.in-codex #dock-tab, body.in-codex #pinbtn { display: none; }

@@ -127,6 +127,7 @@ def build_payload():
     raw, items, facs, recipes, defaults, gathered = load_dataset()
 
     payload = {
+        'v': raw['extractedAt'][:10],          # 数据集版本，持久化状态随它失效
         'items': {iid: {
             'id': iid,
             'zh': it['names'].get('zh') or iid,
