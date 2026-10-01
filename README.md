@@ -33,7 +33,7 @@ python build_chain.py             # -> endfield_chain.html
 
 构建是**可复现**的：`build_chain.py` + `endfield_recipes.json` + `src/` + `assets/items/`
 在固定依赖版本下产出的 `endfield_chain.html` 逐字节一致（sha256
-`adbf2b03…08c24e6`），Windows 本地构建与 Linux CI 构建结果完全相同
+`72f08d23…39ed87`），Windows 本地构建与 Linux CI 构建结果完全相同
 （输出固定写为 LF 换行），因此 CI 发布的站点与本地打开的文件是同一份字节。
 
 部署走 GitHub Actions（`.github/workflows/pages.yml`）：推送到 `main` 后自动构建，

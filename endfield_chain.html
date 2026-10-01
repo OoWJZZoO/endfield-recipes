@@ -214,24 +214,6 @@ html, body {
 }
 .tile .amt.raw { background: linear-gradient(180deg, #4d7a3a, #33562a); }
 
-.tile .badge-tier {
-  position: absolute;
-  right: -5px;
-  top: -5px;
-  width: 15px;
-  height: 15px;
-  border-radius: 4px;
-  background: linear-gradient(180deg, #3b3b3b, #232323);
-  color: #fff;
-  font-size: 9.5px;
-  font-weight: 700;
-  line-height: 15px;
-  text-align: center;
-  border: 1.5px solid var(--card);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, .4);
-  z-index: 3;
-}
-
 /* 选中时展开的操作条（原生：切换制造链路） */
 /* 悬浮 / 选中 / 主体：物品块自身向下长出一段，操作条是卡片的一部分 */
 .tile:hover, .tile.sel, .tile.root { height: calc(var(--tile-h) + 23px); }
@@ -463,41 +445,6 @@ html, body {
   inset: -5px;
 }
 
-/* ---------- 悬浮信息卡 ---------- */
-#hint {
-  position: fixed;
-  z-index: 60;
-  min-width: 190px;
-  max-width: 300px;
-  padding: 9px 11px 10px;
-  border-radius: 8px;
-  background: linear-gradient(180deg, rgba(48, 48, 48, .97), rgba(30, 30, 30, .97));
-  border: 1px solid rgba(255, 255, 255, .18);
-  box-shadow: 0 8px 22px rgba(0, 0, 0, .35);
-  color: #fff;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity .1s;
-}
-#hint.on { opacity: 1; }
-#hint .h-name { font-size: 14px; font-weight: 700; display: flex; align-items: center; gap: 6px; }
-#hint .h-sub { font-size: 11px; color: #b6b3ae; margin-top: 2px; }
-#hint .h-sep { height: 1px; background: rgba(255, 255, 255, .14); margin: 7px 0; }
-#hint .h-row { font-size: 11.5px; line-height: 1.65; color: #ddd9d3; display: flex; gap: 6px; }
-#hint .h-row .k { color: #94908a; flex: none; width: 46px; }
-#hint .h-row .v { font-variant-numeric: tabular-nums; }
-#hint .fam {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 10px;
-  font-weight: 700;
-  padding: 1px 6px;
-  border-radius: 4px;
-  background: rgba(255, 255, 255, .13);
-}
-#hint .swatch { width: 8px; height: 8px; border-radius: 2px; background: var(--fam); }
-
 /* ---------- 顶栏 ---------- */
 #topbar {
   position: fixed;
@@ -600,29 +547,16 @@ html, body {
   font-size: 12.5px;
 }
 #results .r:hover, #results .r.act { background: #e2e0db; }
-#results .r img { width: 26px; height: 26px; object-fit: contain; border-radius: 4px; background: #1d1d1d; flex: none; }
+#results .r img {
+  width: 26px; height: 26px; object-fit: contain; border-radius: 4px; flex: none;
+  /* 与物品块缩略图同一套深色材质 */
+  background: linear-gradient(180deg, #313131, #191919);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .08);
+}
 #results .r .m { color: #8b8883; font-size: 10.5px; margin-left: auto; }
 #results .empty { padding: 12px; text-align: center; color: #8b8883; font-size: 12px; }
 
-/* ---------- 底部状态 / 缩放 ---------- */
-#status {
-  position: fixed;
-  left: 16px;
-  bottom: 12px;
-  z-index: 40;
-  color: #fff;
-  font-size: 12.5px;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, .55), 0 0 8px rgba(0, 0, 0, .45);
-  pointer-events: none;
-}
-#status .bars { display: flex; align-items: flex-end; gap: 1.5px; height: 12px; }
-#status .bars i { width: 2.6px; background: #fff; border-radius: .5px; display: block; }
-#status .sep2 { opacity: .45; }
-
+/* ---------- 缩放 ---------- */
 #zoomctl {
   position: fixed;
   right: 16px;
@@ -664,7 +598,9 @@ html, body {
 #zoomctl .tri { position: absolute; left: 50%; transform: translateX(-50%); width: 0; height: 0; }
 #zoomctl .tri.up { top: 0; border-left: 5px solid transparent; border-right: 5px solid transparent; border-bottom: 5px solid #fff; filter: drop-shadow(0 1px 1px rgba(0, 0, 0, .45)); }
 #zoomctl .tri.dn { bottom: 0; border-left: 5px solid transparent; border-right: 5px solid transparent; border-top: 5px solid #fff; filter: drop-shadow(0 1px 1px rgba(0, 0, 0, .45)); }
-#zoomctl .lbl { color: #fff; font-size: 13px; font-weight: 600; text-shadow: 0 1px 3px rgba(0, 0, 0, .5); }
+/* 文字压在浅色画布上，改用深墨字 + 极浅白描边，与顶栏同一套「浅色面板」语言；
+   游戏里这一处同样是深灰字（shots/latest.png 右下角） */
+#zoomctl .lbl { color: #4a4844; font-size: 13px; font-weight: 700; text-shadow: 0 1px 0 rgba(255, 255, 255, .6); }
 #zoomctl .slider {
   width: 108px;
   height: 22px;
@@ -677,8 +613,8 @@ html, body {
   width: 100%;
   height: 3px;
   border-radius: 2px;
-  background: rgba(255, 255, 255, .8);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, .3);
+  background: rgba(58, 56, 52, .3);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .18);
   outline: none;
   cursor: pointer;
 }
@@ -687,17 +623,17 @@ html, body {
   width: 13px;
   height: 13px;
   border-radius: 50%;
-  background: linear-gradient(180deg, #fff, #ddd);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, .45);
+  background: linear-gradient(180deg, #fff, #e7e5e1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .4), 0 0 0 1.3px #6f6d68;
 }
 #zoomctl .pct {
-  color: #fff;
+  color: #4a4844;
   font-size: 12px;
   font-weight: 700;
   font-variant-numeric: tabular-nums;
   width: 42px;
   text-align: right;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, .5);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, .6);
 }
 
 /* ---------- 侧边详情面板 ---------- */
@@ -814,7 +750,11 @@ html, body {
   cursor: pointer;
 }
 .chips-inline .ci:hover { border-color: #b9b6b0; }
-.chips-inline .ci img { width: 18px; height: 18px; object-fit: contain; border-radius: 3px; background: #222; }
+.chips-inline .ci img {
+  width: 18px; height: 18px; object-fit: contain; border-radius: 3px;
+  background: linear-gradient(180deg, #313131, #191919);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .08);
+}
 .chips-inline .ci .q { color: #2b6fb5; font-weight: 700; font-variant-numeric: tabular-nums; }
 
 .toggle-row { display: flex; flex-wrap: wrap; gap: 6px; padding: 0 12px 4px; }
@@ -891,23 +831,6 @@ html, body {
 }
 #toolbar .tg.on:hover { background: linear-gradient(180deg, #525252, #3b3b3b); }
 
-/* ---------- 图例 ---------- */
-#legend {
-  position: fixed; left: 50%; top: 100px; transform: translateX(-50%) translateY(-8px);
-  width: min(680px, calc(100% - 60px)); z-index: 44;
-  padding: 12px 16px 14px; border-radius: 10px;
-  background: linear-gradient(180deg, rgba(250,249,246,.985), rgba(240,238,233,.985));
-  box-shadow: 0 14px 34px rgba(0,0,0,.24), inset 0 0 0 1px rgba(0,0,0,.06);
-  opacity: 0; pointer-events: none; transition: opacity .16s, transform .16s;
-}
-#legend.on { opacity: 1; pointer-events: auto; transform: translateX(-50%); }
-#legend .lg-sect { font-size: 11.5px; line-height: 1.75; color: #55524c; }
-#legend .lg-sect b { color: #2b2926; }
-#legend .lg-sect i { color: #2b6fb5; font-style: normal; font-weight: 700; }
-#legend .lg-fam { display: flex; flex-wrap: wrap; gap: 6px 10px; margin-top: 9px; padding-top: 9px; border-top: 1px solid #e2e0da; }
-#legend .lg-fam span { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; color: #55524c; }
-#legend .lg-fam .swatch { width: 10px; height: 10px; border-radius: 3px; background: var(--fam); }
-
 #world.noamt .tile .amt { display: none; }
 .chip .r1 .bytag {
   margin-left: 1px; padding: 0 4px; border-radius: 3px;
@@ -938,16 +861,20 @@ body.in-codex #toolbar, body.in-codex #zoomctl { display: none; }
   backdrop-filter: blur(3px);
 }
 #codex .cx-bar { display: flex; flex-wrap: wrap; gap: 7px; }
+/* 与顶栏工具条 / 面包屑胶囊同一套：圆角矩形 + 同样的灰阶与描边 */
 #codex .cx-chip {
   display: flex; align-items: center; gap: 6px;
-  height: 27px; padding: 0 11px; border-radius: 999px;
-  background: #f7f6f4; border: 1px solid #cfccc6;
-  font-size: 12px; font-weight: 600; color: #6b6862; cursor: pointer;
-  box-shadow: 0 1px 2px rgba(0,0,0,.06);
+  height: 26px; padding: 0 12px; border-radius: 6px;
+  background: #e7e5e0; border: 1px solid #d3d0ca;
+  font-size: 12.5px; font-weight: 700; color: #6b6862; cursor: pointer;
 }
-#codex .cx-chip:hover { border-color: #a9a6a0; color: #3a3a3a; }
-#codex .cx-chip.on { background: linear-gradient(180deg, #474747, #313131); border-color: #474747; color: #fff; }
-#codex .cx-chip span { font-size: 10.5px; opacity: .62; font-variant-numeric: tabular-nums; }
+#codex .cx-chip:hover { background: #dedbd5; color: #3a3a3a; }
+#codex .cx-chip.on {
+  background: linear-gradient(180deg, #464646, #333);
+  border-color: #464646; color: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .22);
+}
+#codex .cx-chip span { font-size: 10.5px; font-weight: 600; opacity: .55; font-variant-numeric: tabular-nums; }
 #codex .cx-note { margin-top: 9px; font-size: 11.5px; color: #8a8781; }
 
 #codex .cx-grid {
@@ -1154,8 +1081,8 @@ body.in-codex #toolbar, body.in-codex #zoomctl { display: none; }
   transition: background .12s, color .12s;
   z-index: 2;
 }
-#dock .dk-card:hover .dk-x { background: rgba(255, 255, 255, .14); color: #fff; }
-#dock .dk-x:hover { background: #e05a4a !important; color: #fff; }
+/* 悬停只给半透明白底板（原来是红底，红色在本项目里只承担稀有度 / 环境语义） */
+#dock .dk-x:hover { background: rgba(255, 255, 255, .28); color: #fff; }
 
 body.in-codex #dock, body.in-codex #dock-tab, body.in-codex #pinbtn { display: none; }
 
@@ -2459,7 +2386,9 @@ window.__ICON__={"items":{"item_acridgen":"data:image/webp;base64,UklGRtAOAABXRU
       toastEl = document.createElement('div');
       toastEl.style.cssText = 'position:fixed;left:50%;bottom:60px;transform:translateX(-50%);z-index:99;' +
         'background:linear-gradient(180deg,#464646,#2c2c2c);color:#fff;font:700 12.5px ' + FF + ';' +
-        'padding:7px 16px;border-radius:999px;box-shadow:0 6px 18px rgba(0,0,0,.35);opacity:0;' +
+        // 内圈高光与机具胶囊同族，气泡与链路上的深色胶囊看起来是一套东西
+        'padding:7px 16px;border-radius:999px;' +
+        'box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.16),0 6px 18px rgba(0,0,0,.35);opacity:0;' +
         'transition:opacity .18s;pointer-events:none;white-space:nowrap';
       document.body.appendChild(toastEl);
     }

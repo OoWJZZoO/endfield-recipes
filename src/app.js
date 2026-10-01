@@ -1107,7 +1107,9 @@
       toastEl = document.createElement('div');
       toastEl.style.cssText = 'position:fixed;left:50%;bottom:60px;transform:translateX(-50%);z-index:99;' +
         'background:linear-gradient(180deg,#464646,#2c2c2c);color:#fff;font:700 12.5px ' + FF + ';' +
-        'padding:7px 16px;border-radius:999px;box-shadow:0 6px 18px rgba(0,0,0,.35);opacity:0;' +
+        // 内圈高光与机具胶囊同族，气泡与链路上的深色胶囊看起来是一套东西
+        'padding:7px 16px;border-radius:999px;' +
+        'box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.16),0 6px 18px rgba(0,0,0,.35);opacity:0;' +
         'transition:opacity .18s;pointer-events:none;white-space:nowrap';
       document.body.appendChild(toastEl);
     }
