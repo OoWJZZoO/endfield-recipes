@@ -97,7 +97,7 @@
   const openDups = new Set(), openAlt = new Set(), userSet = new Set();
 
   /* ---------------- 视图状态 ---------------- */
-  let curRoot = D.defaultRoot, history = [];
+  let curRoot = D.defaultRoot;
   let k = 1, tx = 0, ty = 0;
   let SHOW_AMOUNT = true, ANCHOR_2S = false;
   let view = 'chain';                 // 'chain' | 'codex'
@@ -628,10 +628,7 @@
     }
     const btn = e.target.closest('.tile .btn');
     if (btn) {
-      const t = btn.closest('.tile');
-      history.push(curRoot);
-      render(t.dataset.item);
-      selectNode(null);
+      routeTo(btn.closest('.tile').dataset.item);
       return;
     }
     const tile = e.target.closest('.tile');
@@ -758,8 +755,38 @@
       return;
     }
     const jump = e.target.closest('[data-jump]');
-    if (jump) { history.push(curRoot); render(jump.dataset.jump); selectNode(null); return; }
+    if (jump) { routeTo(jump.dataset.jump); return; }
   });
+
+  /* ---------------- Hash 路由 ----------------
+     #/          → 物品图鉴（主页面）
+     #/<物品id>  → 该物品的制造链路子页，不同物品的子页 id 不同，
+     前进 / 后退 / 刷新 / 分享链接都由浏览器历史原生接管。 */
+  let navDepth = 0;                   // 应用内压入的历史层数（直链进入时为 0）
+
+  function parseRoute() {
+    const id = decodeURIComponent(location.hash.replace(/^#\/?/, ''));
+    return (id && ITEMS[id]) ? { view: 'chain', id } : { view: 'codex' };
+  }
+  function applyRoute() {
+    const r = parseRoute();
+    if (r.view === 'codex') { if (view !== 'codex') showCodex(); }
+    else if (view === 'codex' || curRoot !== r.id) { render(r.id); selectNode(null); }
+  }
+  function routeTo(hash) {
+    const target = '#/' + hash;
+    if (location.hash !== target) {
+      navDepth++;
+      try { history.pushState({ d: navDepth }, '', target); }
+      catch (e) { location.hash = target; }   // 极老内核禁用 pushState 时退化为 hash 导航
+    }
+    applyRoute();
+  }
+  addEventListener('popstate', () => {
+    navDepth = (history.state && history.state.d) || 0;
+    applyRoute();
+  });
+  addEventListener('hashchange', applyRoute); // 手改地址栏 / 退化路径时补一次路由
 
   /* ---------------- 顶栏 / 搜索 ---------------- */
   function updateCrumb() {
@@ -894,10 +921,7 @@
   });
   cxGrid.addEventListener('click', e => {
     const c = e.target.closest('.cx-card');
-    if (!c) return;
-    history.length = 0;
-    render(c.dataset.id);
-    selectNode(null);
+    if (c) routeTo(c.dataset.id);
   });
 
   const search = document.getElementById('search');
@@ -926,9 +950,7 @@
   });
   results.addEventListener('click', e => { const r = e.target.closest('.r'); if (r) pick(r.dataset.id); });
   function pick(id) {
-    history.push(curRoot);
-    render(id);
-    selectNode(null);
+    routeTo(id);
     results.classList.remove('on');
     search.value = ''; search.blur();
   }
@@ -936,13 +958,12 @@
     if (!e.target.closest('#results') && !e.target.closest('#searchwrap')) results.classList.remove('on');
   });
   document.getElementById('backbtn').addEventListener('click', () => {
-    if (!history.length) { showCodex(); return; }
-    render(history.pop());
-    selectNode(null);
+    if (navDepth > 0) history.back();
+    else routeTo('');               // 直链落在子页、应用内无历史时，回图鉴
   });
-  document.getElementById('crumb-home').addEventListener('click', showCodex);
-  document.getElementById('crumb-home-pill').addEventListener('click', showCodex);
-  document.getElementById('crumb-codex').addEventListener('click', showCodex);
+  document.getElementById('crumb-home').addEventListener('click', () => routeTo(''));
+  document.getElementById('crumb-home-pill').addEventListener('click', () => routeTo(''));
+  document.getElementById('crumb-codex').addEventListener('click', () => routeTo(''));
 
   addEventListener('keydown', e => {
     if (e.key === 'Escape') {
@@ -1016,9 +1037,15 @@
   });
   /* ---------------- 启动 ---------------- */
   contours();
-  render(D.defaultRoot);          // 先把默认链路准备好，切过去时立即可用
-  apply();
-  showCodex();                    // 首屏 = 物品图鉴
+  navDepth = (history.state && history.state.d) || 0;
+  const first = parseRoute();
+  if (first.view === 'codex') {
+    render(D.defaultRoot);          // 先把默认链路准备好，垫在图鉴下立即可用
+    apply();
+    showCodex();                    // 首屏 = 物品图鉴
+  } else {
+    render(first.id);               // #/<物品id> 直链：直接落子页
+  }
   addEventListener('keydown', e => {
     if (e.key === 'Escape' && view === 'codex') codex.scrollTop = 0;
   });

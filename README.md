@@ -33,7 +33,7 @@ python build_chain.py             # -> endfield_chain.html
 
 构建是**可复现**的：`build_chain.py` + `endfield_recipes.json` + `src/` + `assets/items/`
 在固定依赖版本下产出的 `endfield_chain.html` 逐字节一致（sha256
-`8cfb21a1…f41994`），Windows 本地构建与 Linux CI 构建结果完全相同
+`b0016115…89b95b27`），Windows 本地构建与 Linux CI 构建结果完全相同
 （输出固定写为 LF 换行），因此 CI 发布的站点与本地打开的文件是同一份字节。
 
 部署走 GitHub Actions（`.github/workflows/pages.yml`）：推送到 `main` 后自动构建，
@@ -116,8 +116,13 @@ python build_chain.py      # -> endfield_chain.html
 | 备选产线标签「设为默认配方 ○」 | 切换该物品的默认配方并重算整棵树 |
 | 左侧眼睛 | 展开/收起「已在别处展示过」的重复上游 |
 | 顶栏搜索 | 中文 / 英文 / ID 模糊匹配，回车或点击直达 |
-| 顶栏 ← | 返回上一级链路 |
+| 顶栏 ← | 返回上一级链路（直链进入时回图鉴页） |
 | `Esc` | 关闭详情面板并取消选中 |
+
+**子页面路由**：图鉴平铺页是主页，每个物品的制造链路是独立的 hash 子页
+（`#/物品ID`，如 `#/item_carbon_mtl`，主页为 `#/`）。顶栏 ← / 面包屑 / 图鉴卡片 /
+搜索 / 「切换制造链路」的跳转全部写入浏览器历史，前进 / 后退按钮、刷新、
+分享链接均原生可用；子页链接也可直接打开（文件双击打开时同样支持）。
 
 顶栏正中的三个按钮：
 `配方比例` / `需求数量` 开关对应信息层；
