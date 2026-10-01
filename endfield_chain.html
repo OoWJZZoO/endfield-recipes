@@ -1185,7 +1185,7 @@ body.in-codex #dock, body.in-codex #dock-tab, body.in-codex #pinbtn { display: n
   <div id="toolbar">
     <div class="tg on" id="tg-ratio">配方比例</div>
     <div class="tg on" id="tg-amount">需求数量</div>
-    <div class="tg" id="tg-2s">按2秒记</div>
+    <div class="tg" id="tg-2s">按2秒计</div>
   </div>
   <div id="searchwrap">
     <input id="search" placeholder="搜索物品 · 输入中文 / 英文 / ID" autocomplete="off" spellcheck="false">
@@ -1579,10 +1579,13 @@ window.__ICON__={"items":{"item_acridgen":"data:image/webp;base64,UklGRtAOAABXRU
       br.stack = br.children;   // 备选分支沿自身链向左展开
       return br;
     }
-    // 「按2秒记」：把整条链路的时间基准锚到 2 秒 —— 各节点数量统一乘 2 / 主体单次耗时，
+    // 基准是主体「一次制造」：主体数量取该配方的单次产出量，于是胶囊读作「t 秒 · ×1次」，
+    // 上游按这一炉的配比逐级折算（单次产出 2 个的配方不会退化成 ×0.5次）。
+    // 「按2秒计」在这个基准上锚定时间 —— 整条链路数量统一乘 2 / 主体单次耗时，
     // 于是物品块角标读作「每 2 秒需要多少」，主体读作「每 2 秒产出多少」。
     const rootRec = pickRecipe(rootId);
-    const scale = (ANCHOR_2S && rootRec && !ITEMS[rootId].g) ? 2 / rootRec.t : 1;
+    const rooted = rootRec && !ITEMS[rootId].g;
+    const scale = rooted ? outAmtOf(rootRec, rootId) * (ANCHOR_2S ? 2 / rootRec.t : 1) : 1;
     return make(rootId, scale, 'R:' + rootId, new Set());
   }
 
