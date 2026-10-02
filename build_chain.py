@@ -18,8 +18,43 @@ ICON_PX = 96
 DEFAULT_ROOT = 'item_liquid_heavy_xiranite'   # 液化重息壤
 
 DISMANTLER = 'item_port_dismantler_1'
+MIX_POOL = 'item_port_mix_pool_1'          # 反应池
+MIX_POOL_ENR = 'item_port_mix_pool_2'      # 扩容反应池
 GATHER_CATEGORIES = {'natural_resource', 'collection_material'}
 INF = 1e9
+
+
+# ---------------------------------------------------------------- 配方过滤
+def is_liquid(item):
+    """管道输送且不是气体 —— 与前端 familyOf() 同一口径"""
+    zh = item['names'].get('zh') or ''
+    return item.get('transportMode') == 'pipe' and '气态' not in zh and not zh.endswith('气')
+
+
+def recipe_sig(r):
+    """配方指纹：投入 / 产出 / 耗时 / 环境要求全都一样，就算同一条配方"""
+    return (tuple(sorted((x['itemId'], x['amount']) for x in r['inputs'])),
+            tuple(sorted((x['itemId'], x['amount']) for x in r['outputs'])),
+            r['craftingTime'], r.get('requiredGasEnv') or '')
+
+
+def filter_recipes(recipes, items):
+    """剔掉对「看链路」没有意义的配方：
+       1) 扩容反应池里与反应池完全相同的那几条 —— 升级的是机器不是配方，留着只是同一条配方的两份；
+       2) 液体瓶拆解 —— 瓶装液体的反向操作，液体本来就能走管道，纯占位。"""
+    pool = {recipe_sig(r) for r in recipes if r['facilityId'] == MIX_POOL}
+    dropped = {'pool': 0, 'bottle': 0}
+    out = []
+    for r in recipes:
+        if r['facilityId'] == MIX_POOL_ENR and recipe_sig(r) in pool:
+            dropped['pool'] += 1
+            continue
+        if r['facilityId'] == DISMANTLER and any(
+                o['itemId'] in items and is_liquid(items[o['itemId']]) for o in r['outputs']):
+            dropped['bottle'] += 1
+            continue
+        out.append(r)
+    return out, dropped
 
 
 # ---------------------------------------------------------------- dataset
@@ -27,7 +62,7 @@ def load_dataset():
     raw = json.load(open(os.path.join(ROOT, 'endfield_recipes.json'), encoding='utf-8'))
     items = {i['id']: i for i in raw['items']}
     facs = {f['id']: f for f in raw['facilities']}
-    recipes = raw['recipes']
+    recipes, dropped = filter_recipes(raw['recipes'], items)
 
     by_output = {}
     for r in recipes:
@@ -81,7 +116,7 @@ def load_dataset():
     for iid, cands in by_output.items():
         defaults[iid] = sorted(cands, key=lambda r: (score(r, iid), r['id']))[0]['id']
 
-    return raw, items, facs, recipes, defaults, gathered
+    return raw, items, facs, recipes, defaults, gathered, dropped
 
 
 # ---------------------------------------------------------------- icons
@@ -124,7 +159,7 @@ def build_icons(items, facs):
 
 # ---------------------------------------------------------------- payload
 def build_payload():
-    raw, items, facs, recipes, defaults, gathered = load_dataset()
+    raw, items, facs, recipes, defaults, gathered, dropped = load_dataset()
 
     payload = {
         'v': raw['extractedAt'][:10],          # 数据集版本，持久化状态随它失效
@@ -159,12 +194,12 @@ def build_payload():
         'defaultRoot': DEFAULT_ROOT,
     }
     icons = build_icons(items, facs)
-    return payload, icons
+    return payload, icons, dropped
 
 
 # ---------------------------------------------------------------- assemble
 def main():
-    data, icons = build_payload()
+    data, icons, dropped = build_payload()
     tpl = open(os.path.join(SRC, 'template.html'), encoding='utf-8').read()
     css = open(os.path.join(SRC, 'style.css'), encoding='utf-8').read()
     glyphs = open(os.path.join(SRC, 'glyphs.js'), encoding='utf-8').read()
@@ -189,6 +224,7 @@ def main():
     print(f'wrote {out}  ({size/1024/1024:.2f} MB)')
     print(f'  items={len(data["items"])} facilities={len(data["facilities"])} '
           f'recipes={len(data["recipes"])} icons={len(icons)} defaultRoot={data["defaultRoot"]}')
+    print(f'  hidden recipes: 扩容反应池重复 {dropped["pool"]}，液体瓶拆解 {dropped["bottle"]}')
 
 
 if __name__ == '__main__':

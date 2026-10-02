@@ -133,6 +133,8 @@
   let view = 'chain';                 // 'chain' | 'codex'
   let nodes = [], worldW = 0, worldH = 0, CHIP_W = 196, SHOW_RATIO = true;
 
+  const PAD_X = 60, PAD_TOP = 92, PAD_BOT = 66;   // 视口内留给顶栏 / 底栏的边距
+
   const stage = document.getElementById('stage');
   const world = document.getElementById('world');
   const nodeLayer = document.getElementById('nodes');
@@ -298,6 +300,27 @@
     return Math.min(lines, 2);
   }
 
+  /* 备选链路整组挂在金色胶囊（其他配方 / 收起）下面，而金色胶囊又悬在机具胶囊下方：
+     主体中心往下 anchorH/2 + 29 才是胶囊下沿，备选机具顶上还有配方标签。
+     配方行数少（胶囊矮）时这两者会正好叠在一起，所以主体中心到首条备选胶囊顶
+     至少留 anchorH/2 + 29 + 8 + 标签高度，不够的部分补成组间留白。 */
+  const PILL_DROP = 29;      // 金色胶囊下沿：主体中心 + anchorH/2 + 29
+  const PILL_PAD = 8;        // 胶囊与备选标签之间的呼吸位
+
+  function altPad(n) {
+    const alt = n.alt && n.alt[0];
+    if (!alt) return 0;
+    let mid;                                   // 主体中心相对栈顶的偏移
+    if (n.children.length) {
+      const at = i => { let a = 0; for (let j = 0; j < i; j++) a += n.children[j].span + GAP_ROW; return a + n.children[i].span / 2; };
+      mid = (at(0) + at(n.children.length - 1)) / 2;
+    } else {
+      mid = n.childSpan / 2;                   // 端点：主体在自己的盒子里居中
+    }
+    const dist = mid + GAP_ROW + (alt.span - alt.chipH) / 2;
+    return Math.max(0, n.anchorH / 2 + PILL_DROP + PILL_PAD + (alt.recipe.req ? 30 : 23) - dist);
+  }
+
   function spans(n) {
     n.chipH = 0;
     if (n.recipe) {
@@ -313,13 +336,20 @@
     let s = 0;
     for (const c of n.stack) s += c.span + GAP_ROW;
     n.childSpan = n.stack.length ? s - GAP_ROW : 0;
+    n.altGap = altPad(n);
+    n.childSpan += n.altGap;
     n.span = Math.max(n.h, n.childSpan);
   }
 
   /* ---------------- 布局 ---------------- */
   function place(n, yTop) {
     let cy = yTop + (n.span - n.childSpan) / 2;
-    for (const c of n.stack) { place(c, cy); cy += c.span + GAP_ROW; }
+    for (let i = 0; i < n.stack.length; i++) {
+      const c = n.stack[i];
+      if (i && c.isBranch && !n.stack[i - 1].isBranch) cy += n.altGap;   // 首条备选：让开金色胶囊
+      place(c, cy);
+      cy += c.span + GAP_ROW;
+    }
     if (n.children.length) {
       n.y = (n.children[0].y + n.children[n.children.length - 1].y) / 2;
     } else {
@@ -361,6 +391,9 @@
     if (view === 'codex') hideCodex();
     // 展开/收起备选链路时，让「链路主体」在屏幕上保持不动，避免视图跳走
     const keep = (root && opts.fit === false) ? (root.x * k + tx) + ',' + (root.y * k + ty) : null;
+    // opts.focus：这次重排后要把视角挪到哪 —— 展开取 { path, mode:'top' }，收起取 { mode:'center' }
+    const focus = opts.focus || null;
+    const focusX = (focus && focus.path && root) ? screenX(focus.path) : null;
     curRoot = rootId;
     COLS.length = 0;
     root = build(rootId);
@@ -405,6 +438,7 @@
     world.style.height = worldH + 'px';
 
     if (opts.fit !== false) fit();
+    else if (focus) focusView(focus, focusX);
     else if (keep) {
       const p = keep.split(',');
       tx += p[0] - (root.x * k + tx);
@@ -440,6 +474,7 @@
       return `<path class="e-lead" d="M${sx} ${sy} H${mx - 5} Q${mx} ${sy} ${mx} ${sy - 5} V${bottomY + 3}"/>`;
     };
     for (const n of nodes) {
+      if (n.kind === 'dup' || eyeOnly(n)) continue;   // 上游已展示过：不画机具胶囊，也就没有连线
       const chipL = n.chipX - CHIP_W / 2, chipR = n.chipX + CHIP_W / 2;
       // 金色胶囊的引导线
       if (n.others && n.others.length) {
@@ -480,6 +515,22 @@
   }
 
   /* ---------------- 节点 ---------------- */
+  // 机具胶囊上方是否挂着配方标签（「默认配方」/「设为默认配方」）
+  function hasTab(n) {
+    if (!n.recipe) return false;
+    if (n.isBranch) return true;
+    return !!(n.others && n.others.length && openAlt.has(n.path));
+  }
+  // 上游已经展示过这件物品（重复 / 环路）：整格收成一个眼睛按钮，
+  // 左侧那条机具胶囊是同一台机具的同一份配方，再画一遍只是噪音
+  function eyeOnly(n) { return !!n.wasDup && !openDups.has(n.path); }
+  // 标签相对胶囊顶边的偏移：普通胶囊保留 7px 的嵌入感；带环境色带的胶囊顶部那 20px
+  // 是色带，再压上去就会把色带切掉一块，所以整块抬到胶囊顶边之上（30 = 标签高度）
+  function tabOffset(n) {
+    if (!hasTab(n)) return 0;
+    return n.recipe.req ? 30 : 23;
+  }
+
   function drawNodes() {
     const h = [];
     const iconURL = id => ICON.items[id] || PH;
@@ -504,11 +555,11 @@
           `<div class="actions">${label}</div></div>`);
       }
 
-      if (!n.recipe) continue;
+      if (!n.recipe || eyeOnly(n)) continue;         // 上游已展示过：只留眼睛与物品块，机具胶囊整个收起
       const r = n.recipe;
       const chipH = n.chipH;
       const lines = n.ratioLines || 0;
-      h.push(`<div class="chip${n.isBranch ? ' altchip' : ''}${r.req ? ' hasenv' : ''}" data-path="${esc(n.path)}" ` +
+      h.push(`<div class="chip${n.isBranch ? ' altchip' : ''}${r.req ? ' hasenv' : ''}${hasTab(n) ? ' hastab' : ''}" data-path="${esc(n.path)}" ` +
         `style="left:${n.chipX - CHIP_W / 2}px;top:${n.y - chipH / 2}px;width:${CHIP_W}px;height:${chipH}px">` +
         (r.req ? `<div class="envband" style="background:${envCol(r.req)}">` +
           envGlyph(r.req) + `<span>${esc(envName(r.req))}</span></div>` : '') +
@@ -521,6 +572,7 @@
     }
     // 标签与胶囊（端点节点也可能带配方入口）
     for (const n of nodes) {
+      if (n.kind === 'dup' || eyeOnly(n)) continue;   // 已经收成眼睛的节点没有胶囊，也就没有标签
       if (!n.recipe) {
         if (n.others && n.others.length) {
           const open = openAlt.has(n.path);
@@ -533,11 +585,11 @@
         continue;
       }
       const r = n.recipe;
-      const showDefaultTab = !n.isBranch && n.others && openAlt.has(n.path);
+      const showDefaultTab = !n.isBranch && hasTab(n);
       if (n.isBranch || showDefaultTab) {
         const isDefault = !n.isBranch;
         h.push(`<div class="tab${isDefault ? ' on' : ' clickable'}"${isDefault ? '' : ` data-act="setdef" data-item="${esc(n.itemId)}" data-rid="${esc(r.id)}"`} ` +
-          `style="left:${n.chipX - CHIP_W / 2}px;top:${n.y - n.chipH / 2 - 23}px;width:${CHIP_W}px;height:30px">` +
+          `style="left:${n.chipX - CHIP_W / 2}px;top:${n.y - n.chipH / 2 - tabOffset(n)}px;width:${CHIP_W}px;height:30px">` +
           `<span>${isDefault ? '默认配方' : '设为默认配方'}</span><span class="radio"></span></div>`);
       }
       if (n.others && n.others.length) {
@@ -587,19 +639,75 @@
     world.classList.toggle('coarse', k < .34);
   }
   function fit() {
+    stopPan();
     const r = stage.getBoundingClientRect();
-    const padX = 60, padTop = 92, padBot = 66;
-    const kk = Math.min((r.width - padX * 2) / Math.max(worldW, 1), (r.height - padTop - padBot) / Math.max(worldH, 1));
+    const kk = Math.min((r.width - PAD_X * 2) / Math.max(worldW, 1), (r.height - PAD_TOP - PAD_BOT) / Math.max(worldH, 1));
     k = Math.max(.15, Math.min(kk, 1.3));
     tx = Math.max(30, (r.width - worldW * k) / 2);
-    ty = padTop;
+    ty = PAD_TOP;
     apply();
   }
   function zoomAt(cx, cy, nk) {
+    stopPan();
     nk = Math.max(.15, Math.min(2.6, nk));
     const wx = (cx - tx) / k, wy = (cy - ty) / k;
     k = nk; tx = cx - wx * k; ty = cy - wy * k;
     apply();
+  }
+  // 该节点机具胶囊当前在屏幕上的横向位置（重排前记下来，重排后照原样摆回去）
+  function screenX(path) {
+    const n = nodes.find(z => z.path === path);
+    return (n && n.chipX !== undefined) ? n.chipX * k + tx : null;
+  }
+
+  /* 视角平移：用 rAF 缓动，避免瞬移；拖动、缩放、下一次聚焦都会打断它 */
+  let panRAF = 0, panTimer = 0;
+  function stopPan() {
+    if (panRAF) { cancelAnimationFrame(panRAF); panRAF = 0; }
+    if (panTimer) { clearTimeout(panTimer); panTimer = 0; }
+  }
+  function panTo(nx, ny, ms) {
+    stopPan();
+    const x0 = tx, y0 = ty, t0 = performance.now();
+    const dur = ms || 400;
+    // 标签页切到后台时浏览器不再派动画帧，兜底把视角直接放到目标位置，
+    // 免得「展开 / 收起」之后画面停在原地、内容却已经变了
+    panTimer = setTimeout(() => {
+      panTimer = 0;
+      if (!panRAF) return;
+      cancelAnimationFrame(panRAF); panRAF = 0;
+      tx = nx; ty = ny; apply();
+    }, dur + 300);
+    const step = now => {
+      const p = Math.min(1, Math.max(0, (now - t0) / dur));
+      const e = 1 - Math.pow(1 - p, 3);        // ease-out：起步快、收尾稳
+      tx = x0 + (nx - x0) * e;
+      ty = y0 + (ny - y0) * e;
+      apply();
+      panRAF = p < 1 ? requestAnimationFrame(step) : 0;
+    };
+    panRAF = requestAnimationFrame(step);
+  }
+
+  /* 展开「其他配方」：把这条配方（备选组里的第一条）顶到屏幕上方，新铺开的分支正好落进视野；
+     收起：这条配方纵向回到屏幕正中（链路缩小后不至于把刚操作的那一格甩到视野外），
+     横向不拦 —— 横向跟着回中会让整张图左右晃一下，比纵向偏移更扎眼。
+     两者都只平移、不缩放。 */
+  function focusView(focus, keepScreenX) {
+    const r = stage.getBoundingClientRect();
+    const n = nodes.find(z => z.path === focus.path);
+    if (!n) return;
+    const cx = n.recipe ? n.chipX : n.x;          // 端点节点没有机具胶囊，对准物品块
+    let nx = tx, ny = ty;
+    if (focus.mode === 'center') {
+      ny = PAD_TOP + (r.height - PAD_TOP - PAD_BOT) / 2 - n.y * k;
+    } else {
+      const top = Math.min(n.y - Math.max(n.h, n.chipH) / 2,
+        n.recipe ? n.y - n.chipH / 2 - tabOffset(n) : Infinity);
+      ny = PAD_TOP - top * k;
+      if (keepScreenX !== null) nx = keepScreenX - cx * k;
+    }
+    panTo(nx, ny);
   }
 
   stage.addEventListener('wheel', e => {
@@ -611,9 +719,12 @@
 
   // 注意：不要在 stage 上 setPointerCapture —— 指针捕获会把后续鼠标事件一并重定向到
   // 捕获元素，画布内的物品块/机具胶囊就再也收不到 click。改为窗口级监听。
-  let drag = null;
+  const DRAG_SLOP = 5;             // 位移超过它就算「拖动」，不再算「点击」
+  let drag = null, swallowClick = false;
   stage.addEventListener('pointerdown', e => {
     if (e.button === 2) return;
+    stopPan();
+    swallowClick = false;
     drag = {
       x: e.clientX, y: e.clientY, tx, ty, moved: 0,
       onNode: !!e.target.closest('.tile, .chip, .pill, .eye, .tab'),
@@ -623,7 +734,7 @@
     if (!drag) return;
     const dx = e.clientX - drag.x, dy = e.clientY - drag.y;
     drag.moved = Math.max(drag.moved, Math.abs(dx) + Math.abs(dy));
-    if (drag.moved > 4) stage.classList.add('dragging');
+    if (drag.moved >= DRAG_SLOP) stage.classList.add('dragging');
     tx = drag.tx + dx; ty = drag.ty + dy;
     apply();
   });
@@ -631,12 +742,16 @@
     if (!drag) return;
     const d = drag; drag = null;
     stage.classList.remove('dragging');
-    if (d.moved < 5 && !d.onNode) selectNode(null);
+    // 画布被拖走了：这次手势是平移，抬手后浏览器补发的那一下 click 必须丢掉。
+    // 否则在物品块 / 机具胶囊上起手的拖动会顺带触发它们的点击（切换链路、开详情…）
+    if (d.moved >= DRAG_SLOP) swallowClick = true;
+    else if (!d.onNode) selectNode(null);
   });
-  addEventListener('pointercancel', () => { drag = null; stage.classList.remove('dragging'); });
+  addEventListener('pointercancel', () => { drag = null; swallowClick = false; stage.classList.remove('dragging'); });
 
   /* ---------------- 交互 ---------------- */
   nodeLayer.addEventListener('click', e => {
+    if (swallowClick) { swallowClick = false; return; }   // 这一次是拖动画布，不是点节点
     const eye = e.target.closest('.eye');
     if (eye) {
       const p = eye.dataset.path;
@@ -646,8 +761,11 @@
     const pill = e.target.closest('.pill');
     if (pill) {
       const p = pill.dataset.path;
-      openAlt.has(p) ? openAlt.delete(p) : openAlt.add(p);
-      render(curRoot, { fit: false }); return;
+      const opening = !openAlt.has(p);
+      if (opening) openAlt.add(p); else openAlt.delete(p);
+      // 展开：把这条配方顶到屏幕上方，好让备选链路整组落进视野；收起：它自己纵向回到屏幕正中
+      render(curRoot, { fit: false, focus: { path: p, mode: opening ? 'top' : 'center' } });
+      return;
     }
     const tab = e.target.closest('.tab.clickable');
     if (tab) {

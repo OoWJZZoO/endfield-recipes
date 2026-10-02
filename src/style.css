@@ -283,6 +283,11 @@ html, body {
   box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .18);
 }
 .chip .envband svg { width: 13px; height: 13px; flex: none; }
+/* 带环境色带的胶囊，上方一旦挂了配方标签（tabOffset 把标签整块抬到顶边之上，
+   标签底边与胶囊顶边齐平），胶囊与色带的顶部圆角就会在标签直角处留出两道灰缝。
+   这一档把顶部两角切平，让标签与色带严丝合缝；没有标签时维持圆角。 */
+.chip.hasenv.hastab { border-radius: 0 0 10px 10px; }
+.chip.hasenv.hastab .envband { border-radius: 0; }
 .chip .body {
   flex: 1;
   min-width: 0;
