@@ -508,20 +508,6 @@ html, body {
   pointer-events: none;
 }
 #searchwrap .mag svg { width: 15px; height: 15px; fill: none; stroke: #4a4a4a; stroke-width: 2.1; }
-#backbtn {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: linear-gradient(180deg, #fdfdfc, #e9e7e3);
-  box-shadow: 0 1px 4px rgba(0, 0, 0, .22), inset 0 0 0 1px rgba(255, 255, 255, .8);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  flex: none;
-}
-#backbtn:hover { background: linear-gradient(180deg, #fff, #f0eeea); }
-#backbtn svg { width: 17px; height: 17px; fill: #333; }
 
 #results {
   position: fixed;
@@ -931,25 +917,32 @@ body.in-codex #toolbar, body.in-codex #zoomctl { display: none; }
    挂起边栏（dock）：贴左缘的白色竖式面板，每条挂起项 = 游戏风格的配方条；
    收起时面板恰好滑出屏幕，同一枚把手停在屏幕左缘（两态同尺寸、与面板连通）
    ============================================================ */
+/* 顶栏材质：与工具条开关（.tg）、面包屑胶囊、图鉴筛选胶囊同一套 ——
+   26px 高、6px 圆角矩形、灰底 #e7e5e0 + #d3d0ca 描边，选中态转深墨 */
 #pinbtn {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: linear-gradient(180deg, #fdfdfc, #e9e7e3);
-  box-shadow: 0 1px 4px rgba(0, 0, 0, .22), inset 0 0 0 1px rgba(255, 255, 255, .8);
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border-radius: 6px;
+  background: #e7e5e0;
+  border: 1px solid #d3d0ca;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   flex: none;
+  transition: background .12s, border-color .12s, box-shadow .12s;
 }
-#pinbtn:hover { background: linear-gradient(180deg, #fff, #f0eeea); }
-#pinbtn svg { width: 16px; height: 16px; fill: #333; }
+#pinbtn:hover { background: #dedbd5; }
+#pinbtn svg { width: 15px; height: 15px; fill: #6b6862; transition: fill .12s; }
+#pinbtn:hover svg { fill: #3a3a3a; }
 #pinbtn.on {
-  background: linear-gradient(180deg, #fff6dd, #f7e3a8);
-  box-shadow: 0 1px 4px rgba(0, 0, 0, .16), inset 0 0 0 1px rgba(185, 133, 20, .4);
+  background: linear-gradient(180deg, #464646, #333);
+  border-color: #464646;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .22);
 }
-#pinbtn.on svg { fill: #b07908; }
+#pinbtn.on:hover { background: linear-gradient(180deg, #525252, #3b3b3b); }
+#pinbtn.on svg { fill: #fff; }
 
 #dock {
   position: fixed;

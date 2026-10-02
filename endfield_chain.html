@@ -515,20 +515,6 @@ html, body {
   pointer-events: none;
 }
 #searchwrap .mag svg { width: 15px; height: 15px; fill: none; stroke: #4a4a4a; stroke-width: 2.1; }
-#backbtn {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: linear-gradient(180deg, #fdfdfc, #e9e7e3);
-  box-shadow: 0 1px 4px rgba(0, 0, 0, .22), inset 0 0 0 1px rgba(255, 255, 255, .8);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  flex: none;
-}
-#backbtn:hover { background: linear-gradient(180deg, #fff, #f0eeea); }
-#backbtn svg { width: 17px; height: 17px; fill: #333; }
 
 #results {
   position: fixed;
@@ -938,25 +924,32 @@ body.in-codex #toolbar, body.in-codex #zoomctl { display: none; }
    挂起边栏（dock）：贴左缘的白色竖式面板，每条挂起项 = 游戏风格的配方条；
    收起时面板恰好滑出屏幕，同一枚把手停在屏幕左缘（两态同尺寸、与面板连通）
    ============================================================ */
+/* 顶栏材质：与工具条开关（.tg）、面包屑胶囊、图鉴筛选胶囊同一套 ——
+   26px 高、6px 圆角矩形、灰底 #e7e5e0 + #d3d0ca 描边，选中态转深墨 */
 #pinbtn {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: linear-gradient(180deg, #fdfdfc, #e9e7e3);
-  box-shadow: 0 1px 4px rgba(0, 0, 0, .22), inset 0 0 0 1px rgba(255, 255, 255, .8);
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border-radius: 6px;
+  background: #e7e5e0;
+  border: 1px solid #d3d0ca;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   flex: none;
+  transition: background .12s, border-color .12s, box-shadow .12s;
 }
-#pinbtn:hover { background: linear-gradient(180deg, #fff, #f0eeea); }
-#pinbtn svg { width: 16px; height: 16px; fill: #333; }
+#pinbtn:hover { background: #dedbd5; }
+#pinbtn svg { width: 15px; height: 15px; fill: #6b6862; transition: fill .12s; }
+#pinbtn:hover svg { fill: #3a3a3a; }
 #pinbtn.on {
-  background: linear-gradient(180deg, #fff6dd, #f7e3a8);
-  box-shadow: 0 1px 4px rgba(0, 0, 0, .16), inset 0 0 0 1px rgba(185, 133, 20, .4);
+  background: linear-gradient(180deg, #464646, #333);
+  border-color: #464646;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .22);
 }
-#pinbtn.on svg { fill: #b07908; }
+#pinbtn.on:hover { background: linear-gradient(180deg, #525252, #3b3b3b); }
+#pinbtn.on svg { fill: #fff; }
 
 #dock {
   position: fixed;
@@ -1127,9 +1120,6 @@ body.in-codex #dock, body.in-codex #dock-tab, body.in-codex #pinbtn { display: n
   </div>
   <div id="pinbtn" title="挂起当前产线">
     <svg viewBox="0 0 24 24"><path d="M16 9V4h1c.55 0 1-.45 1-1s-.45-1-1-1H7c-.55 0-1 .45-1 1s.45 1 1 1h1v5c0 1.66-1.34 3-3 3v2h5.97v7l1 1 1-1v-7H19v-2c-1.66 0-3-1.34-3-3z"/></svg>
-  </div>
-  <div id="backbtn" title="返回上一级链路">
-    <svg viewBox="0 0 24 24"><path d="M11.4 4.6 3.9 12l7.5 7.4v-4.8h9V9.4h-9z"/></svg>
   </div>
 </div>
 <div id="results"></div>
@@ -2398,10 +2388,6 @@ window.__ICON__={"items":{"item_acridgen":"data:image/webp;base64,UklGRtAOAABXRU
   }
   document.addEventListener('pointerdown', e => {
     if (!e.target.closest('#results') && !e.target.closest('#searchwrap')) results.classList.remove('on');
-  });
-  document.getElementById('backbtn').addEventListener('click', () => {
-    if (navDepth > 0) history.back();
-    else routeTo('');               // 直链落在子页、应用内无历史时，回图鉴
   });
   document.getElementById('crumb-home').addEventListener('click', () => routeTo(''));
   document.getElementById('crumb-home-pill').addEventListener('click', () => routeTo(''));

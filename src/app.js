@@ -1113,10 +1113,6 @@
   document.addEventListener('pointerdown', e => {
     if (!e.target.closest('#results') && !e.target.closest('#searchwrap')) results.classList.remove('on');
   });
-  document.getElementById('backbtn').addEventListener('click', () => {
-    if (navDepth > 0) history.back();
-    else routeTo('');               // 直链落在子页、应用内无历史时，回图鉴
-  });
   document.getElementById('crumb-home').addEventListener('click', () => routeTo(''));
   document.getElementById('crumb-home-pill').addEventListener('click', () => routeTo(''));
   document.getElementById('crumb-codex').addEventListener('click', () => routeTo(''));
