@@ -540,8 +540,9 @@
 
       if (n.wasDup) {
         const open = openDups.has(n.path);
+        // 眼睛嵌在物品块左边缘上：横向压进块内半个身位（22 宽 → 11），纵向与块同中心
         h.push(`<div class="eye${open ? ' open' : ''}" data-act="eye" data-path="${esc(n.path)}" ` +
-          `style="left:${n.x - TILE_W / 2 - 31}px;top:${n.y - 11}px">` +
+          `style="left:${n.x - TILE_W / 2 - 11}px;top:${n.y - 11}px">` +
           eyeSVG() + `</div>`);
       }
 

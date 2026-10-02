@@ -427,6 +427,8 @@ html, body {
 .tab.clickable:hover .radio { border-color: #fff; background: rgba(255, 255, 255, .45); }
 
 /* ---------- 眼睛（上游已展示，默认隐藏） ---------- */
+/* 半嵌在物品块左边缘上，所以层级要压过物品块自身的悬浮（12）/ 选中（14）态，
+   否则鼠标一碰物品块，眼睛就被卡片盖回去，「嵌着」的感觉就断了 */
 .eye {
   position: absolute;
   width: 22px;
@@ -439,7 +441,7 @@ html, body {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  z-index: 6;
+  z-index: 15;
 }
 .eye:hover { background: linear-gradient(180deg, #4b4b4b, #2e2e2e); }
 .eye svg { width: 13px; height: 13px; fill: #fff; }
@@ -1824,8 +1826,9 @@ window.__ICON__={"items":{"item_acridgen":"data:image/webp;base64,UklGRtAOAABXRU
 
       if (n.wasDup) {
         const open = openDups.has(n.path);
+        // 眼睛嵌在物品块左边缘上：横向压进块内半个身位（22 宽 → 11），纵向与块同中心
         h.push(`<div class="eye${open ? ' open' : ''}" data-act="eye" data-path="${esc(n.path)}" ` +
-          `style="left:${n.x - TILE_W / 2 - 31}px;top:${n.y - 11}px">` +
+          `style="left:${n.x - TILE_W / 2 - 11}px;top:${n.y - 11}px">` +
           eyeSVG() + `</div>`);
       }
 
