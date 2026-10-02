@@ -415,7 +415,7 @@
     const keep = (root && opts.fit === false) ? (root.x * k + tx) + ',' + (root.y * k + ty) : null;
     // opts.focus：这次重排后要把视角挪到哪 —— 展开取 { path, mode:'top' }，收起取 { mode:'center' }
     const focus = opts.focus || null;
-    const focusX = (focus && focus.path && root) ? screenX(focus.path) : null;
+    const focusAt = (focus && focus.path && root) ? screenAt(focus.path) : null;
     curRoot = rootId;
     COLS.length = 0;
     root = build(rootId);
@@ -460,7 +460,7 @@
     world.style.height = worldH + 'px';
 
     if (opts.fit !== false) fit();
-    else if (focus) focusView(focus, focusX);
+    else if (focus) focusView(focus, focusAt);
     else if (keep) {
       const p = keep.split(',');
       tx += p[0] - (root.x * k + tx);
@@ -677,10 +677,15 @@
     k = nk; tx = cx - wx * k; ty = cy - wy * k;
     apply();
   }
-  // 该节点机具胶囊当前在屏幕上的横向位置（重排前记下来，重排后照原样摆回去）
-  function screenX(path) {
+  /* 这一格在屏幕上的横向锚点：有机具胶囊的对准胶囊，端点节点没有胶囊、对准物品块。
+     胶囊的摆放本来就是这个口径（drawNodes 里端点用 n.x、其余用 n.chipX），
+     screenAt 与 focusView 必须跟着同口径 —— 两个锚点相差半列宽，
+     各取各的会让「摆回原位」补错量，整张图被横着推走。 */
+  function anchorX(n) { return n.recipe ? n.chipX : n.x; }
+  // 这一格当前在屏幕上的位置（重排前记下来，重排后先照原样摆回去，再缓动到目标）
+  function screenAt(path) {
     const n = nodes.find(z => z.path === path);
-    return (n && n.chipX !== undefined) ? n.chipX * k + tx : null;
+    return n ? { x: anchorX(n) * k + tx, y: n.y * k + ty } : null;
   }
 
   /* 视角平移：用 rAF 缓动，避免瞬移；拖动、缩放、下一次聚焦都会打断它 */
@@ -713,24 +718,33 @@
   }
 
   /* 展开「其他配方」：把这条配方（备选组里的第一条）顶到屏幕上方，新铺开的分支正好落进视野；
-     收起：这条配方纵向回到屏幕正中（链路缩小后不至于把刚操作的那一格甩到视野外），
-     横向不拦 —— 横向跟着回中会让整张图左右晃一下，比纵向偏移更扎眼。
-     两者都只平移、不缩放。 */
-  function focusView(focus, keepScreenX) {
+     收起：这条配方纵向回到屏幕正中（链路缩小后不至于把刚操作的那一格甩到视野外）。
+     两者都只平移、不缩放，横向都不动 —— 世界原点 ox 会随内容宽窄变化，若只补纵向、
+     不动横向，整张图就会顺着收缩量横移，收得越多挪得越远。
+     重排是瞬间完成的（DOM 已经是新布局），所以首帧必须先把这一格摆回它点击前的屏幕
+     位置，否则点下去会先跳一下、再被缓动拉回来；随后只对纵向做缓动。 */
+  function focusView(focus, from) {
     const r = stage.getBoundingClientRect();
     const n = nodes.find(z => z.path === focus.path);
     if (!n) return;
-    const cx = n.recipe ? n.chipX : n.x;          // 端点节点没有机具胶囊，对准物品块
-    let nx = tx, ny = ty;
+    let ny;
     if (focus.mode === 'center') {
       ny = PAD_TOP + (r.height - PAD_TOP - PAD_BOT) / 2 - n.y * k;
     } else {
-      const top = Math.min(n.y - Math.max(n.h, n.chipH) / 2,
-        n.recipe ? n.y - n.chipH / 2 - tabOffset(n) : Infinity);
+      // 置顶的是「这条配方」本身：有机具胶囊的节点就是它的胶囊（连上方标签）；
+      // 端点节点没有胶囊，展开后顶上第一格才是它的第一条备选配方，取那一格 ——
+      // 端点的物品图标排在更下面，不该占着置顶位。
+      const lead = (!n.recipe && n.alt[0]) ? n.alt[0] : n;
+      const top = Math.min(lead.y - Math.max(lead.h, lead.chipH) / 2,
+        lead.recipe ? lead.y - lead.chipH / 2 - tabOffset(lead) : Infinity);
       ny = PAD_TOP - top * k;
-      if (keepScreenX !== null) nx = keepScreenX - cx * k;
     }
-    panTo(nx, ny);
+    if (!from) { panTo(tx, ny); return; }
+    // 起点：新布局下把这一格放回原处；横向随之恒定，缓动只走纵向
+    tx = from.x - anchorX(n) * k;
+    ty = from.y - n.y * k;
+    apply();
+    panTo(tx, ny);
   }
 
   stage.addEventListener('wheel', e => {
@@ -988,6 +1002,7 @@
 
   /* ---------------- 物品图鉴 ---------------- */
   const codex = document.getElementById('codex');
+  const cxHead = document.querySelector('#codex .cx-head');
   const cxGrid = document.getElementById('cx-grid');
   const cxBar = document.getElementById('cx-bar');
   let cxFilter = (store.cxFilter === 'all' || FAM[store.cxFilter]) ? store.cxFilter : 'all';
@@ -1227,9 +1242,42 @@
     const t = e.target.closest('.dk-card');
     if (t) routeTo(t.dataset.id);
   });
+  /* 让位动画（FLIP）：#codex 的 padding-left 在动画起点一次性落定，物品网格只重排
+     一次（为什么不在 padding 上做过渡，见 style.css 里 #codex 的注释）；200ms 的
+     滑动手感由 transform 补出来 —— .cx-head / .cx-grid 先瞬移回旧的视觉位置，再
+     过渡到 0，与 #dock 的滑入/滑出同步。纯合成器动画：物品再多，动画期间每帧都
+     不再重排重绘。动画中再次点击时按当前视觉位置无缝接续。 */
+  const CX_DOCK_W = 360;                        // 与 #dock 宽度 / #codex 让位宽度一致
+  let cxSlideGen = 0;                           // 动画代数：被新点击接手时，旧收尾作废
+  function cxSlide(folding) {
+    if (view !== 'codex') return;
+    const m = getComputedStyle(cxGrid).transform;
+    const cur = (m && m !== 'none') ? new DOMMatrixReadOnly(m).m41 : 0;
+    const start = cur + (folding ? CX_DOCK_W : -CX_DOCK_W);   // 相对新布局的视觉偏移
+    const els = [cxHead, cxGrid];
+    const gen = ++cxSlideGen;
+    codex.classList.add('cx-anim');
+    els.forEach(el => {
+      el.style.transition = 'none';
+      el.style.transform = `translateX(${start}px)`;
+      el.style.willChange = 'transform';
+    });
+    cxGrid.getBoundingClientRect();             // 强制一次布局，把起始帧提交上去
+    els.forEach(el => {
+      el.style.transition = 'transform .2s ease';   // 缓动与 #dock 一致
+      el.style.transform = 'translateX(0)';
+    });
+    setTimeout(() => {
+      if (gen !== cxSlideGen) return;
+      els.forEach(el => { el.style.transition = el.style.transform = el.style.willChange = ''; });
+      codex.classList.remove('cx-anim');
+    }, 240);
+  }
   dockTab.addEventListener('click', () => {
-    dock.classList.toggle('fold');
+    const folding = !dock.classList.contains('fold');
+    dock.classList.toggle('fold', folding);
     syncDockFold();
+    cxSlide(folding);
     saveStore();
   });
 

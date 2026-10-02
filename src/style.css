@@ -859,10 +859,12 @@ body.in-codex #toolbar, body.in-codex #zoomctl { display: none; }
   position: fixed; inset: 0; z-index: 35; display: none;
   overflow: auto; padding: 70px 0 0;
   background: radial-gradient(120% 110% at 30% 0%, #f1f0ee 0%, #e9e8e5 45%, #dfddd9 100%);
-  transition: padding-left .2s ease;
 }
 /* 侧边栏拉开时把图鉴整体右让一个面板宽度，别让面板盖住第一列卡片；
-   收起（#dock.fold）时不留白，图鉴自然铺满。缓动跟 #dock 的 transform 对齐。 */
+   收起（#dock.fold）时不留白，图鉴自然铺满。
+   不要给这里的 padding-left 加过渡：让位宽度逐帧变化会迫使整张物品网格
+   每帧重排 + 整屏重绘，物品一多必卡。滑动手感由 app.js 的 cxSlide 在
+   .cx-head / .cx-grid 上补 transform 实现（纯合成器动画，每帧零布局）。 */
 #dock:not(.fold) ~ #codex { padding-left: 360px; }
 #codex.on { display: block; }
 #codex::-webkit-scrollbar { width: 12px; }
@@ -872,6 +874,9 @@ body.in-codex #toolbar, body.in-codex #zoomctl { display: none; }
   background: linear-gradient(180deg, rgba(240,239,237,.98), rgba(240,239,237,.86) 70%, rgba(240,239,237,0));
   backdrop-filter: blur(3px);
 }
+/* 让位动画进行中（app.js 挂 .cx-anim）摘掉表头的 backdrop-filter：
+   滑动期间它要逐帧重采样模糊，而表头底色本就近不透明，摘掉肉眼无差。 */
+#codex.cx-anim .cx-head { backdrop-filter: none; }
 #codex .cx-bar { display: flex; flex-wrap: wrap; gap: 7px; }
 /* 与顶栏工具条 / 面包屑胶囊同一套：圆角矩形 + 同样的灰阶与描边 */
 #codex .cx-chip {
@@ -987,12 +992,13 @@ body.in-codex #toolbar, body.in-codex #zoomctl { display: none; }
 #dock.fold { transform: translateX(-100%); }
 
 /* 把手：短拉手，从面板右缘“长”出来（左缘直角、底色与面板一致、只朝右投影，
-   与面板之间无描边无缝隙）；收起时贴在屏幕左缘 */
+   与面板之间无描边无缝隙）；收起时贴在屏幕左缘。
+   收展用 transform（而不是 left）做动画：left 逐帧触发重排，transform 是纯合成器动画 */
 #dock-tab {
   position: fixed;
-  left: 360px;
+  left: 0;
   top: calc(50% + 26px);
-  transform: translateY(-50%);
+  transform: translateY(-50%) translateX(360px);
   width: 16px;
   height: 120px;
   z-index: 39;
@@ -1003,9 +1009,9 @@ body.in-codex #toolbar, body.in-codex #zoomctl { display: none; }
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: left .2s ease;
+  transition: transform .2s ease;
 }
-#dock-tab.closed { left: 0; }
+#dock-tab.closed { transform: translateY(-50%) translateX(0); }
 #dock-tab:hover { filter: brightness(.97); }
 #dock-tab svg {
   width: 12px; height: 12px; fill: none; stroke: #6b6862;
