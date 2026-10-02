@@ -325,9 +325,16 @@
   /* 备选链路整组挂在金色胶囊（其他配方 / 收起）下面，而金色胶囊又悬在机具胶囊下方：
      主体中心往下 anchorH/2 + 29 才是胶囊下沿，备选机具顶上还有配方标签。
      配方行数少（胶囊矮）时这两者会正好叠在一起，所以主体中心到首条备选胶囊顶
-     至少留 anchorH/2 + 29 + 8 + 标签高度，不够的部分补成组间留白。 */
-  const PILL_DROP = 29;      // 金色胶囊下沿：主体中心 + anchorH/2 + 29
+     至少留 anchorH/2 + 29 + 8 + 标签高度，不够的部分补成组间留白。
+     这个估算式对节点高度敏感，摆完后 growAltPads 会按实际位置再补一次差额。 */
+  /* 金色胶囊挂在节点下方：物品块以节点中心对齐、机具胶囊也以中心对齐，谁的下沿
+     更低就跟着谁 —— 只按 anchorH 算的话，物品块比机具胶囊高时（链路主体的块
+     就高 23px）胶囊会压进块里。 */
+  const pillDrop = n => Math.max(n.anchorH, tileH(n)) / 2 + 7;
+  const PILL_DROP = 29;      // 金色胶囊下沿（相对节点中心）= 上式的 +7 再加胶囊高 22
   const PILL_PAD = 8;        // 胶囊与备选标签之间的呼吸位
+  const PILL_H = 22;               // 与 CSS 里 .pill 的高度一致
+  const padExtra = new Map();      // 摆完后按实际位置补的额外间距，键是节点 path
 
   function altPad(n) {
     const alt = n.alt && n.alt[0];
@@ -340,8 +347,30 @@
       mid = n.childSpan / 2;                   // 端点：主体在自己的盒子里居中
     }
     const dist = mid + GAP_ROW + (alt.span - alt.chipH) / 2;
-    return Math.max(0, n.anchorH / 2 + PILL_DROP + PILL_PAD + (alt.recipe.req ? 30 : 23) - dist);
+    return Math.max(0, Math.max(n.anchorH, tileH(n)) / 2 + PILL_DROP + PILL_PAD +
+      (alt.recipe.req ? 30 : 23) - dist) + (padExtra.get(n.path) || 0);
   }
+
+  /* 按摆好之后的实际位置，看金色胶囊下沿到首条备选标签上沿是否够 PILL_PAD；
+     不够就记下差额，交给下一轮 spans/place 补上。返回是否有节点被加大。 */
+  function growAltPads(n) {
+    let grew = false;
+    if (n.alt && n.alt[0]) {
+      const alt = n.alt[0];
+      const pillBottom = n.y + pillDrop(n) + PILL_H;
+      const tabTop = alt.y - alt.chipH / 2 - tabOffset(alt);
+      const short = PILL_PAD - (tabTop - pillBottom);
+      if (short > 0.5) { padExtra.set(n.path, (padExtra.get(n.path) || 0) + short); grew = true; }
+    }
+    n.stack.forEach(c => { if (growAltPads(c)) grew = true; });
+    return grew;
+  }
+
+  /* 链路主体的物品块在 CSS 里比普通块高 23px（.tile.root 要放下「链路主体」标签），
+     布局得按这个实际高度算：物品块以节点中心对齐、金色胶囊从块的下沿再往下 7px，
+     若还按普通块的 68px 算，胶囊就会压进主体块里。 */
+  const ROOT_EXTRA = 23;
+  const tileH = n => TILE_H + (n.path === 'R:' + curRoot ? ROOT_EXTRA : 0);
 
   function spans(n) {
     n.chipH = 0;
@@ -350,8 +379,8 @@
       n.ratioLines = lines;
       n.chipH = (n.recipe.req ? 20 : 0) + 6 + 16 + 14 + (lines ? lines * 13 + 5 : 0) + 6;
     }
-    n.anchorH = n.chipH || TILE_H;
-    n.h = n.isBranch ? n.chipH : TILE_H;
+    n.anchorH = n.chipH || tileH(n);
+    n.h = n.isBranch ? n.chipH : tileH(n);
     if (n.chipH) n.h = Math.max(n.h, n.chipH);
     if (n.others && n.others.length) n.h = Math.max(n.h, n.anchorH + (openAlt.has(n.path) ? 6 : 30));
     (n.stack || []).forEach(spans);
@@ -422,8 +451,12 @@
     metrics(root);
     CHIP_W = calcChipWidth(root);
     COLS.length = 0;
+    padExtra.clear();
     spans(root);
     place(root, 0);
+    // 摆放完再量一次「金色胶囊下沿 ↔ 首条备选标签上沿」：间距不够就给这一格补上差额重排。
+    // altPad 的估算式随节点高度有误差，量实际位置才能保证不重叠；补量只增不减，几次即收敛。
+    for (let i = 0; i < 6 && growAltPads(root); i++) { spans(root); place(root, 0); }
     assignX(root, 0);
 
     let minX = 1e9, maxX = -1e9, minY = 1e9, maxY = -1e9;
@@ -503,7 +536,7 @@
         const open = openAlt.has(n.path);
         const w = pillW(open ? '收起' : '其他配方', !open);
         // 引导线只在「胶囊与机具分离」时有意义；端点节点的胶囊就贴在物品块下方，不画
-        if (n.recipe) out.push(lead(chipL, n.y + n.anchorH / 2 + 7, w, n.y + n.chipH / 2));
+        if (n.recipe) out.push(lead(chipL, n.y + pillDrop(n), w, n.y + n.chipH / 2));
       }
       if (!n.isBranch) {
         if (n.recipe) {
@@ -571,7 +604,7 @@
       if (!n.isBranch) {
         const label = isRoot ? `<div class="tag-sub">链路主体</div>` : `<div class="btn">切换链路 ›</div>`;
         h.push(`<div class="tile${n.kind === 'dup' ? ' isdup' : ''}${isRoot ? ' root' : ''}" data-item="${esc(n.itemId)}" data-path="${esc(n.path)}" ` +
-          `style="left:${n.x - TILE_W / 2}px;top:${n.y - TILE_H / 2}px;--fam:${fam.c};--fam-dark:${famDark(fam.c)}">` +
+          `style="left:${n.x - TILE_W / 2}px;top:${n.y - tileH(n) / 2}px;--fam:${fam.c};--fam-dark:${famDark(fam.c)}">` +
           `<div class="thumb"><div class="ruler"></div><img src="${iconURL(n.itemId)}" alt=""><div class="bar"></div></div>` +
           `<div class="hatch2"></div><div class="dots"></div>` +
           `<div class="amt${n.recipe ? '' : ' raw'}">×${trim(n.amount)}</div>` +
@@ -601,7 +634,7 @@
           const open = openAlt.has(n.path);
           const w = pillW(open ? '收起' : '其他配方', !open);
           h.push(`<div class="pill" data-act="alt" data-path="${esc(n.path)}" ` +
-            `style="left:${Math.round(n.x - w / 2)}px;top:${n.y + n.anchorH / 2 + 7}px;width:${Math.round(w)}px;justify-content:center">` +
+            `style="left:${Math.round(n.x - w / 2)}px;top:${n.y + pillDrop(n)}px;width:${Math.round(w)}px;justify-content:center">` +
             `<span>${open ? '收起' : '其他配方'}</span>` +
             (open ? chevUpSVG() : swapSVG() + `<span class="cnt">${n.others.length}</span>`) + `</div>`);
         }
@@ -619,7 +652,7 @@
         const open = openAlt.has(n.path);
         const w = pillW(open ? '收起' : '其他配方', !open);
         h.push(`<div class="pill" data-act="alt" data-path="${esc(n.path)}" ` +
-          `style="left:${n.chipX - CHIP_W / 2}px;top:${n.y + n.anchorH / 2 + 7}px;width:${Math.round(w)}px;justify-content:space-between">` +
+          `style="left:${n.chipX - CHIP_W / 2}px;top:${n.y + pillDrop(n)}px;width:${Math.round(w)}px;justify-content:space-between">` +
           `<span>${open ? '收起' : '其他配方'}</span>` +
           (open ? chevUpSVG() : swapSVG() + `<span class="cnt">${n.others.length}</span>`) + `</div>`);
       }
