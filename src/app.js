@@ -130,6 +130,9 @@
   let curRoot = D.defaultRoot;
   let k = 1, tx = 0, ty = 0;
   let SHOW_AMOUNT = true, ANCHOR_2S = false;
+  // 锚定窗口（秒）：整条链路折算所对齐的那段时间。默认是「主体一次制造」的耗时，
+  // 勾了「按2秒计」就是 2 秒。胶囊上的机器数 / 每次数由它和配方耗时算出来。
+  let ANCHOR_W = 2;
   let view = 'chain';                 // 'chain' | 'codex'
   let nodes = [], worldW = 0, worldH = 0, CHIP_W = 196, SHOW_RATIO = true;
 
@@ -229,12 +232,13 @@
       br.stack = br.children;   // 备选分支沿自身链向左展开
       return br;
     }
-    // 基准是主体「一次制造」：主体数量取该配方的单次产出量，于是胶囊读作「t 秒 · ×1次」，
+    // 基准是主体「一次制造」：主体数量取该配方的单次产出量，于是胶囊读作「1 机器 × 各 1 次」，
     // 上游按这一炉的配比逐级折算（单次产出 2 个的配方不会退化成 ×0.5次）。
     // 「按2秒计」在这个基准上锚定时间 —— 整条链路数量统一乘 2 / 主体单次耗时，
     // 于是物品块角标读作「每 2 秒需要多少」，主体读作「每 2 秒产出多少」。
     const rootRec = pickRecipe(rootId);
     const rooted = rootRec && !ITEMS[rootId].g;
+    ANCHOR_W = rooted ? (ANCHOR_2S ? 2 : rootRec.t) : 2;
     const scale = rooted ? outAmtOf(rootRec, rootId) * (ANCHOR_2S ? 2 / rootRec.t : 1) : 1;
     return make(rootId, scale, 'R:' + rootId, new Set());
   }
@@ -258,21 +262,35 @@
     };
   }
 
+  /* 计数读法：把「这条配方一共要跑多少次」拆成「几台机器 × 每台各跑几次」。
+     单台机器在锚定窗口里最多跑 ANCHOR_W / t 次；总次数除以它是几台，向上取整
+     （差一点也要多开一台），每台的次数就是总次数平摊回去 —— 于是机器数 × 各次
+     数恒等于总次数，量守恒。 */
+  function machineSplit(runs, t) {
+    const perMachine = ANCHOR_W > 0 ? ANCHOR_W / t : 1;      // 单台在窗口内的产能
+    const machines = Math.max(1, Math.ceil(runs / perMachine - 1e-9));
+    return { machines, each: runs / machines };
+  }
+
   function metrics(n) {
     if (n.recipe) {
       const r = n.recipe;
       n.r1w = 15 + 5 + textW(facName(r.fac), F_R1);
       if (r.req) n.r1w = Math.max(n.r1w, 14 + 5 + textW(envName(r.req), '700 11.5px ' + FF));
-      n.r2w = 10 + 4 + textW(trim(r.t) + '秒 · ×' + trim(n.runs) + '次', F_R2);
-      const p = ratioParts(n);
-      n.selfBy = p.selfBy;
-      n.ratioText = p.ins.map(x => x.n + '×' + x.a).join(' + ') + ' → ' +
-        p.outs.map(x => x.n + '×' + x.a).join(' + ');
-      n.ratioBy = '';
-      n.ratioHTML =
-        p.ins.map(x => `<b>${esc(x.n)}</b>×${x.a}`).join(' <span class="ar">+</span> ') +
-        ' <span class="ar">→</span> ' +
-        p.outs.map(x => `<b>${esc(x.n)}</b>×${x.a}`).join(' <span class="ar">+</span> ');
+      const m = machineSplit(n.runs, r.t);
+      n.machines = m.machines;
+      n.r2text = `${m.machines}机器×各${trim(m.each)}次`;
+      n.r2w = 10 + 4 + textW(n.r2text, F_R2);
+      // 第三行写「单次配方」而不是把总需求再算一遍：物品块角标已经标了各级的总量，
+      // 这里重复总数没有增量信息；同时把耗时从上一行挪下来，跟「秒/次」待在一起。
+      const ins = r.ins.map(x => ({ n: itemName(x.i), a: trim(x.a) }));
+      const outs = r.outs.map(x => ({ n: itemName(x.i), a: trim(x.a) }));
+      const insH = ins.map(x => `<b>${esc(x.n)}</b>×${x.a}`).join(' <span class="ar">+</span> ');
+      const outsH = outs.map(x => `<b>${esc(x.n)}</b>×${x.a}`).join(' <span class="ar">+</span> ');
+      n.ratioText = ins.map(x => x.n + '×' + x.a).join(' + ') + ' → ' +
+        outs.map(x => x.n + '×' + x.a).join(' + ') + ' · ' + trim(r.t) + '秒/次';
+      n.ratioHTML = insH + ' <span class="ar">→</span> ' + outsH +
+        ' <span class="ar">·</span> ' + trim(r.t) + '秒/次';
     }
     (n.stack || []).forEach(metrics);
   }
@@ -567,7 +585,7 @@
         `<div class="body">` +
         `<div class="r1"><svg viewBox="0 0 24 24"><path d="${FACGLYPH(r.fac)}" fill="#fff" fill-rule="evenodd"/></svg>` +
         `<span>${esc(facName(r.fac))}</span></div>` +
-        `<div class="r2">${clockSVG()}<span>${trim(r.t)}秒 · ×${trim(n.runs)}次</span></div>` +
+        `<div class="r2">${clockSVG()}<span>${esc(n.r2text)}</span></div>` +
         (SHOW_RATIO ? `<div class="r3" style="height:${lines * 13 + 3}px">${n.ratioHTML}</div>` : '') +
         `</div></div>`);
     }
@@ -824,7 +842,8 @@
     H.push(`<div class="sect"><h4>需求</h4>`);
     H.push(`<div class="kv"><span class="k">需要量</span><span class="v">×${trim(n.amount)}${n.recipe ? `　生产 <em>${trim(n.runs)}</em> 次` : ''}</span></div>`);
     if (n.recipe) {
-      H.push(`<div class="kv"><span class="k">总耗时</span><span class="v">${trim(n.recipe.t)} × ${trim(n.runs)} = <em>${trim(n.recipe.t * n.runs)}</em> 秒</span></div>`);
+      const m = machineSplit(n.runs, n.recipe.t);
+      H.push(`<div class="kv"><span class="k">计法</span><span class="v"><em>${m.machines}</em> 台机器 × 各 <em>${trim(m.each)}</em> 次 · ${trim(n.recipe.t)} 秒/次</span></div>`);
       H.push(`<div class="kv"><span class="k">机具</span><span class="v">${esc(facName(n.recipe.fac))}</span></div>`);
     } else {
       H.push(`<div class="kv"><span class="k">来源</span><span class="v">${n.kind === 'loop' ? '循环依赖' : '基础资源 / 采集'}</span></div>`);
@@ -844,18 +863,13 @@
     }
     if (n.recipe) {
       const r = n.recipe, p = ratioParts(n);
-      H.push(`<div class="sect"><h4>配方比例（按本链路 ${trim(n.runs)} 次计）</h4><div class="ratio-box">` +
+      H.push(`<div class="sect"><h4>配方比例</h4><div class="ratio-box">` +
         p.ins.map(x => `<b>${esc(x.n)}</b>×${x.a}`).join(' <span class="ar">+</span> ') +
         ` <span class="ar">→</span> ` +
         p.outs.map(x => `<b>${esc(x.n)}</b>×${x.a}`).join(' <span class="ar">+</span> ') +
         `<br><span class="ar">单次配方　</span>` +
         esc(r.ins.map(x => itemName(x.i) + '×' + x.a).join(' + ')) + ' → ' + esc(it.zh) + '×' + mainOut(r) +
         `　·　${trim(r.t)} 秒/次</div></div>`);
-      if (n.children.length) {
-        H.push(`<div class="sect"><h4>直接投入</h4><div class="chips-inline">` +
-          n.children.map(c => `<div class="ci" data-jump="${esc(c.itemId)}"><img src="${ICON.items[c.itemId] || PH}" alt="">` +
-            `${esc(c.item.zh)}<span class="q">×${trim(c.amount)}</span></div>`).join('') + `</div></div>`);
-      }
     }
 
     const others = BYOUT[n.itemId] || [];
@@ -865,7 +879,10 @@
         const cur = n.recipe && r.id === n.recipe.id;
         H.push(`<div class="rec${cur ? ' cur' : ''}" data-act="setdef" data-item="${esc(n.itemId)}" data-rid="${esc(r.id)}">` +
           `<span class="dot2"></span><div style="flex:1">` +
-          `<span class="fac">${esc(facName(r.fac))}</span> <span class="sub">${trim(r.t)} 秒</span><br>` +
+          `<span class="fac">${esc(facName(r.fac))}</span> <span class="sub">${trim(r.t)} 秒</span>` +
+          (r.req ? `<span class="env" style="background:${envCol(r.req)}">` +
+            envGlyph(r.req) + `${esc(envName(r.req))}</span>` : '') +
+          `<br>` +
           `<span class="sub">${esc(r.ins.map(x => itemName(x.i) + '×' + x.a).join(' + '))} → ${esc(it.zh)}×${mainOut(r)}</span>` +
 
           `</div></div>`);
@@ -888,8 +905,6 @@
           (r.producedGasEnv ? ` → ${({ stable: '稳定环境', humid: '湿润环境', acidic: '酸性环境', xiranite: '息壤环境' })[r.producedGasEnv] || r.producedGasEnv}` : '') +
           (r.producedPowerW ? ` → 发电 ${r.producedPowerW}W` : '')).join('<br>') + `</div></div>`);
     }
-    H.push(`<div class="sect" style="padding-bottom:16px"><div class="hintline">` +
-      `点击物品块下的「切换制造链路」把该物品设为主体；点击胶囊下的「其他配方」展开备选链路，可对比后设为默认。</div></div>`);
     panel.innerHTML = H.join('');
     panel.classList.add('on');
   }

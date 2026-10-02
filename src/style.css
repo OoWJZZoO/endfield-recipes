@@ -722,6 +722,16 @@ html, body {
 .rec .sub { color: #86837d; font-size: 10.5px; }
 .rec .dot2 { width: 8px; height: 8px; border-radius: 50%; border: 1.6px solid #b0ada7; flex: none; }
 .rec.cur .dot2 { background: #3a3a3a; border-color: #3a3a3a; }
+/* 可选配方里的气体环境要求：跟机具胶囊顶部那条色带是同一件事，
+   列表里漏掉这几个配方就会显得和别的配方没差别 */
+.rec .env {
+  display: inline-flex; align-items: center; gap: 3px;
+  margin-left: 5px; padding: 0 5px; height: 15px;
+  border-radius: 4px; color: #fff;
+  font-size: 10px; font-weight: 700; line-height: 15px;
+  white-space: nowrap; vertical-align: middle;
+}
+.rec .env svg { width: 9px; height: 9px; flex: none; }
 .hintline { font-size: 11px; color: #86837d; line-height: 1.7; }
 .chips-inline { display: flex; flex-wrap: wrap; gap: 5px; }
 .chips-inline .ci {

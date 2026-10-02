@@ -31,6 +31,11 @@ def is_liquid(item):
     return item.get('transportMode') == 'pipe' and '气态' not in zh and not zh.endswith('气')
 
 
+def is_gas(item):
+    """管道输送的气体（气态* / *气）—— 与 is_liquid 互补"""
+    return item.get('transportMode') == 'pipe' and not is_liquid(item)
+
+
 def recipe_sig(r):
     """配方指纹：投入 / 产出 / 耗时 / 环境要求全都一样，就算同一条配方"""
     return (tuple(sorted((x['itemId'], x['amount']) for x in r['inputs'])),
@@ -41,7 +46,7 @@ def recipe_sig(r):
 def filter_recipes(recipes, items):
     """剔掉对「看链路」没有意义的配方：
        1) 扩容反应池里与反应池完全相同的那几条 —— 升级的是机器不是配方，留着只是同一条配方的两份；
-       2) 液体瓶拆解 —— 瓶装液体的反向操作，液体本来就能走管道，纯占位。"""
+       2) 瓶装拆解（液体与气体）—— 瓶装的反向操作，这两类本来就能走管道，纯占位。"""
     pool = {recipe_sig(r) for r in recipes if r['facilityId'] == MIX_POOL}
     dropped = {'pool': 0, 'bottle': 0}
     out = []
@@ -50,7 +55,8 @@ def filter_recipes(recipes, items):
             dropped['pool'] += 1
             continue
         if r['facilityId'] == DISMANTLER and any(
-                o['itemId'] in items and is_liquid(items[o['itemId']]) for o in r['outputs']):
+                o['itemId'] in items and (is_liquid(items[o['itemId']]) or is_gas(items[o['itemId']]))
+                for o in r['outputs']):
             dropped['bottle'] += 1
             continue
         out.append(r)
@@ -224,7 +230,7 @@ def main():
     print(f'wrote {out}  ({size/1024/1024:.2f} MB)')
     print(f'  items={len(data["items"])} facilities={len(data["facilities"])} '
           f'recipes={len(data["recipes"])} icons={len(icons)} defaultRoot={data["defaultRoot"]}')
-    print(f'  hidden recipes: 扩容反应池重复 {dropped["pool"]}，液体瓶拆解 {dropped["bottle"]}')
+    print(f'  hidden recipes: 扩容反应池重复 {dropped["pool"]}，瓶装拆解（液体/气体） {dropped["bottle"]}')
 
 
 if __name__ == '__main__':
