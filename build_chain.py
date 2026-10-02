@@ -193,7 +193,8 @@ def build_payload():
             'ins': [{'i': x['itemId'], 'a': x['amount']} for x in r['inputs']],
             'outs': [{'i': x['itemId'], 'a': x['amount']} for x in r['outputs']],
             'req': r.get('requiredGasEnv') or '',      # 需要的气体环境
-            'env': r.get('producedGasEnv') or '',      # 蒸发机等产出的环境
+            'env': r.get('producedGasEnv') or '',      # 气体散布机维持的环境
+            'pw': r.get('producedPowerW') or 0,        # 热能池的发电功率
             'base': r.get('gasEnvBaseRecipeId') or '', # 不带环境要求的同族配方
         } for r in recipes],
         'defaults': defaults,

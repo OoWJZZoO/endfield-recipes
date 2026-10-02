@@ -682,7 +682,7 @@ html, body {
   margin: 0 0 6px;
   font-size: 10.5px;
   font-weight: 700;
-  color: #8d8a84;
+  color: #232323;
   letter-spacing: .08em;
 }
 .kv { display: flex; font-size: 12px; line-height: 1.75; gap: 8px; }
@@ -737,6 +737,14 @@ html, body {
 }
 .rec .env svg { width: 9px; height: 9px; flex: none; }
 .hintline { font-size: 11px; color: #86837d; line-height: 1.7; }
+/* 「其他用途」：每条两行 —— 机具 + 耗时 + 消耗在前，结果（无产出 / 维持环境 / 发电）在后。
+   两条线整体往里缩 8px：同屏的「需求」块用的 kv 有 62px 标签列，条目直接顶格会显得
+   比上面的小节更靠左、更抢眼；机具名压到灰色，避免盖过黑色的小标题。
+   两个以上的用途之间用虚线分开（目前只有极少数物品会同时有多条）。 */
+.hintline .use { padding: 3px 0 3px 8px; }
+.hintline .use + .use { border-top: 1px dashed #e2e0da; }
+.hintline .use b { color: #6f6c66; font-weight: 700; }
+.hintline .use .envname { font-weight: 700; }
 .chips-inline { display: flex; flex-wrap: wrap; gap: 5px; }
 .chips-inline .ci {
   display: flex;

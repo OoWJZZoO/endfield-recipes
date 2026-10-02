@@ -30,7 +30,9 @@
   /* 气体环境：部分配方（气体反应炉 / 提纯机 / 息壤窑…）必须在特定环境里运行。
      这是配方级属性 —— 同一台机具的不同配方，有的需要有的不需要。 */
   const ENV_NAME = { stable: '稳定环境', humid: '湿润环境', acidic: '酸性环境', xiranite: '息壤环境' };
-  const ENV_COL = { stable: '#31a7e0', humid: '#35c6d6', acidic: '#e8a32c', xiranite: '#ab6ce6' };
+  // 息壤环境用绿：跟「息壤」这件物品自己的稀有度色一致，也和稳定（蓝）/ 湿润（青）/
+  // 酸性（橙）拉开差异。原先给的是紫，那是晶体的颜色，不是息壤的颜色。
+  const ENV_COL = { stable: '#31a7e0', humid: '#35c6d6', acidic: '#e8a32c', xiranite: '#6dd04a' };
   const ENV_ICON = {
     stable: 'M8 2 L4.4 11 H6.9 V16 H9.1 V11 H11.6 Z M17.2 6 L13.6 15 H16.1 V19.2 H18.3 V15 H20.8 Z',
     humid: 'M12 4.2c-3.4 0-6.1 2.3-6.1 5.2 0 1 .3 1.9.8 2.7h10.6c.5-.8.8-1.7.8-2.7 0-2.9-2.7-5.2-6.1-5.2z'
@@ -43,6 +45,8 @@
   };
   const envName = k => ENV_NAME[k] || k || '';
   const envCol = k => ENV_COL[k] || '#31a7e0';
+  // 气体散布机：实际耗时随输入流速在 2~10 秒之间浮动，数据集里只存了 10 秒这个上限
+  const GAS_DIFFUSER = 'item_port_vaporizer_1';
   function envGlyph(k) {
     return `<svg viewBox="0 0 24 24" fill="#fff" fill-rule="evenodd"><path d="${ENV_ICON[k] || ENV_ICON.stable}"/></svg>`;
   }
@@ -900,12 +904,22 @@
         u.map(r => `<div class="ci" data-jump="${esc(r.outs[0].i)}"><img src="${ICON.items[r.outs[0].i] || PH}" alt="">` +
           `${esc(itemName(r.outs[0].i))}</div>`).join('') + `</div></div>`);
     }
+    // 无产出的配方：这件物品的「销毁 / 供能 / 供环境」去向。电池这类物品在整个数据集里
+    // 只有这一条用途，发电功率是这里信息量最大的数字，但它只存在于配方数据里，
+    // 物品块、链路图都看不到，所以必须在这栏点出来。
     const envUse = ENV.filter(r => r.ins.some(x => x.i === n.itemId));
     if (envUse.length) {
-      H.push(`<div class="sect"><h4>环境 / 能源用途</h4><div class="hintline">` +
-        envUse.map(r => `${esc(facName(r.fac))}（消耗 ${esc(r.ins.map(x => itemName(x.i) + '×' + x.a).join(' + '))}）` +
-          (r.producedGasEnv ? ` → ${({ stable: '稳定环境', humid: '湿润环境', acidic: '酸性环境', xiranite: '息壤环境' })[r.producedGasEnv] || r.producedGasEnv}` : '') +
-          (r.producedPowerW ? ` → 发电 ${r.producedPowerW}W` : '')).join('<br>') + `</div></div>`);
+      H.push(`<div class="sect"><h4>其他用途</h4><div class="hintline">` +
+        envUse.map(r => {
+          const amt = trim(r.ins.reduce((s, x) => s + x.a, 0));
+          const secs = r.fac === GAS_DIFFUSER ? '2~10秒' : trim(r.t) + '秒';
+          let out;
+          if (r.pw) out = `发电 ${r.pw}W`;
+          else if (r.env) out = `在一定范围内维持<span class="envname" style="color:${envCol(r.env)}">` +
+            esc(envName(r.env)) + `</span>`;
+          else out = '无产出';
+          return `<div class="use"><b>${esc(facName(r.fac))}</b> ${secs} 消耗 ${amt} 单位<br>${out}</div>`;
+        }).join('') + `</div></div>`);
     }
     panel.innerHTML = H.join('');
     panel.classList.add('on');
