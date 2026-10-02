@@ -702,6 +702,10 @@ html, body {
 .ratio-box b { color: #fff; }
 .ratio-box .by { color: #f0b95e; }
 .ratio-box .ar { color: #8d8983; margin: 0 4px; }
+/* 「单次配方」两行共用：标签与配比同色、同缩进（4px，对齐累计配比那行的内缩），
+   两行作为一整块挂在累计配比下面。先前配比行是裸文本，比标签少 4px 又更亮，
+   两行就错开了 */
+.ratio-box .one { color: #8d8983; margin: 0 4px; }
 .rec {
   display: flex;
   align-items: center;

@@ -845,18 +845,19 @@
       const m = machineSplit(n.runs, n.recipe.t);
       H.push(`<div class="kv"><span class="k">计法</span><span class="v"><em>${m.machines}</em> 台机器 × 各 <em>${trim(m.each)}</em> 次 · ${trim(n.recipe.t)} 秒/次</span></div>`);
       H.push(`<div class="kv"><span class="k">机具</span><span class="v">${esc(facName(n.recipe.fac))}</span></div>`);
+      // 环境要求直接跟在机具后面成一行：它跟机具一样是这条配方的属性，
+      // 单开一节只放一行「环境」反而多一层层级
+      if (n.recipe.req) {
+        const src = ENV.find(x => x.env === n.recipe.req);
+        H.push(`<div class="kv"><span class="k">环境</span><span class="v">` +
+          `<em style="color:${envCol(n.recipe.req)}">${esc(envName(n.recipe.req))}</em>` +
+          (src ? `　由 ${esc(facName(src.fac))} 提供` : '') + `</span></div>`);
+      }
     } else {
       H.push(`<div class="kv"><span class="k">来源</span><span class="v">${n.kind === 'loop' ? '循环依赖' : '基础资源 / 采集'}</span></div>`);
     }
     H.push('</div>');
 
-    if (n.recipe && n.recipe.req) {
-      const src = ENV.find(x => x.env === n.recipe.req);
-      H.push(`<div class="sect"><h4>所需环境</h4><div class="kv"><span class="k">环境</span><span class="v">` +
-        `<em style="color:${envCol(n.recipe.req)}">${esc(envName(n.recipe.req))}</em>` +
-        (src ? `　由 ${esc(facName(src.fac))} 提供（消耗 ${esc(src.ins.map(x => itemName(x.i) + '×' + x.a).join(' + '))}）` : '') +
-        `</span></div></div>`);
-    }
     if (n.recipe && n.recipe.env) {
       H.push(`<div class="sect"><h4>产出环境</h4><div class="kv"><span class="k">环境</span><span class="v">` +
         `<em style="color:${envCol(n.recipe.env)}">${esc(envName(n.recipe.env))}</em>　不产出物品，供同区域机具使用</span></div></div>`);
@@ -867,9 +868,10 @@
         p.ins.map(x => `<b>${esc(x.n)}</b>×${x.a}`).join(' <span class="ar">+</span> ') +
         ` <span class="ar">→</span> ` +
         p.outs.map(x => `<b>${esc(x.n)}</b>×${x.a}`).join(' <span class="ar">+</span> ') +
-        `<br><span class="ar">单次配方　</span>` +
-        esc(r.ins.map(x => itemName(x.i) + '×' + x.a).join(' + ')) + ' → ' + esc(it.zh) + '×' + mainOut(r) +
-        `　·　${trim(r.t)} 秒/次</div></div>`);
+        `<br><span class="one">单次配方 ${trim(r.t)}秒/次</span><br>` +
+        `<span class="one">` + esc(r.ins.map(x => itemName(x.i) + '×' + x.a).join(' + ')) + ' → ' +
+        esc(r.outs.map(x => itemName(x.i) + '×' + x.a).join(' + ')) + `</span>` +
+        `</div></div>`);
     }
 
     const others = BYOUT[n.itemId] || [];

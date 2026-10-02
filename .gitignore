@@ -23,3 +23,6 @@ _site/
 # 系统杂项
 .DS_Store
 Thumbs.db
+
+# 客户端本机文件（ZCode 的排除规则，从本文件同步生成）
+.zcodeignore
