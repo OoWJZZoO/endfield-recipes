@@ -844,7 +844,11 @@ body.in-codex #toolbar, body.in-codex #zoomctl { display: none; }
   position: fixed; inset: 0; z-index: 35; display: none;
   overflow: auto; padding: 70px 0 0;
   background: radial-gradient(120% 110% at 30% 0%, #f1f0ee 0%, #e9e8e5 45%, #dfddd9 100%);
+  transition: padding-left .2s ease;
 }
+/* 侧边栏拉开时把图鉴整体右让一个面板宽度，别让面板盖住第一列卡片；
+   收起（#dock.fold）时不留白，图鉴自然铺满。缓动跟 #dock 的 transform 对齐。 */
+#dock:not(.fold) ~ #codex { padding-left: 360px; }
 #codex.on { display: block; }
 #codex::-webkit-scrollbar { width: 12px; }
 #codex .cx-head {
@@ -1084,7 +1088,9 @@ body.in-codex #toolbar, body.in-codex #zoomctl { display: none; }
 /* 悬停只给半透明白底板（原来是红底，红色在本项目里只承担稀有度 / 环境语义） */
 #dock .dk-x:hover { background: rgba(255, 255, 255, .28); color: #fff; }
 
-body.in-codex #dock, body.in-codex #dock-tab, body.in-codex #pinbtn { display: none; }
+/* 主界面（图鉴）里也保留侧边栏：手法与产线页一致，能拉出、能收起。
+   图钉只对「当前产线」有意义，图鉴下没有当前产线，所以仍然隐藏。 */
+body.in-codex #pinbtn { display: none; }
 
 </style>
 </head>
