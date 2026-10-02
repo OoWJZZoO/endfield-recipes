@@ -655,7 +655,7 @@
       const showDefaultTab = !n.isBranch && hasTab(n);
       if (n.isBranch || showDefaultTab) {
         const isDefault = !n.isBranch;
-        h.push(`<div class="tab${isDefault ? ' on' : ' clickable'}"${isDefault ? '' : ` data-act="setdef" data-item="${esc(n.itemId)}" data-rid="${esc(r.id)}"`} ` +
+        h.push(`<div class="tab${isDefault ? ' on' : ' clickable'}"${isDefault ? '' : ` data-act="setdef" data-item="${esc(n.itemId)}" data-rid="${esc(r.id)}" data-path="${esc(n.path)}"`} ` +
           `style="left:${n.chipX - CHIP_W / 2}px;top:${n.y - n.chipH / 2 - tabOffset(n)}px;width:${CHIP_W}px;height:30px">` +
           `<span>${isDefault ? '默认配方' : '设为默认配方'}</span><span class="radio"></span></div>`);
       }
@@ -866,8 +866,11 @@
     if (tab) {
       overrides[tab.dataset.item] = tab.dataset.rid;
       userSet.add(tab.dataset.item);
+      // 备选组展开只为挑选：选完默认配方就整组收起，视角对准这一格（与「收起」胶囊同款）
+      const owner = tab.dataset.path.slice(0, tab.dataset.path.lastIndexOf('~'));
+      openAlt.delete(owner);
       saveStore();
-      render(curRoot, { fit: false });
+      render(curRoot, { fit: false, focus: { path: owner, mode: 'center' } });
       toast('已将「' + facName(REC[tab.dataset.rid].fac) + '」设为 ' + itemName(tab.dataset.item) + ' 的默认配方');
       const n = nodes.find(z => z.itemId === tab.dataset.item && z.recipe);
       if (n) openPanel(n);
