@@ -53,14 +53,6 @@
 
   const TIER_COL = ['#e2e2e2', '#6dd04a', '#3fa9f5', '#a877e8', '#e8b23c', '#e05a4a'];
   const tierColor = t => TIER_COL[Math.min(Math.max((t || 1), 1), 6) - 1];
-  const FAM_DARK = {};
-  function famDark(hex) {
-    if (!FAM_DARK[hex]) {
-      const r = parseInt(hex.slice(1, 3), 16), g = parseInt(hex.slice(3, 5), 16), b = parseInt(hex.slice(5, 7), 16);
-      FAM_DARK[hex] = `rgb(${Math.round(r * .18 + 12)},${Math.round(g * .18 + 12)},${Math.round(b * .18 + 14)})`;
-    }
-    return FAM_DARK[hex];
-  }
 
   const ORE = new Set(['item_originium_ore', 'item_quartz_sand', 'item_iron_ore', 'item_cuprium_ore']);
   const METAL = new Set(['item_iron_nugget', 'item_cuprium', 'item_hetonite', 'item_pyrrolite',
@@ -615,10 +607,9 @@
       if (!n.isBranch) {
         const label = isRoot ? `<div class="tag-sub">链路主体</div>` : `<div class="btn">切换链路 ›</div>`;
         h.push(`<div class="tile${n.kind === 'dup' ? ' isdup' : ''}${isRoot ? ' root' : ''}" data-item="${esc(n.itemId)}" data-path="${esc(n.path)}" ` +
-          `style="left:${n.x - TILE_W / 2}px;top:${n.y - tileH(n) / 2}px;--fam:${fam.c};--fam-dark:${famDark(fam.c)}">` +
-          `<div class="thumb"><div class="ruler"></div><img src="${iconURL(n.itemId)}" alt=""><div class="bar"></div></div>` +
-          `<div class="hatch2"></div><div class="dots"></div>` +
-          `<div class="amt${n.recipe ? '' : ' raw'}">×${trim(n.amount)}</div>` +
+          `style="left:${n.x - TILE_W / 2}px;top:${n.y - tileH(n) / 2}px;--fam:${fam.c}">` +
+          `<div class="thumb"><img src="${iconURL(n.itemId)}" alt="">` +
+          `<div class="amt">${trim(n.amount)}</div><div class="bar"></div></div>` +
           `<div class="actions">${label}</div></div>`);
       }
 
@@ -1151,8 +1142,8 @@
     cxGrid.innerHTML = ids.map(id => {
       const it = ITEMS[id], c = tierColor(it.tier);
       return `<div class="cx-card" data-id="${esc(id)}" title="${esc(it.zh)} · T${it.tier || 1}">` +
-        `<div class="cx-thumb" style="--fam:${c};--fam-dark:${famDark(c)}">` +
-        `<div class="ruler"></div><img src="${ICON.items[id] || PH}" alt="">` +
+        `<div class="cx-thumb" style="--fam:${c}">` +
+        `<img src="${ICON.items[id] || PH}" alt="">` +
         `<div class="cx-name">${esc(it.zh)}</div><div class="bar"></div></div></div>`;
     }).join('');
     document.getElementById('cx-note').textContent =
@@ -1246,7 +1237,7 @@
   }
   function dkTile(iid, a) {
     const t = ITEMS[iid], c = tierColor(t.tier);
-    return `<div class="dk-tile" style="--fam-dark:${famDark(c)}" title="${esc(t.zh)} · T${t.tier || 1}">` +
+    return `<div class="dk-tile" title="${esc(t.zh)} · T${t.tier || 1}">` +
       `<img src="${ICON.items[iid] || PH}" alt="">` +
       (a !== undefined ? `<span class="dk-q">${trim(a)}</span>` : '') +
       `<i style="background:${c}"></i></div>`;

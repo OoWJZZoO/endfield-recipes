@@ -79,6 +79,52 @@ html, body {
   pointer-events: none;
 }
 
+/* ---------- 物品头像（统一材质） ----------
+   所有物品头像 —— 链路物品块、边栏配方条、图鉴网格、搜索结果、详情面板、
+   面板内链小图 —— 共用边栏配方条那套深色材质：左上高光 + 斜纹 + 深炭渐变 +
+   内描边；稀有度色条压在头像内底缘；数量标记是头像内底部的白色粗体数字
+   （与游戏原生一致），字号按场景缩放。 */
+.tile .thumb, #dock .dk-tile, #codex .cx-thumb,
+#results .r img, #panel .p-head img, .chips-inline .ci img {
+  background:
+    linear-gradient(160deg, rgba(255, 255, 255, .18) 0%, rgba(255, 255, 255, .05) 42%, rgba(255, 255, 255, 0) 62%),
+    repeating-linear-gradient(-55deg, rgba(255, 255, 255, .05) 0 2px, rgba(255, 255, 255, 0) 2px 4px),
+    linear-gradient(180deg, #2e2e2e 0%, #191919 100%);
+  box-shadow: inset 0 0 0 1px #4c4c4c;
+}
+/* 稀有度色条：头像内底部一条，上缘压半透明白高光；边栏的色条由内联 style 上色 */
+.tile .thumb .bar, #dock .dk-tile i, #codex .cx-thumb .bar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 5px;
+}
+.tile .thumb .bar, #codex .cx-thumb .bar { background: var(--fam, #7ed957); }
+.tile .thumb .bar::after, #dock .dk-tile i::after, #codex .cx-thumb .bar::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1.5px;
+  background: rgba(255, 255, 255, .55);
+}
+/* 数量标记：头像内部下方，白色粗体数字 */
+.tile .amt, .dk-q {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 6px;
+  text-align: center;
+  color: #fff;
+  font-weight: 800;
+  line-height: 1;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, .95);
+  font-variant-numeric: tabular-nums;
+  z-index: 2;
+}
+
 /* ---------- 物品块 ---------- */
 .tile {
   position: absolute;
@@ -91,93 +137,28 @@ html, body {
   cursor: pointer;
   transition: box-shadow .13s ease, transform .13s ease;
 }
-.tile::after { /* 右侧装配条纹区 */
-  content: "";
-  position: absolute;
-  right: 3px;
-  top: 4px;
-  width: 5px;
-  height: 20px;
-  border-radius: 1px;
-  background: repeating-linear-gradient(45deg, transparent 0 2.6px, #d5d3ce 2.6px 3.6px);
-}
-.tile .hatch2 {
-  position: absolute;
-  right: 3px;
-  top: 47px;
-  width: 5px;
-  height: 16px;
-  border-radius: 1px;
-  background: repeating-linear-gradient(45deg, transparent 0 2.6px, #d5d3ce 2.6px 3.6px);
-}
-.tile .dots {
-  position: absolute;
-  right: 3.5px;
-  top: 27px;
-  width: 5px;
-  height: 5px;
-  background-image: radial-gradient(#cfcdc8 1px, transparent 1px);
-  background-size: 3px 3px;
-}
 .tile .thumb {
+  /* 左右用 inset 对齐：白边严格等宽，不受描边取整影响。高度固定 60px——
+     卡片 hover/选中时会向下伸展 23px 给操作条，bottom 不能跟着绑。 */
   position: absolute;
-  left: 4px;
-  top: 4px;
-  width: 52px;
+  left: 3px;
+  right: 3px;
+  top: 3px;
   height: 60px;
   border-radius: 4px;
   overflow: hidden;
-  background: linear-gradient(180deg, #313131 0%, #1d1d1d 55%, var(--fam-dark, #101010) 100%);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .06);
-}
-.tile .thumb::before { /* 顶部高光 */
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  height: 14px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, .085), transparent);
-}
-.tile .ruler {
-  position: absolute;
-  left: 4px;
-  top: 3px;
-  width: 21px;
-  height: 4px;
-  z-index: 2;
-  background:
-    linear-gradient(#b9b7b2, #b9b7b2) 0 100% / 100% 1px no-repeat,
-    repeating-linear-gradient(90deg, #b9b7b2 0 1px, transparent 1px 3px) 0 0 / 21px 4px no-repeat;
-  opacity: .9;
 }
 .tile .thumb img {
   position: absolute;
-  left: 6px;
-  top: 6px;
-  width: 46px;
-  height: 46px;
+  left: 50%;
+  top: 44%;
+  transform: translate(-50%, -50%);
+  width: 82%;
+  height: 82%;
   object-fit: contain;
   pointer-events: none;
   image-rendering: -webkit-optimize-contrast;
-  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, .5));
-}
-.tile .bar {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 5px;
-  background: var(--fam, #7ed957);
-}
-.tile .bar::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 1.5px;
-  background: rgba(255, 255, 255, .55);
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, .6));
 }
 
 .tile:hover { box-shadow: 0 3px 8px rgba(0, 0, 0, .24), 0 12px 22px rgba(0, 0, 0, .16); z-index: 12; }
@@ -186,26 +167,8 @@ html, body {
   z-index: 14;
 }
 
-/* 数量角标（原生 UI 无此信息，这里补上） */
-.tile .amt {
-  position: absolute;
-  left: -5px;
-  top: -6px;
-  min-width: 15px;
-  padding: 0 4px;
-  height: 15px;
-  line-height: 12.5px;
-  border-radius: 5px;
-  background: linear-gradient(180deg, #3b3b3b, #232323);
-  color: #fff;
-  font-size: 10px;
-  font-weight: 700;
-  font-variant-numeric: tabular-nums;
-  border: 1.5px solid var(--card);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, .4);
-  z-index: 3;
-}
-.tile .amt.raw { background: linear-gradient(180deg, #4d7a3a, #33562a); }
+/* 数量标记：画法与边栏配方条同款（白字压在头像内部下方），这里只剩字号差异 */
+.tile .amt { font-size: 13px; }
 
 /* 选中时展开的操作条（原生：切换制造链路） */
 /* 悬浮 / 选中 / 主体：物品块自身向下长出一段，操作条是卡片的一部分 */
@@ -535,9 +498,6 @@ html, body {
 #results .r:hover, #results .r.act { background: #e2e0db; }
 #results .r img {
   width: 26px; height: 26px; object-fit: contain; border-radius: 4px; flex: none;
-  /* 与物品块缩略图同一套深色材质 */
-  background: linear-gradient(180deg, #313131, #191919);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .08);
 }
 #results .r .m { color: #8b8883; font-size: 10.5px; margin-left: auto; }
 #results .empty { padding: 12px; text-align: center; color: #8b8883; font-size: 12px; }
@@ -656,7 +616,6 @@ html, body {
   height: 46px;
   object-fit: contain;
   border-radius: 6px;
-  background: linear-gradient(180deg, #313131, #191919);
   flex: none;
 }
 #panel .p-head .nm { font-size: 15px; font-weight: 700; line-height: 1.25; }
@@ -760,8 +719,6 @@ html, body {
 .chips-inline .ci:hover { border-color: #b9b6b0; }
 .chips-inline .ci img {
   width: 18px; height: 18px; object-fit: contain; border-radius: 3px;
-  background: linear-gradient(180deg, #313131, #191919);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .08);
 }
 .chips-inline .ci .q { color: #2b6fb5; font-weight: 700; font-variant-numeric: tabular-nums; }
 
@@ -902,26 +859,14 @@ body.in-codex #toolbar, body.in-codex #zoomctl { display: none; }
 #codex .cx-card { cursor: pointer; }
 #codex .cx-thumb {
   position: relative; aspect-ratio: 1 / 1.1; border-radius: 7px; overflow: hidden;
-  background: linear-gradient(180deg, #383838 0%, #232323 52%, var(--fam-dark, #101010) 100%);
-  border: 1px solid #4c4c4c;
-  box-shadow: 0 2px 5px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.09);
-  transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
-}
-#codex .cx-thumb::before {
-  content: ""; position: absolute; left: 0; right: 0; top: 0; height: 22%;
-  background: linear-gradient(180deg, rgba(255,255,255,.07), transparent);
-}
-#codex .cx-thumb .ruler {
-  position: absolute; left: 6px; top: 4px; width: 24px; height: 4px; z-index: 2;
-  background:
-    linear-gradient(#9c9a95, #9c9a95) 0 100% / 100% 1px no-repeat,
-    repeating-linear-gradient(90deg, #9c9a95 0 1px, transparent 1px 3px) 0 0 / 24px 4px no-repeat;
-  opacity: .85;
+  /* 材质走「物品头像」统一段；这里只补图鉴卡片的外投影 */
+  box-shadow: 0 2px 5px rgba(0,0,0,.22), inset 0 0 0 1px #4c4c4c;
+  transition: transform .12s ease, box-shadow .12s ease;
 }
 #codex .cx-thumb img {
-  position: absolute; left: 50%; top: 42%; transform: translate(-50%, -50%);
-  width: 74%; height: 74%; object-fit: contain;
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,.55));
+  position: absolute; left: 50%; top: 44%; transform: translate(-50%, -50%);
+  width: 82%; height: 82%; object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,.6));
 }
 #codex .cx-thumb .cx-name {
   position: absolute; left: 3px; right: 3px; bottom: 6px;
@@ -930,17 +875,9 @@ body.in-codex #toolbar, body.in-codex #zoomctl { display: none; }
   text-shadow: 0 1px 3px rgba(0,0,0,.85), 0 0 8px rgba(0,0,0,.6);
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
-#codex .cx-thumb .bar {
-  position: absolute; left: 0; right: 0; bottom: 0; height: 4px; background: var(--fam, #7ed957);
-}
-#codex .cx-thumb .bar::after {
-  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1.5px;
-  background: rgba(255,255,255,.5);
-}
 #codex .cx-card:hover .cx-thumb {
   transform: translateY(-2px);
-  border-color: #f0efec;
-  box-shadow: 0 6px 14px rgba(0,0,0,.3), inset 0 1px 0 rgba(255,255,255,.14);
+  box-shadow: 0 6px 14px rgba(0,0,0,.3), inset 0 0 0 1px #f0efec;
 }
 #codex .cx-card:active .cx-thumb { transform: translateY(0); }
 
@@ -1074,26 +1011,17 @@ body.in-codex #toolbar, body.in-codex #zoomctl { display: none; }
 #dock .dk-grp { display: flex; gap: 6px; }
 #dock .dk-grp.ins { flex-wrap: wrap; max-width: 128px; }
 #dock .dk-grp.outs { flex-wrap: wrap; max-width: 128px; justify-content: flex-end; }
+/* 图块材质 / 数量标记 / 稀有度色条走「物品头像」统一段，这里只留尺寸 */
 #dock .dk-tile {
   position: relative; width: 60px; height: 66px; border-radius: 7px;
   overflow: hidden; flex: none;
-  background:
-    linear-gradient(160deg, rgba(255, 255, 255, .18) 0%, rgba(255, 255, 255, .05) 42%, rgba(255, 255, 255, 0) 62%),
-    repeating-linear-gradient(-55deg, rgba(255, 255, 255, .05) 0 2px, rgba(255, 255, 255, 0) 2px 4px),
-    linear-gradient(180deg, #2e2e2e 0%, #191919 100%);
-  box-shadow: inset 0 0 0 1px #4c4c4c;
 }
 #dock .dk-tile img {
   position: absolute; left: 50%; top: 44%; transform: translate(-50%, -50%);
   width: 82%; height: 82%; object-fit: contain;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, .6));
 }
-#dock .dk-tile .dk-q {
-  position: absolute; left: 0; right: 0; bottom: 6px; text-align: center; color: #fff;
-  font-size: 15px; font-weight: 800; line-height: 1;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, .95);
-}
-#dock .dk-tile i { position: absolute; left: 0; right: 0; bottom: 0; height: 5px; }
+#dock .dk-tile .dk-q { font-size: 15px; }
 #dock .dk-go { display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 0 3px; }
 #dock .dk-go b { color: #3a3936; font-size: 16px; font-weight: 800; white-space: nowrap; }
 #dock .dk-go svg { width: 28px; height: 16px; }
