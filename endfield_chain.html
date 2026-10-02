@@ -1635,8 +1635,7 @@ window.__ICON__={"items":{"item_acridgen":"data:image/webp;base64,UklGRtAOAABXRU
   /* 备选链路整组挂在金色胶囊（其他配方 / 收起）下面，而金色胶囊又悬在机具胶囊下方：
      主体中心往下 anchorH/2 + 29 才是胶囊下沿，备选机具顶上还有配方标签。
      配方行数少（胶囊矮）时这两者会正好叠在一起，所以主体中心到首条备选胶囊顶
-     至少留 anchorH/2 + 29 + 8 + 标签高度，不够的部分补成组间留白。
-     这个估算式对节点高度敏感，摆完后 growAltPads 会按实际位置再补一次差额。 */
+     至少留 anchorH/2 + 29 + 8 + 标签高度，不够的部分补成组间留白。 */
   /* 金色胶囊挂在节点下方：物品块以节点中心对齐、机具胶囊也以中心对齐，谁的下沿
      更低就跟着谁 —— 只按 anchorH 算的话，物品块比机具胶囊高时（链路主体的块
      就高 23px）胶囊会压进块里。 */
@@ -1661,15 +1660,15 @@ window.__ICON__={"items":{"item_acridgen":"data:image/webp;base64,UklGRtAOAABXRU
       (alt.recipe.req ? 30 : 23) - dist) + (padExtra.get(n.path) || 0);
   }
 
-  /* 按摆好之后的实际位置，看金色胶囊下沿到首条备选标签上沿是否够 PILL_PAD；
-     不够就记下差额，交给下一轮 spans/place 补上。返回是否有节点被加大。 */
+  /* 上面那个间距是估算式，主体块比机具胶囊高 23px 时会差几个像素。摆完之后按实际
+     位置量一次「胶囊下沿 ↔ 首条备选标签上沿」，不够就把差额补进去重排。
+     只对有上游子节点的格子补：它们的物品块位置由子节点决定，补间距只会把备选往下推，
+     一定收敛；端点格子的物品块位置随自身高度变化，补间距会连它一起推走，越补越大。 */
   function growAltPads(n) {
     let grew = false;
-    if (n.alt && n.alt[0]) {
+    if (n.alt && n.alt[0] && n.children.length) {
       const alt = n.alt[0];
-      const pillBottom = n.y + pillDrop(n) + PILL_H;
-      const tabTop = alt.y - alt.chipH / 2 - tabOffset(alt);
-      const short = PILL_PAD - (tabTop - pillBottom);
+      const short = PILL_PAD - ((alt.y - alt.chipH / 2 - tabOffset(alt)) - (n.y + pillDrop(n) + PILL_H));
       if (short > 0.5) { padExtra.set(n.path, (padExtra.get(n.path) || 0) + short); grew = true; }
     }
     n.stack.forEach(c => { if (growAltPads(c)) grew = true; });
@@ -1764,8 +1763,6 @@ window.__ICON__={"items":{"item_acridgen":"data:image/webp;base64,UklGRtAOAABXRU
     padExtra.clear();
     spans(root);
     place(root, 0);
-    // 摆放完再量一次「金色胶囊下沿 ↔ 首条备选标签上沿」：间距不够就给这一格补上差额重排。
-    // altPad 的估算式随节点高度有误差，量实际位置才能保证不重叠；补量只增不减，几次即收敛。
     for (let i = 0; i < 6 && growAltPads(root); i++) { spans(root); place(root, 0); }
     assignX(root, 0);
 
