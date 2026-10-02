@@ -1408,9 +1408,9 @@ window.__ICON__={"items":{"item_acridgen":"data:image/webp;base64,UklGRtAOAABXRU
   });
 
   /* ---------------- 本地持久化 ----------------
-     localStorage 存：挂起的产线、边栏收起态、用户自定义默认配方（仅覆盖增量）、
-     图鉴筛选。键内带数据集版本，数据集重抓后旧状态自动作废；
-     隐私模式等不可用场景退化为仅内存。 */
+     localStorage 存：挂起的产线、边栏收起态、用户自定义默认配方（仅覆盖增量；
+     可采集物品眼睛的开合也记在这里）、图鉴筛选。键内带数据集版本，数据集重抓后
+     旧状态自动作废；隐私模式等不可用场景退化为仅内存。 */
   const STORE_KEY = 'endfield_chain_ui_v1';
   const store = (() => {
     try {
@@ -1494,7 +1494,8 @@ window.__ICON__={"items":{"item_acridgen":"data:image/webp;base64,UklGRtAOAABXRU
         fam: familyOf(item), children: [], alt: [], stack: [], kind: 'craft',
       };
       n.famColor = tierColor(item.tier);
-      // 可采集资源（含植物/种子/天然气）在游戏里是链路端点：默认不向上展开，但保留配方入口
+      // 可采集资源（含植物/种子/天然气）在游戏里是链路端点：默认收成一只眼睛，点开才按
+      // 当前选用配方展开。眼睛的开合就记在 userSet 里，与「设为默认配方」共用一个持久位。
       if (!recipe || item.g && !userSet.has(itemId)) {
         n.kind = recipe ? 'gather' : 'raw';
         n.runs = 1;
@@ -1691,7 +1692,9 @@ window.__ICON__={"items":{"item_acridgen":"data:image/webp;base64,UklGRtAOAABXRU
     n.anchorH = n.chipH || tileH(n);
     n.h = n.isBranch ? n.chipH : tileH(n);
     if (n.chipH) n.h = Math.max(n.h, n.chipH);
-    if (n.others && n.others.length) n.h = Math.max(n.h, n.anchorH + (openAlt.has(n.path) ? 6 : 30));
+    // 眼睛关着的采集端点没有金色胶囊，也就不用给它留位置
+    if (n.others && n.others.length && !(n.kind === 'gather' && !n.wasDup))
+      n.h = Math.max(n.h, n.anchorH + (openAlt.has(n.path) ? 6 : 30));
     (n.stack || []).forEach(spans);
     let s = 0;
     for (const c of n.stack) s += c.span + GAP_ROW;
@@ -1886,6 +1889,12 @@ window.__ICON__={"items":{"item_acridgen":"data:image/webp;base64,UklGRtAOAABXRU
   // 上游已经展示过这件物品（重复 / 环路）：整格收成一个眼睛按钮，
   // 左侧那条机具胶囊是同一台机具的同一份配方，再画一遍只是噪音
   function eyeOnly(n) { return !!n.wasDup && !openDups.has(n.path); }
+  // 可采集物品的配方入口：物品块左缘那只眼睛。关＝空配方端点，金色胶囊不出现；
+  // 开＝按当前选用配方展开成正常机具格。开合状态即 userSet，与「设为默认配方」同一位。
+  function hasGatherEye(n) {
+    return !n.isBranch && !n.wasDup && n.kind !== 'loop' && n.item.g &&
+      !!(n.recipe || (n.others && n.others.length));
+  }
   // 标签相对胶囊顶边的偏移：普通胶囊保留 7px 的嵌入感；带环境色带的胶囊顶部那 20px
   // 是色带，再压上去就会把色带切掉一块，所以整块抬到胶囊顶边之上（30 = 标签高度）
   function tabOffset(n) {
@@ -1904,6 +1913,11 @@ window.__ICON__={"items":{"item_acridgen":"data:image/webp;base64,UklGRtAOAABXRU
         const open = openDups.has(n.path);
         // 眼睛嵌在物品块左边缘上：横向压进块内半个身位（22 宽 → 11），纵向与块同中心
         h.push(`<div class="eye${open ? ' open' : ''}" data-act="eye" data-path="${esc(n.path)}" ` +
+          `style="left:${n.x - TILE_W / 2 - 11}px;top:${n.y - 11}px">` +
+          eyeSVG() + `</div>`);
+      } else if (hasGatherEye(n)) {
+        // 同一只眼睛复用在采集端点上：开＝显示配方（持久），关＝收回端点
+        h.push(`<div class="eye${userSet.has(n.itemId) ? ' open' : ''}" data-act="eye" data-path="${esc(n.path)}" ` +
           `style="left:${n.x - TILE_W / 2 - 11}px;top:${n.y - 11}px">` +
           eyeSVG() + `</div>`);
       }
@@ -1937,7 +1951,7 @@ window.__ICON__={"items":{"item_acridgen":"data:image/webp;base64,UklGRtAOAABXRU
     for (const n of nodes) {
       if (n.kind === 'dup' || eyeOnly(n)) continue;   // 已经收成眼睛的节点没有胶囊，也就没有标签
       if (!n.recipe) {
-        if (n.others && n.others.length) {
+        if (!hasGatherEye(n) && n.others && n.others.length) {
           const open = openAlt.has(n.path);
           const w = pillW(open ? '收起' : '其他配方', !open);
           h.push(`<div class="pill" data-act="alt" data-path="${esc(n.path)}" ` +
@@ -2132,7 +2146,21 @@ window.__ICON__={"items":{"item_acridgen":"data:image/webp;base64,UklGRtAOAABXRU
     const eye = e.target.closest('.eye');
     if (eye) {
       const p = eye.dataset.path;
-      openDups.has(p) ? openDups.delete(p) : openDups.add(p);
+      const n = nodes.find(z => z.path === p);
+      if (n && hasGatherEye(n)) {
+        // 采集端点的眼睛：开＝显示当前选用配方并持久保存，关＝收回空配方端点。
+        // 同一物品在链路里出现多处时，重排后只有首行成为主体、其余收成重复眼睛：
+        // 先清空这一物品的所有展开痕迹，再单独记住点击行 —— 从哪行点开都是首行与当前行一起睁开。
+        const opening = !userSet.has(n.itemId);
+        if (opening) userSet.add(n.itemId); else userSet.delete(n.itemId);
+        nodes.forEach(z => {
+          if (z.itemId === n.itemId) { openDups.delete(z.path); openAlt.delete(z.path); }
+        });
+        if (opening) openDups.add(p);
+        saveStore();
+      } else {
+        openDups.has(p) ? openDups.delete(p) : openDups.add(p);
+      }
       render(curRoot, { fit: false }); return;
     }
     const pill = e.target.closest('.pill');
