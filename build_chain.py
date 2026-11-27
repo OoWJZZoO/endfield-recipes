@@ -15,7 +15,7 @@ from PIL import Image
 ROOT = os.path.dirname(os.path.abspath(__file__))
 SRC = os.path.join(ROOT, 'src')
 ICON_PX = 96
-DEFAULT_ROOT = 'item_liquid_heavy_xiranite'   # 液化重息壤
+DEFAULT_ROOT = 'item_liquid_xiranite_enr'      # 液化重息壤（1.5 解包数据 id）
 
 DISMANTLER = 'item_port_dismantler_1'
 MIX_POOL = 'item_port_mix_pool_1'          # 反应池
@@ -46,9 +46,11 @@ def recipe_sig(r):
 def filter_recipes(recipes, items):
     """剔掉对「看链路」没有意义的配方：
        1) 扩容反应池里与反应池完全相同的那几条 —— 升级的是机器不是配方，留着只是同一条配方的两份；
-       2) 瓶装拆解（液体与气体）—— 瓶装的反向操作，这两类本来就能走管道，纯占位。"""
+       2) 瓶装拆解（液体与气体）—— 瓶装的反向操作，这两类本来就能走管道，纯占位；
+       3) 同一台机具里投入/产出/耗时/环境完全相同的重复配方（1.7 平衡炉的模式副本）。"""
     pool = {recipe_sig(r) for r in recipes if r['facilityId'] == MIX_POOL}
-    dropped = {'pool': 0, 'bottle': 0}
+    dropped = {'pool': 0, 'bottle': 0, 'dupe': 0}
+    seen = set()
     out = []
     for r in recipes:
         if r['facilityId'] == MIX_POOL_ENR and recipe_sig(r) in pool:
@@ -59,6 +61,11 @@ def filter_recipes(recipes, items):
                 for o in r['outputs']):
             dropped['bottle'] += 1
             continue
+        key = (r['facilityId'], recipe_sig(r))
+        if key in seen:
+            dropped['dupe'] += 1
+            continue
+        seen.add(key)
         out.append(r)
     return out, dropped
 
@@ -231,7 +238,8 @@ def main():
     print(f'wrote {out}  ({size/1024/1024:.2f} MB)')
     print(f'  items={len(data["items"])} facilities={len(data["facilities"])} '
           f'recipes={len(data["recipes"])} icons={len(icons)} defaultRoot={data["defaultRoot"]}')
-    print(f'  hidden recipes: 扩容反应池重复 {dropped["pool"]}，瓶装拆解（液体/气体） {dropped["bottle"]}')
+    print(f'  hidden recipes: 扩容反应池重复 {dropped["pool"]}，瓶装拆解（液体/气体） {dropped["bottle"]}，'
+          f'机具内重复配方 {dropped["dupe"]}')
 
 
 if __name__ == '__main__':

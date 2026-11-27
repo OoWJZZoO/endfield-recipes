@@ -5,7 +5,8 @@
 
 **在线预览：** <https://oowjzzoo.github.io/endfield-recipes/>
 
-数据规模：190 物品 / 288 配方 / 21 机具，全部图标内联，无外部请求。
+数据规模：267 物品 / 400 条原始配方（构建时剔除 11 条扩容反应池重复、79 条瓶装拆解、14 条机具内重复，
+产物内 296 条）/ 22 机具，全部图标内联，无外部请求。数据源为 `rmxlinux/EndfieldData` 的 1.7 版本解包数据。
 
 ## 交付物
 
@@ -13,14 +14,16 @@
 | --- | --- |
 | **`endfield_chain.html`** | **最终交付**。单文件、自包含（数据 + 全部图标以 data URI 内联），双击即可用浏览器打开，无需联网、无需本地服务器。 |
 | `assets/` | 下载/合成的图标母版（webp，128~256px） |
-| `endfield_recipes.json` | 原始数据集：190 物品 / 288 配方 / 21 机具 |
+| `endfield_recipes.json` | 原始数据集：267 物品 / 400 配方 / 22 机具（由 1.7 解包数据生成） |
 | `src/` | 源码：`template.html` / `style.css` / `app.js` / `glyphs.js` |
 | `build_chain.py` | 构建脚本：选默认配方 → 归一化图标 → 内联打包 |
-| `fetch_icons.py` / `compose_filled.py` | 图标抓取与灌装瓶合成 |
+| `extract_game_data.py` | 从 EndfieldData 的 TableCfg 生成 `endfield_recipes.json` |
+| `compose_filled.py` | 用瓶身 + 内容物合成灌装瓶 / 耐压罐图标 |
 
 `endfield_recipe_tree.html` 是更早一版的配方树查看器（同样是自包含单文件），
 `recipes.csv` / `recipe_tree.md` / `recipe_trees.json` / `recipe_data.js` 是
-`node build.mjs` 与 `node build_html.mjs` 输出的派生数据集。
+早期 gameheads 数据集经 `node build.mjs` 与 `node build_html.mjs` 输出的派生文件，
+停留在旧数据版本，仅作历史资料保留。
 
 ## 构建与部署
 
@@ -33,7 +36,7 @@ python build_chain.py             # -> endfield_chain.html
 
 构建是**可复现**的：`build_chain.py` + `endfield_recipes.json` + `src/` + `assets/items/`
 在固定依赖版本下产出的 `endfield_chain.html` 逐字节一致（sha256
-`72f08d23…39ed87`），Windows 本地构建与 Linux CI 构建结果完全相同
+`05d35ce6…3d6d`），Windows 本地构建与 Linux CI 构建结果完全相同
 （输出固定写为 LF 换行），因此 CI 发布的站点与本地打开的文件是同一份字节。
 
 部署走 GitHub Actions（`.github/workflows/pages.yml`）：推送到 `main` 后自动构建，
@@ -49,26 +52,44 @@ python build_chain.py             # -> endfield_chain.html
 | --- | --- |
 | `shots/` / `probe/` | 游戏内截图与 UI 探测脚本（走 MaaEnd 本地 HTTP API 点击 + 取帧） |
 | `snapshot/` / `modules/` | 抓取自 gameheads.gg 的页面与 JS bundle 原样镜像，可用 `fetch_modules.py` 重新抓取 |
-| `dev/` | 早期探索脚本 |
+| `dev/` | 早期探索脚本、`EndfieldData` 本地 clone 等开发产物 |
 
 另有两个辅助文件：`endfield.py` 是本机 MaaEnd 取帧/点击的命令行辅助（对照游戏截图时用），
-`assets_manifest.json` 记录图标下载清单。
+`assets_manifest.json` 记录当前数据集需要的物品/机具图标清单。
 
 ## 数据流水线（从零重建数据集）
 
-以下步骤需要联网，且需要在本地准备好 `snapshot/`（站点页面镜像）与 `modules/`（`python fetch_modules.py`）：
+配方数据来自 [rmxlinux/EndfieldData](https://github.com/rmxlinux/EndfieldData) 的 1.7 版本
+TableCfg 解包数据（commit `19d202b`，2026-11-27 的 1.7 更新）。准备一份 clone 到
+`dev/EndfieldData`（`--filter=blob:none` 即可，不需要 checkout），然后：
 
 ```
-python fetch_modules.py    # 抓 gameheads.gg 的 _astro JS bundle -> modules/
-node extract.mjs           # 解析 bundle -> endfield_recipes.json
-node build.mjs             # -> recipes.csv / recipe_tree.md / recipe_trees.json / recipe_data.js
-node build_html.mjs        # -> endfield_recipe_tree.html
-python fetch_icons.py      # -> assets/items/*.webp   （站点缺图的 29 个会失败，见 assets_dl.log）
-python compose_filled.py   # 合成灌装瓶/耐压罐图标（55 个）
+git clone --filter=blob:none https://github.com/rmxlinux/EndfieldData dev/EndfieldData
+python extract_game_data.py --repo dev/EndfieldData --ref 19d202b
+                           # TableCfg -> endfield_recipes.json
+python compose_filled.py   # 用瓶身 + 内容物合成灌装瓶/耐压罐图标
 python build_chain.py      # -> endfield_chain.html
 ```
 
-`fetch_modules.py` 里 `SEEDS` 是带内容哈希的文件名，站点重新部署后会失效，届时需要手动更新。
+`extract_game_data.py` 只用 `git show <ref>:TableCfg/<表>.json` 读取需要的十几张表，
+不需要 checkout 整个仓库：
+
+- 配方：`FactoryMachineCraftTable`，外加 `FactoryFuelItemTable`（热能池）、
+  `FactoryVaporizerTable`（气体散布机）、`FactorySewageTreatImportTable`（废水处理）
+- 物品 / 机具：`ItemTable`、`FactoryItemTable`、`FactoryBuildingTable`、
+  `FactoryBuildingItemTable`、`FactoryBuildingTypeToNodeType`
+- 三语名称：`I18nTextTable_CN/EN/JP`
+- 活动限时配方：`LimitedFormulaCraftIdReverseTable`
+
+EndfieldData 只包含表数据，不含图片。1.5 已有物品的图标沿用仓库里的 gameheads 母版，
+按中文名迁移；1.7 新增的 57 个物品里，53 个按官方 id 从 warfarin.wiki 补齐，
+4 个耐压罐再用 `compose_filled.py` 由瓶身 + 气体图标合成。
+`fetch_modules.py` / `extract.mjs` / `fetch_icons.py` 是旧 gameheads 数据源的抓取脚本，
+产物停留在旧版本，仅作历史参考。
+
+解包表里灌装瓶 / 耐压罐的 `name` 只有通用瓶身名（如「赤铜瓶」），
+`extract_game_data.py` 会按 id 后缀找到内容物，把显示名拼成「赤铜瓶（清水）」这种形式；
+id 和图标规则都不变，只是便于搜索与辨认。
 
 ## 界面还原
 
@@ -89,7 +110,8 @@ python build_chain.py      # -> endfield_chain.html
   同一物品在链路里多处出现时，从任意一处点开都会一次睁开首行与当前行
 - **选中态**：物品块浮起 + 金色描边，链路上的中间物品可点「切换制造链路 ›」把它变成画布主体
 - **顶栏 / 缩放控件**：面包屑（终末地百科 › 物品图鉴 › 当前物品名）、搜索框、返回按钮、右下角鼠标滚轮缩放提示与滑杆
-- **物品图鉴页（首屏）**：190 件物品的深色卡片网格（图标 + 名称 + 稀有度色条），
+- **物品图鉴页（首屏）**：267 件物品的深色卡片网格（图标 + 名称 + 稀有度色条），
+  名称过长时按卡片宽度自动缩字号，不再显示省略号；
   顶部按分类筛选并显示数量，点任意物品直接进入它的制造链路；顶栏「物品图鉴」可随时回到这里
 - **背景**：暖灰渐变 + 等高线 + 顶部点阵带
 
@@ -144,11 +166,14 @@ python build_chain.py      # -> endfield_chain.html
 
 ## 数据与图标来源
 
-- 配方数据：`gameheads.gg` 的终末地条目页（`endfield_recipes.json`）
-- 物品图标：`https://gameheads.gg/images/endfield/items/<itemId>.webp`（190 个）
-- 机具图标：手绘 SVG 单色 glyph（21 个），与原生胶囊里的白色机具图标风格一致
-- 灌装瓶 / 耐压罐图标：站点缺图或不区分内容物，按游戏做法用「瓶身 + 内容物图标」合成
-  （`compose_filled.py`，内容物按瓶腹 alpha 质心定位、按瓶体宽度等比缩放，共 55 个）
+- 配方数据：[rmxlinux/EndfieldData](https://github.com/rmxlinux/EndfieldData) 的 1.7 版本 TableCfg
+  （`endfield_recipes.json`，commit `19d202b`）
+- 物品图标：1.5 之前的母版来自 gameheads.gg；1.7 新增的 57 个物品里，53 个按官方 id 从
+  warfarin.wiki 补齐（`https://static.warfarin.wiki/v4/itemicon/<id>.webp`），4 个耐压罐由合成补齐，
+  共 267 个；EndfieldData 本身不含图片
+- 机具图标：手绘 SVG 单色 glyph（22 个），与原生胶囊里的白色机具图标风格一致
+- 灌装瓶 / 耐压罐图标：按游戏做法用「瓶身 + 内容物图标」合成
+  （`compose_filled.py`，内容物按瓶腹 alpha 质心定位、按瓶体宽度等比缩放，共 78 个）
 
 ## 已知取舍
 
@@ -156,23 +181,28 @@ python build_chain.py      # -> endfield_chain.html
   列宽由最长比例文本决定；比例过长时折成两行。
 - **物品分类为自建体系**（矿石 / 植物 / 种子 / 液体 / 气体 / 粉末 / 金属块 / 晶体与息壤 /
   零件与元件 / 容器 / 消耗品 / 活动与特殊 / 杂项，共 13 类），只用于图鉴页的筛选：
-  站点数据只给出 `category` 与 `transportMode`，游戏内部的图鉴分类无从获取，因此按物品 id 与
-  中文名逐条推导。规则要点：气体按名字含「气态」或以「气」结尾（这样「气态赤铜」不会被当成液体），
-  「息壤」虽 id 含 `_powder` 但实为固体矿物，`item_iron_enr_cmpt`（钢制零件）与
-  `item_cuprium_enr_cmpt`（赤铜装备原件）id 结构相同但归类不同，故以中文名为准。
+  数据集的 `category` 由 TableCfg 的 `showingType` / `type` 推导，`transportMode` 由
+  `FactoryItemTable.phaseType` 推导；前端的 `familyOf()` 再按物品 id 与中文名细分。
+  规则要点：气体按名字含「气态」或以「气」结尾（这样「气态赤铜」不会被当成液体），
+  「息壤」「重息壤」虽 id 含 `_powder` 但实为固体矿物，因此单独排除；1.7 新增的农作物按
+  `item_corp_` 归入植物 / 种子，副产品按 `item_byproduct_` 归入植物 / 粉末，食材按
+  `item_Ingredient_` 归入消耗品。
 - **物品块底部色条 = 稀有度（tier）**，白(1) → 绿(2) → 蓝(3) → 紫(4) → 金(5) → 红(6)，
   与游戏一致；缩略图底部的渐变也用同色加深。图鉴页默认按游戏物品图鉴的排列顺序展示
   （溶液 → 气体 → 块与晶体 → 粉末 → 空瓶罐 → 零件 → 装备原件 → 电池 → 灌装瓶罐 →
-  天然资源 → 消耗品 → 活动 → 杂项），该顺序写在 `src/app.js` 的 `CX_SEQ`。
+  天然资源 → 消耗品 → 活动 → 杂项），该顺序写在 `src/app.js` 的 `CX_SEQ`，已按 1.7 的
+  物品 id 更新。
 - **可采集资源（矿石、清水、天然气、植物与种子）默认作为链路端点**：与游戏一致（游戏里这些节点
   显示眼睛或直接终止）。点物品块左缘的眼睛按当前选用配方展开，再点收回；想换配方先点开眼睛，
   再用「其他配方」与「设为默认配方」切换。
-- **拆解（回收）配方计入「其他配方」**，因此液体类物品的备选数量偏多（如清水 8 条）——展开后链路会很深，
-  这是数据本身的规模，不是渲染问题。
+- **拆解机的瓶装拆解配方在构建时剔除**：它们的产出是液体 / 气体，与管道输送重复；
+  扩容反应池里与反应池完全相同的配方、以及 1.7 平衡炉里完全相同的模式副本也一并剔除。
+  这些是 `build_chain.py` 的 `filter_recipes()` 有意为之，所以产物内配方数（296）少于
+  原始数据集（400）。
 
 ## 许可与致谢
 
 代码以 MIT 许可发布。游戏图标与配方数据的版权归属及来源说明见 [NOTICE](NOTICE)。
 
-本项目是非官方同人工具；配方数据与物品图标来自 [gameheads.gg](https://gameheads.gg/)，
-游戏内截图对照素材由本机 MaaEnd 取帧获得。
+本项目是非官方同人工具；配方数据来自 [rmxlinux/EndfieldData](https://github.com/rmxlinux/EndfieldData)，
+物品图标母版来自 [gameheads.gg](https://gameheads.gg/)，游戏内截图对照素材由本机 MaaEnd 取帧获得。

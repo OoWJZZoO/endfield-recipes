@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Compose filled-bottle / gas-canister icons the way the game does:
    bottle base artwork + the content icon pasted into the bottle body."""
+import json
 import os
 import numpy as np
 from PIL import Image
@@ -9,35 +10,41 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 SRC = os.path.join(ROOT, 'assets')
 CANVAS = 256
 
-# bottle key -> (base item icon, canvas tint)
+# 1.5 解包数据的瓶身与内容 id
 BOTTLE_BASE = {
-    'iron': 'item_iron_bottle',
-    'ironenr': 'item_iron_enr_bottle',
+    'copper': 'item_copper_bottle',
+    'copperenr': 'item_copper_enr_bottle',
     'glass': 'item_glass_bottle',
     'glassenr': 'item_glass_enr_bottle',
-    'cuprium': 'item_cuprium_bottle',
-    'hetonite': 'item_hetonite_bottle',
+    'iron': 'item_iron_bottle',
+    'ironenr': 'item_iron_enr_bottle',
 }
 CONTENT = {
     'water': 'item_liquid_water',
-    'sewage': 'item_sewage',
+    'sewage': 'item_liquid_sewage',
     'xiranite': 'item_liquid_xiranite',
-    'heavy_xiranite': 'item_liquid_heavy_xiranite',
+    'xiranite_enr': 'item_liquid_xiranite_enr',
+    'xiranite_poly': 'item_liquid_xiranite_poly',
+    'xiranite_lowpoly': 'item_liquid_xiranite_lowpoly',
     'grass_1': 'item_liquid_plant_grass_1',
     'grass_2': 'item_liquid_plant_grass_2',
-    'precip_acid': 'item_precipitation_acid',
-    'xircon_effluent': 'item_xircon_effluent',
-    'inert_xircon_effluent': 'item_inert_xircon_effluent',
+    'acid': 'item_liquid_acid',
+    'copper': 'item_liquid_copper',
+    'copper_enr': 'item_liquid_copper_enr',
 }
 GAS_CONTENT = {
-    'cuprium_acridgen': 'item_acridgen',
-    'cuprium_aquagen': 'item_aquagen',
-    'cuprium_cuprium_gas': 'item_cuprium_gas',
-    'cuprium_heavy_xiragen': 'item_heavy_xiragen',
-    'cuprium_hetonite_gas': 'item_hetonite_gas',
-    'cuprium_inergen': 'item_inergen',
-    'cuprium_pyrrolite_gas': 'item_pyrrolite_gas',
-    'cuprium_xiragen': 'item_xiragen',
+    'acid': 'item_gas_acid',
+    'water': 'item_gas_water',
+    'inert': 'item_gas_inert',
+    'xiranite': 'item_gas_xiranite',
+    'xiranite_enr': 'item_gas_xiranite_enr',
+    'copper': 'item_gas_copper',
+    'copper_enr': 'item_gas_copper_enr',
+    'copper_enr2': 'item_gas_copper_enr2',
+    'copper_bright_clear': 'item_gas_copper_bright_clear',
+    'copper_bright_turbid': 'item_gas_copper_bright_turbid',
+    'copper_enr_heng': 'item_gas_copper_enr_heng',
+    'xiranite_enr_heng': 'item_gas_xiranite_enr_heng',
 }
 
 
@@ -67,7 +74,7 @@ def body_anchor(im):
     return cx / im.width, cy / im.height, bulge / im.width
 
 
-def compose(bottle_id, content_id, out_id, fill=0.88):
+def compose(bottle_id, content_id, out_id, fill=0.88, gas=False):
     base = load(bottle_id)
     content = load(content_id)
     if base is None or content is None:
@@ -76,6 +83,10 @@ def compose(bottle_id, content_id, out_id, fill=0.88):
     nx, ny, bulge = body_anchor(base)
     box = max(24, int(CANVAS * bulge * fill))
     c = content.resize((box, box), Image.LANCZOS)
+    if gas:
+        # 气体图标自带一层很淡的环境色光晕，整块贴进罐体后会露出方形底；
+        # 去掉低 alpha 的光晕，只保留气体本身的团块。
+        c.putalpha(c.getchannel('A').point(lambda v: 0 if v < 96 else v))
     cx = int(nx * CANVAS - box / 2)
     cy = int(ny * CANVAS - box / 2)
     # drop the content in with a soft dark rim so it reads on bright glass
@@ -89,41 +100,36 @@ def compose(bottle_id, content_id, out_id, fill=0.88):
     return True, ''
 
 
-def main():
-    jobs = []
-    for iid in sorted(os.listdir(os.path.join(SRC, 'items'))):
-        pass
-    # discover every fbottle_* / gasjar_* id from the data set
-    import json
-    data = json.load(open(os.path.join(ROOT, 'endfield_recipes.json'), encoding='utf-8'))
-    ids = [i['id'] for i in data['items']]
-    for iid in ids:
-        if iid.startswith('item_fbottle_'):
-            rest = iid[len('item_fbottle_'):]
-            if rest == 'ferrium_heavy_xiranite':
-                key, ckey = 'iron', 'heavy_xiranite'
-            else:
-                parts = rest.split('_', 1)
-                if len(parts) != 2:
-                    continue
-                key, ckey = parts
-            if key in BOTTLE_BASE and ckey in CONTENT:
-                jobs.append((BOTTLE_BASE[key], CONTENT[ckey], iid))
-        elif iid == 'item_event_fbottle_heavy_xiranite_grass_2':
-            jobs.append(('item_event_heavy_xiranite_bottle', CONTENT['grass_2'], iid))
-        elif iid.startswith('item_gasjar_'):
-            rest = iid[len('item_gasjar_'):]
-            if rest in GAS_CONTENT:
-                jobs.append(('item_cuprium_canister', GAS_CONTENT[rest], iid))
+def vessel_recipe(item_id):
+    """item_fbottle_<瓶身>_<内容> / item_gasjar_<瓶身>_gas_<气体> -> (瓶身图标, 内容图标)"""
+    if item_id.startswith('item_fbottle_'):
+        rest = item_id[len('item_fbottle_'):]
+        for key in sorted(BOTTLE_BASE, key=len, reverse=True):
+            if rest.startswith(key + '_'):
+                content = rest[len(key) + 1:]
+                if content in CONTENT:
+                    return BOTTLE_BASE[key], CONTENT[content]
+        return None
+    if item_id.startswith('item_gasjar_'):
+        content = item_id[len('item_gasjar_copper_gas_'):]
+        if content in GAS_CONTENT:
+            return 'item_copper_jar', GAS_CONTENT[content]
+    return None
 
+
+def main():
+    data = json.load(open(os.path.join(ROOT, 'endfield_recipes.json'), encoding='utf-8'))
     done = fail = 0
-    for b, c, o in jobs:
-        ok, msg = compose(b, c, o)
+    for it in data['items']:
+        pair = vessel_recipe(it['id'])
+        if not pair:
+            continue
+        ok, msg = compose(pair[0], pair[1], it['id'], gas=it['id'].startswith('item_gasjar_'))
         if ok:
             done += 1
         else:
             fail += 1
-            print('FAIL', o, msg)
+            print('FAIL', it['id'], msg)
     print(f'composed {done}, failed {fail}')
 
 

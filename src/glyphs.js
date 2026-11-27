@@ -75,6 +75,14 @@
       'M11.1 5.2h1.8v4.2h-1.8zM11.1 14.6h1.8v4.2h-1.8z'],
     // 采矿机：矿车 + 镐
     miner: [1, 'M4.6 13.6h11.2l1.6 6H3z', 'M8 7.4h1.8v6.2H8z', 'M6.6 6.2c1.8-2.6 5-3.4 7.6-2l-1 1.7c-2-1-4.2-.5-5.6 1.2z'],
+    // 平衡炉：天平 + 炉座
+    magic_balancer: [1,
+      'M11.1 4.4h1.8v2h-1.8z',
+      'M5.4 6.6h13.2v1.8H5.4z',
+      'M11.1 8.4h1.8v7.2h-1.8z',
+      'M7.6 15.6h8.8v2H7.6z',
+      'M5.8 9.2h4.4l-2.2 4.2z',
+      'M13.8 9.2h4.4l-2.2 4.2z'],
     // 通用兜底：齿轮箱
     generic: [1, 'M11.1 5.4h1.8v13.2h-1.8zM5.4 11.1h13.2v1.8H5.4z',
       'M12 8.4a3.6 3.6 0 1 1 0 7.2 3.6 3.6 0 0 1 0-7.2zm0 2.2a1.4 1.4 0 1 0 0 2.8 1.4 1.4 0 0 0 0-2.8z'],
@@ -86,8 +94,8 @@
     item_port_mix_pool_2: 'mix_pool',
     item_port_furnance_1: 'furnance',
     item_port_gas_reactor_1: 'gas_reactor',
-    item_port_purification_1: 'purification',
-    item_port_water_treatment_1: 'water_treatment',
+    item_port_liquid_purifier_1: 'purification',
+    liquid_clean_gate_1: 'water_treatment',
     item_port_phase_trans_1: 'phase_trans_1',
     item_port_phase_trans_2: 'phase_trans_2',
     item_port_planter_1: 'planter',
@@ -101,7 +109,8 @@
     item_port_vaporizer_1: 'vaporizer',
     item_port_dismantler_1: 'dismantler',
     item_port_xiranite_oven_1: 'xiranite_oven',
-    thermal_bank_1: 'thermal_bank',
+    item_port_magic_balancer_1: 'magic_balancer',
+    item_port_power_sta_1: 'thermal_bank',
   };
 
   function path(key) {

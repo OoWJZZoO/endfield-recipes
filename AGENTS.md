@@ -19,10 +19,11 @@ python build_chain.py             # -> endfield_chain.html
 **构建必须逐字节可复现**（Windows 本地与 Linux CI 产物一致）。改构建代码时不要引入平台差异：
 换行、时间戳、字典顺序、webp 编码参数都要留意，输出固定写 LF。
 
-数据流水线脚本（`fetch_modules.py` → `extract.mjs` → `build.mjs` → `build_html.mjs` →
-`fetch_icons.py` → `compose_filled.py`）需要联网和本地 `snapshot/`、`modules/` 镜像，
-日常改 UI 用不到。`verify.mjs` / `verify2.mjs` 是拿 `snapshot/items.html` 对数据的一次性核对脚本，
-没有快照就跑不了。
+数据流水线：`extract_game_data.py` 从 `dev/EndfieldData`（rmxlinux/EndfieldData 的 1.7 版本，
+commit `19d202b`）的 TableCfg 生成 `endfield_recipes.json`，`compose_filled.py` 合成灌装瓶图标，
+再 `build_chain.py` 打包。仓库里的 `endfield_recipes.json` 已生成好，日常改 UI 不需要跑这条链路。
+`fetch_modules.py` / `extract.mjs` / `fetch_icons.py` 是旧 gameheads 数据源的抓取脚本，仅作历史参考；
+`verify.mjs` / `verify2.mjs` 依赖旧 `snapshot/` 快照，同样跑不了。
 
 ## 目录与产物边界
 
@@ -31,8 +32,8 @@ python build_chain.py             # -> endfield_chain.html
 | `src/app.js`、`src/style.css`、`src/template.html`、`src/glyphs.js` | 唯一的源码，**所有改动写在这里** |
 | `build_chain.py` | 构建脚本：过滤配方 → 选默认配方 → 归一化图标 → 内联打包 |
 | `endfield_chain.html` | **生成物，但入库**。永远不要直接编辑；改完 `src/` 必须重新构建 |
-| `endfield_recipes.json` | 原始数据集（190 物品 / 288 配方 / 21 机具） |
-| `assets/items/*.webp` | 图标母版，构建时读取，入库（209 个） |
+| `endfield_recipes.json` | 原始数据集（267 物品 / 400 配方 / 22 机具，由 1.7 解包数据生成） |
+| `assets/items/*.webp` | 图标母版，构建时读取，入库（341 个） |
 | `README.md` | 面向用户的说明。改界面后容易滞后，动 UI 时顺手核对 |
 
 `dev/`、`probe/`、`shots/`、`modules/`、`snapshot/` 是本机开发产物，已在 `.gitignore` 里排除；
@@ -43,10 +44,13 @@ python build_chain.py             # -> endfield_chain.html
 - **payload 字段在 `build_chain.py` 的 `build_payload()` 里显式列出**，前端从 `window.__DATA__` 读。
   只在 `app.js` 里读某个原始数据集字段、却没在 payload 里输出，得到的就是永远 undefined 的死代码
   —— `producedPowerW` 这样静默失效过（热能池的发电功率整段显示不出来）。读任何字段前先确认它在 payload 里。
-- 发货的配方集**不是** `endfield_recipes.json` 那 288 条：`filter_recipes()` 会剔掉扩容反应池里与
-  反应池完全重复的配方，以及拆解机的瓶装拆解配方（液体 + 气体，判据 `is_liquid()` / `is_gas()`，
-  与前端 `familyOf()` 同口径）。所以 README 写 288、产物里是 227，两个数都对。
+- 发货的配方集**不是** `endfield_recipes.json` 那 400 条：`filter_recipes()` 会剔掉扩容反应池里与
+  反应池完全重复的配方、拆解机的瓶装拆解配方（液体 + 气体，判据 `is_liquid()` / `is_gas()`，
+  与前端 `familyOf()` 同口径），以及同一台机具内投入/产出/耗时完全相同的重复配方。
+  所以 README 写 400、产物里是 296，两个数都对。
 - 环境是**配方级**属性，不是机具级；同一台机具的不同配方有的需要有的不需要。
+- 灌装瓶 / 耐压罐在解包表里的 `name` 只有通用瓶身名，`extract_game_data.py` 会按 id 后缀
+  把内容物拼进显示名（`赤铜瓶（清水）`）；id、分类、图标规则不变。
 - localStorage 键 `endfield_chain_ui_v1` 内含数据集日期版本，数据集重抓后旧状态自动作废。
 
 ## 界面约定

@@ -45,7 +45,8 @@
   };
   const envName = k => ENV_NAME[k] || k || '';
   const envCol = k => ENV_COL[k] || '#31a7e0';
-  // 气体散布机：实际耗时随输入流速在 2~10 秒之间浮动，数据集里只存了 10 秒这个上限
+  // 气体散布机：游戏里按输入流速持续消耗，数据集给出每秒消耗量，这里按 1 秒一次折算；
+  // 详情面板仍按游戏表现显示 2~10 秒的浮动区间。
   const GAS_DIFFUSER = 'item_port_vaporizer_1';
   function envGlyph(k) {
     return `<svg viewBox="0 0 24 24" fill="#fff" fill-rule="evenodd"><path d="${ENV_ICON[k] || ENV_ICON.stable}"/></svg>`;
@@ -54,27 +55,36 @@
   const TIER_COL = ['#e2e2e2', '#6dd04a', '#3fa9f5', '#a877e8', '#e8b23c', '#e05a4a'];
   const tierColor = t => TIER_COL[Math.min(Math.max((t || 1), 1), 6) - 1];
 
-  const ORE = new Set(['item_originium_ore', 'item_quartz_sand', 'item_iron_ore', 'item_cuprium_ore']);
-  const METAL = new Set(['item_iron_nugget', 'item_cuprium', 'item_hetonite', 'item_pyrrolite',
-    'item_iron_enr', 'item_carbon_mtl', 'item_carbon_enr']);
+  const ORE = new Set(['item_originium_ore', 'item_quartz_sand', 'item_iron_ore', 'item_copper_ore']);
+  const METAL = new Set(['item_iron_nugget', 'item_copper_nugget', 'item_copper_enr',
+    'item_copper_enr2', 'item_iron_enr', 'item_carbon_mtl', 'item_carbon_enr',
+    'item_copper_bright', 'item_copper_bright_cube', 'item_copper_enr_heng',
+    'item_copper_hui', 'item_copper_ming']);
   const CRYSTAL = new Set(['item_crystal_shell', 'item_crystal_enr', 'item_quartz_glass',
-    'item_quartz_enr', 'item_xircon', 'item_xiranite_powder', 'item_heavy_xiranite']);
+    'item_quartz_enr', 'item_xiranite_powder', 'item_xiranite_enr_powder', 'item_xiranite_poly',
+    'item_xiranite_enr_heng', 'item_xiranite_hui', 'item_xiranite_ming']);
   const EMPTY_VESSEL = new Set(['item_iron_bottle', 'item_glass_bottle', 'item_glass_enr_bottle',
-    'item_iron_enr_bottle', 'item_cuprium_bottle', 'item_hetonite_bottle', 'item_cuprium_canister']);
+    'item_iron_enr_bottle', 'item_copper_bottle', 'item_copper_enr_bottle', 'item_copper_jar']);
+  const NOT_POWDER = new Set(['item_xiranite_powder', 'item_xiranite_enr_powder']);
 
   // 按物品 id + 中文名判定，规则顺序即优先级
   function familyOf(it) {
     const id = it.id, zh = it.zh || '';
-    if (/^item_(activity|event)_/.test(id)) return 'event';          // 活动 / 事件道具
+    if (/^item_(activity|event)_/.test(id) || /^item_fbottle_xiranenr_/.test(id)) return 'event'; // 活动 / 事件道具
     if (/^item_(fbottle|gasjar)_/.test(id) || EMPTY_VESSEL.has(id)) return 'vessel';
-    if (id.indexOf('_powder') >= 0 && id !== 'item_xiranite_powder') return 'powder';
+    if (id.indexOf('_powder') >= 0 && !NOT_POWDER.has(id)) return 'powder';
     if (ORE.has(id)) return 'ore';
     if (it.transport === 'pipe') return (zh.indexOf('气态') >= 0 || /气$/.test(zh)) ? 'gas' : 'liquid';
     if (id.indexOf('item_plant_') === 0) return id.indexOf('_seed_') >= 0 ? 'seed' : 'plant';
+    if (id.indexOf('item_corp_') === 0) return id.indexOf('_seed_') >= 0 ? 'seed' : 'plant';
+    if (id.indexOf('item_byproduct_') === 0) return id.indexOf('_moss_') >= 0 ? 'powder' : 'plant';
+    if (id.indexOf('item_Ingredient_') === 0 || id.indexOf('item_ranch_milk_') === 0) return 'consum';
     if (METAL.has(id)) return 'metal';
     if (CRYSTAL.has(id)) return 'crystal';
     if (zh.indexOf('装备原件') >= 0 || zh.indexOf('零件') >= 0 ||
-        id === 'item_separator_core' || /^item_proc_battery_/.test(id)) return 'part';
+        zh.indexOf('组件') >= 0 || zh.indexOf('元件') >= 0 ||
+        id === 'item_separator_core' || id === 'item_filter_core' ||
+        /^item_proc_battery_/.test(id)) return 'part';
     if (it.category === 'consumable_item') return 'consum';
     return 'misc';
   }
@@ -1065,55 +1075,70 @@
   /* 图鉴排序沿用游戏物品图鉴的排列：溶液 → 气体 → 块与晶体 → 粉末 → 空瓶罐 →
      零件 → 装备原件 → 电池 → 灌装瓶罐 → 天然资源 → 消耗品 → 活动 → 杂项。
      未列入的物品按稀有度、名称排在最后。 */
-  const BOTTLE_SEQ = ['glass', 'iron', 'glassenr', 'ironenr', 'cuprium', 'hetonite'];
-  const CONTENT_SEQ = ['water', 'sewage', 'grass_1', 'grass_2', 'xiranite', 'heavy_xiranite',
-    'precip_acid', 'xircon_effluent', 'inert_xircon_effluent'];
-  const GASJAR_SEQ = ['aquagen', 'acridgen', 'xiragen', 'heavy_xiragen', 'inergen',
-    'cuprium_gas', 'hetonite_gas', 'pyrrolite_gas'];
+  const BOTTLE_SEQ = ['glass', 'iron', 'glassenr', 'ironenr', 'copper', 'copperenr'];
+  const CONTENT_SEQ = ['water', 'sewage', 'grass_1', 'grass_2', 'xiranite', 'xiranite_enr',
+    'acid', 'xiranite_poly', 'xiranite_lowpoly', 'copper', 'copper_enr'];
+  const GASJAR_SEQ = ['water', 'acid', 'xiranite', 'xiranite_enr', 'inert',
+    'copper', 'copper_enr', 'copper_enr2', 'copper_bright_clear', 'copper_bright_turbid',
+    'copper_enr_heng', 'xiranite_enr_heng'];
 
   const CX_SEQ = [
-    'item_liquid_plant_grass_1', 'item_liquid_plant_grass_2', 'item_liquid_xiranite', 'item_liquid_heavy_xiranite',
-    'item_xircon_effluent', 'item_inert_xircon_effluent', 'item_cuprium_solution', 'item_hetonite_solution', 'item_sewage',
-    'item_aquagen', 'item_acridgen', 'item_heavy_xiragen', 'item_cuprium_gas', 'item_hetonite_gas', 'item_pyrrolite_gas',
-    'item_carbon_mtl', 'item_crystal_shell', 'item_quartz_glass', 'item_iron_nugget', 'item_cuprium', 'item_carbon_enr',
-    'item_crystal_enr', 'item_quartz_enr', 'item_iron_enr', 'item_hetonite', 'item_pyrrolite',
-    'item_xiranite_powder', 'item_heavy_xiranite', 'item_xircon',
+    'item_liquid_plant_grass_1', 'item_liquid_plant_grass_2', 'item_liquid_xiranite', 'item_liquid_xiranite_enr',
+    'item_liquid_xiranite_poly', 'item_liquid_xiranite_lowpoly', 'item_liquid_copper', 'item_liquid_copper_enr', 'item_liquid_sewage',
+    'item_gas_water', 'item_gas_acid', 'item_gas_xiranite_enr', 'item_gas_copper', 'item_gas_copper_enr', 'item_gas_copper_enr2',
+    'item_gas_copper_bright_clear', 'item_gas_copper_bright_turbid', 'item_gas_copper_enr_heng', 'item_gas_xiranite_enr_heng',
+    'item_carbon_mtl', 'item_crystal_shell', 'item_quartz_glass', 'item_iron_nugget', 'item_copper_nugget', 'item_carbon_enr',
+    'item_crystal_enr', 'item_quartz_enr', 'item_iron_enr', 'item_copper_enr', 'item_copper_enr2',
+    'item_copper_bright', 'item_copper_bright_cube', 'item_copper_enr_heng', 'item_copper_hui', 'item_copper_ming',
+    'item_xiranite_powder', 'item_xiranite_enr_powder', 'item_xiranite_poly',
+    'item_xiranite_enr_heng', 'item_xiranite_hui', 'item_xiranite_ming',
     'item_carbon_powder', 'item_originium_powder', 'item_crystal_powder', 'item_quartz_powder', 'item_iron_powder',
-    'item_cuprium_powder', 'item_plant_moss_powder_3', 'item_plant_bbflower_powder_1',
+    'item_copper_powder', 'item_plant_moss_powder_3', 'item_plant_bbflower_powder_1',
     'item_plant_moss_enr_powder_1', 'item_plant_moss_enr_powder_2',
     'item_plant_grass_powder_1', 'item_plant_grass_powder_2', 'item_plant_moss_powder_1', 'item_plant_moss_powder_2',
     'item_carbon_enr_powder', 'item_originium_enr_powder', 'item_crystal_enr_powder',
     'item_quartz_enr_powder', 'item_iron_enr_powder',
+    'item_byproduct_bean_moss_1', 'item_byproduct_potato_moss_1',
     'item_glass_bottle', 'item_iron_bottle', 'item_glass_enr_bottle', 'item_iron_enr_bottle',
-    'item_cuprium_bottle', 'item_hetonite_bottle', 'item_cuprium_canister',
+    'item_copper_bottle', 'item_copper_enr_bottle', 'item_copper_jar',
     'item_glass_cmpt', 'item_iron_cmpt', 'item_glass_enr_cmpt', 'item_iron_enr_cmpt',
-    'item_cuprium_cmpt', 'item_hetonite_cmpt', 'item_pyrrolite_cmpt',
+    'item_copper_cmpt', 'item_copper_enr_cmpt', 'item_copper_enr2_cmpt',
+    'item_copper_bright_cmpt', 'item_copper_hui_cmpt', 'item_copper_ming_cmpt',
+    'item_copper_xiranite_hui', 'item_copper_xiranite_ming',
     'item_equip_script_1', 'item_equip_script_2', 'item_equip_script_3', 'item_equip_script_4',
-    'item_cuprium_enr_cmpt', 'item_hetonite_enr_cmpt', 'item_pyrrolite_enr_cmpt',
+    'item_equip_script_4_1', 'item_equip_script_4_2', 'item_equip_script_4_3',
     'item_proc_battery_1', 'item_proc_battery_2', 'item_proc_battery_3',
-    'item_proc_battery_4', 'item_proc_battery_5', 'item_separator_core',
+    'item_proc_battery_4', 'item_proc_battery_5', 'item_proc_battery_6', 'item_filter_core',
   ].concat(BOTTLE_SEQ.reduce(
     (acc, k) => acc.concat(CONTENT_SEQ.map(c => 'item_fbottle_' + k + '_' + c)), [])
-  ).concat([
-    'item_fbottle_ferrium_heavy_xiranite',
-  ]).concat(GASJAR_SEQ.map(c => 'item_gasjar_cuprium_' + c)).concat([
-    'item_originium_ore', 'item_quartz_sand', 'item_iron_ore', 'item_cuprium_ore',
+  ).concat(GASJAR_SEQ.map(c => 'item_gasjar_copper_gas_' + c)).concat([
+    'item_originium_ore', 'item_quartz_sand', 'item_iron_ore', 'item_copper_ore',
     'item_plant_moss_1', 'item_plant_moss_seed_1', 'item_plant_moss_2', 'item_plant_moss_seed_2',
     'item_plant_moss_3', 'item_plant_moss_seed_3', 'item_plant_bbflower_1', 'item_plant_bbflower_seed_1',
     'item_plant_grass_1', 'item_plant_grass_seed_1', 'item_plant_grass_2', 'item_plant_grass_seed_2',
-    'item_plant_tundra_wood', 'item_liquid_water', 'item_precipitation_acid', 'item_inergen', 'item_xiragen',
+    'item_plant_tundra_wood', 'item_liquid_water', 'item_liquid_acid', 'item_gas_inert', 'item_gas_xiranite',
+    'item_corp_bean_1', 'item_corp_bean_seed_1', 'item_corp_cabbage_1', 'item_corp_cabbage_seed_1',
+    'item_corp_canolaflower_1', 'item_corp_canolaflower_seed_1', 'item_corp_mushroom_1', 'item_corp_mushroom_seed_1',
+    'item_corp_potato_1', 'item_corp_potato_seed_1', 'item_corp_strawberry_1', 'item_corp_strawberry_seed_1',
+    'item_corp_sugarcane_1', 'item_corp_sugarcane_seed_1', 'item_corp_tomato_1', 'item_corp_tomato_seed_1',
+    'item_corp_whitegourd_1', 'item_corp_whitegourd_seed_1',
+    'item_byproduct_bean_1', 'item_byproduct_potato_1',
     'item_plant_sp_1', 'item_plant_sp_2', 'item_plant_sp_3', 'item_plant_sp_4',
     'item_plant_sp_seed_1', 'item_plant_sp_seed_2', 'item_plant_sp_seed_3', 'item_plant_sp_seed_4',
     'item_bottled_food_1', 'item_bottled_food_2', 'item_bottled_food_3', 'item_bottled_food_4', 'item_bottled_food_5',
     'item_bottled_rec_hp_1', 'item_bottled_rec_hp_2', 'item_bottled_rec_hp_3', 'item_bottled_rec_hp_4', 'item_bottled_rec_hp_5',
     'item_proc_bomb_1',
+    'item_Ingredient_flour_1', 'item_Ingredient_oil_1', 'item_Ingredient_paprika_1',
+    'item_Ingredient_starch_1', 'item_Ingredient_sugar_1',
+    'item_ranch_milk_1', 'item_ranch_milk_2', 'item_ranch_fodder_1', 'item_ranch_fodder_2',
+    'item_inn_drink_2', 'item_inn_drink_4', 'item_inn_drink_7', 'item_inn_drink_10',
     'item_activity_xiranite_nugget', 'item_activity_xiranite_lung', 'item_activity_xiranite_box',
     'item_activity_xiranite_enr_nugget', 'item_activity_xiranite_enr_lung', 'item_activity_xiranite_enr_box',
     'item_activity_copper_xiranite_tool', 'item_activity_copper_poly', 'item_activity_copper_poly_cmpt',
     'item_activity_copper_poly_gas', 'item_activity_copper_poly_tool',
-    'item_event_xiranite_bottle', 'item_event_xiranite_cmpt', 'item_event_heavy_xiranite_bottle',
-    'item_event_heavy_xiranite_cmpt', 'item_event_xiranite_gourd', 'item_event_xiranite_jade_gourd',
-    'item_event_xiran_hue_atomizer', 'item_event_fbottle_heavy_xiranite_grass_2',
+    'item_activity_xiranite_bottle', 'item_activity_xiranite_cmpt', 'item_activity_xiranite_enr_bottle',
+    'item_activity_xiranite_enr_cmpt', 'item_activity_xiranite_hulu', 'item_activity_xiranite_enr_hulu',
+    'item_activity_xiranite_enr_tool', 'item_fbottle_xiranenr_grass_2',
     'item_muck_feces_1', 'item_muck_xiranite_1',
   ]);
   const CX_RANK = {};
@@ -1148,6 +1173,19 @@
     }).join('');
     document.getElementById('cx-note').textContent =
       `${ids.length} 件物品 · 点击任意物品查看它的制造链路`;
+    if (codex.classList.contains('on')) fitCodexNames();
+  }
+
+  /* 图鉴卡片的名字按可用宽度自动缩字号：长名（如「赤铜瓶（赫铜溶液）」）不再出省略号 */
+  function fitCodexNames() {
+    const max = 12, min = 7.5;
+    cxGrid.querySelectorAll('.cx-name').forEach(el => {
+      el.style.fontSize = '';
+      const avail = el.clientWidth - 3;
+      if (avail <= 0) return;
+      const w = textW(el.textContent, '700 ' + max + 'px ' + FF);
+      if (w > avail) el.style.fontSize = Math.max(min, max * avail / w).toFixed(1) + 'px';
+    });
   }
 
   function showCodex() {
@@ -1158,6 +1196,7 @@
     codex.classList.add('on');
     document.body.classList.add('in-codex');
     codex.scrollTop = 0;
+    fitCodexNames();
     updateCrumb();
   }
   function hideCodex() {
@@ -1387,7 +1426,7 @@
     }
     c.innerHTML = s + ticks;
   }
-  addEventListener('resize', () => { contours(); apply(); });
+  addEventListener('resize', () => { contours(); apply(); if (codex.classList.contains('on')) fitCodexNames(); });
 
   /* ---------------- 工具条 ---------------- */
   document.getElementById('tg-ratio').addEventListener('click', e => {

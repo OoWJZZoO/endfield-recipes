@@ -12,9 +12,10 @@
 - `assets/` 下的物品图标、机具图标，以及 `endfield_chain.html` 中内联的同名图标，
   均为《明日方舟：终末地》的游戏美术资源，版权归鹰角网络 / GRYPHLINE 所有。
   此处仅用于非商业的同人资料展示。
-- `endfield_recipes.json` 及其他派生产物中的配方数据，抓取自 `gameheads.gg` 的终末地条目页。
-  再分发时请保留该来源标注。
-- 物品图标的原始文件来自 `https://gameheads.gg/images/endfield/`。
+- `endfield_recipes.json` 及其他派生产物中的配方数据，来自 `rmxlinux/EndfieldData`
+  仓库的 1.7 版本 TableCfg 解包数据，再分发时请保留该来源标注。
+- 物品图标的原始文件来自 `https://gameheads.gg/images/endfield/` 与
+  `https://static.warfarin.wiki/v4/itemicon/`，按中文名/物品 id 迁移到 1.7 的物品 id。
 
 ## 游戏名称
 
