@@ -20,6 +20,7 @@ DEFAULT_ROOT = 'item_liquid_xiranite_enr'      # 液化重息壤（1.5 解包数
 DISMANTLER = 'item_port_dismantler_1'
 MIX_POOL = 'item_port_mix_pool_1'          # 反应池
 MIX_POOL_ENR = 'item_port_mix_pool_2'      # 扩容反应池
+MAGIC_SPAWNER = 'item_port_magic_spawner_1'  # 明晦炉：范围转化，不按台数×次数计
 GATHER_CATEGORIES = {'natural_resource', 'collection_material'}
 INF = 1e9
 
@@ -192,6 +193,7 @@ def build_payload():
             'tier': f.get('tier') or 0,
             'category': f.get('category') or '',
             'power': f.get('powerConsumption') or 0,
+            'array': fid == MAGIC_SPAWNER,
         } for fid, f in facs.items()},
         'recipes': [{
             'id': r['id'],

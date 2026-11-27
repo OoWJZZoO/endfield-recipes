@@ -282,11 +282,19 @@
   function metrics(n) {
     if (n.recipe) {
       const r = n.recipe;
+      const isArray = !!(FAC[r.fac] && FAC[r.fac].array);
       n.r1w = 15 + 5 + textW(facName(r.fac), F_R1);
       if (r.req) n.r1w = Math.max(n.r1w, 14 + 5 + textW(envName(r.req), '700 11.5px ' + FF));
-      const m = machineSplit(n.runs, r.t);
-      n.machines = m.machines;
-      n.r2text = `${m.machines}机器×各${trim(m.each)}次`;
+      if (isArray) {
+        // 明晦炉是范围转化设备：每 10 秒对范围内传送带物品判定一次，
+        // 台数由阵列覆盖决定，不能按「需求次数 ÷ 单台产能」折算。
+        n.machines = 1;
+        n.r2text = '范围转化';
+      } else {
+        const m = machineSplit(n.runs, r.t);
+        n.machines = m.machines;
+        n.r2text = `${m.machines}机器×各${trim(m.each)}次`;
+      }
       n.r2w = 10 + 4 + textW(n.r2text, F_R2);
       // 第三行写「单次配方」而不是把总需求再算一遍：物品块角标已经标了各级的总量，
       // 这里重复总数没有增量信息；同时把耗时从上一行挪下来，跟「秒/次」待在一起。
@@ -294,10 +302,11 @@
       const outs = r.outs.map(x => ({ n: itemName(x.i), a: trim(x.a) }));
       const insH = ins.map(x => `<b>${esc(x.n)}</b>×${x.a}`).join(' <span class="ar">+</span> ');
       const outsH = outs.map(x => `<b>${esc(x.n)}</b>×${x.a}`).join(' <span class="ar">+</span> ');
+      const unit = isArray ? '秒/判定' : '秒/次';
       n.ratioText = ins.map(x => x.n + '×' + x.a).join(' + ') + ' → ' +
-        outs.map(x => x.n + '×' + x.a).join(' + ') + ' · ' + trim(r.t) + '秒/次';
+        outs.map(x => x.n + '×' + x.a).join(' + ') + ' · ' + trim(r.t) + unit;
       n.ratioHTML = insH + ' <span class="ar">→</span> ' + outsH +
-        ' <span class="ar">·</span> ' + trim(r.t) + '秒/次';
+        ' <span class="ar">·</span> ' + trim(r.t) + unit;
     }
     (n.stack || []).forEach(metrics);
   }
@@ -920,10 +929,16 @@
       `</div></div><div class="x" data-act="close">✕</div></div>`);
 
     H.push(`<div class="sect"><h4>需求</h4>`);
-    H.push(`<div class="kv"><span class="k">需要量</span><span class="v">×${trim(n.amount)}${n.recipe ? `　生产 <em>${trim(n.runs)}</em> 次` : ''}</span></div>`);
+    const isArray = !!(n.recipe && FAC[n.recipe.fac] && FAC[n.recipe.fac].array);
+    H.push(`<div class="kv"><span class="k">需要量</span><span class="v">×${trim(n.amount)}${n.recipe ? (isArray ? `　转化 <em>${trim(n.runs)}</em> 个` : `　生产 <em>${trim(n.runs)}</em> 次`) : ''}</span></div>`);
     if (n.recipe) {
-      const m = machineSplit(n.runs, n.recipe.t);
-      H.push(`<div class="kv"><span class="k">计法</span><span class="v"><em>${m.machines}</em> 台机器 × 各 <em>${trim(m.each)}</em> 次 · ${trim(n.recipe.t)} 秒/次</span></div>`);
+      if (isArray) {
+        H.push(`<div class="kv"><span class="k">计法</span><span class="v">范围转化 · 每 <em>${trim(n.recipe.t)}</em> 秒判定一次</span></div>`);
+        H.push(`<div class="kv"><span class="k">转化</span><span class="v">范围内传送带物品，概率随阵列等级提高</span></div>`);
+      } else {
+        const m = machineSplit(n.runs, n.recipe.t);
+        H.push(`<div class="kv"><span class="k">计法</span><span class="v"><em>${m.machines}</em> 台机器 × 各 <em>${trim(m.each)}</em> 次 · ${trim(n.recipe.t)} 秒/次</span></div>`);
+      }
       H.push(`<div class="kv"><span class="k">机具</span><span class="v">${esc(facName(n.recipe.fac))}</span></div>`);
       // 环境要求直接跟在机具后面成一行：它跟机具一样是这条配方的属性，
       // 单开一节只放一行「环境」反而多一层层级

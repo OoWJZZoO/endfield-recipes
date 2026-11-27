@@ -49,6 +49,8 @@ commit `19d202b`）的 TableCfg 生成 `endfield_recipes.json`，`compose_filled
   与前端 `familyOf()` 同口径），以及同一台机具内投入/产出/耗时完全相同的重复配方。
   所以 README 写 400、产物里是 296，两个数都对。
 - 环境是**配方级**属性，不是机具级；同一台机具的不同配方有的需要有的不需要。
+- `facilities[].array` 为 true 的机具（明晦炉）是**范围转化**设备：每 10 秒对范围内传送带
+  物品判定一次，台数由阵列覆盖决定，不能套 `machineSplit()` 的「需求次数 ÷ 单台产能」。
 - 灌装瓶 / 耐压罐在解包表里的 `name` 只有通用瓶身名，`extract_game_data.py` 会按 id 后缀
   把内容物拼进显示名（`赤铜瓶（清水）`）；id、分类、图标规则不变。
 - localStorage 键 `endfield_chain_ui_v1` 内含数据集日期版本，数据集重抓后旧状态自动作废。
