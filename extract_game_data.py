@@ -67,6 +67,7 @@ GAS_CONTENT = {
 # 配方来源表之外、按机具规则生成的配方
 FUEL_FACILITY = 'item_port_power_sta_1'   # 热能池
 VAPORIZER_FACILITY = 'item_port_vaporizer_1'  # 气体散布机
+MAGIC_SPAWNER = 'item_port_magic_spawner_1'   # 明晦炉
 
 
 def git_show(repo, ref, path):
@@ -144,9 +145,15 @@ def build_recipes(tables, facility_of_machine):
     recipes = []
 
     for rid, r in mc.items():
+        # 1.7 的 TableCfg 把明晦炉的阵列转化配方也挂在 magic_balancer_1 下，
+        # 但 formation_magic_* 的产物是明 / 晦 / 衡物品，实际设备是明晦炉；
+        # 平衡炉只负责 magic_balancer_1_* 的合成配方。
+        facility = facility_of_machine.get(r['machineId'], r['machineId'])
+        if rid.startswith('formation_magic_'):
+            facility = MAGIC_SPAWNER
         recipe = {
             'id': rid,
-            'facilityId': facility_of_machine.get(r['machineId'], r['machineId']),
+            'facilityId': facility,
             # 解包数据里的 progressRound 就是游戏界面显示的单次耗时（秒）
             'craftingTime': r['progressRound'],
             'inputs': flatten(r['ingredients']),

@@ -6,7 +6,7 @@
 **在线预览：** <https://oowjzzoo.github.io/endfield-recipes/>
 
 数据规模：267 物品 / 400 条原始配方（构建时剔除 11 条扩容反应池重复、79 条瓶装拆解、14 条机具内重复，
-产物内 296 条）/ 22 机具，全部图标内联，无外部请求。数据源为 `rmxlinux/EndfieldData` 的 1.7 版本解包数据。
+产物内 296 条）/ 23 机具，全部图标内联，无外部请求。数据源为 `rmxlinux/EndfieldData` 的 1.7 版本解包数据。
 
 ## 交付物
 
@@ -14,7 +14,7 @@
 | --- | --- |
 | **`endfield_chain.html`** | **最终交付**。单文件、自包含（数据 + 全部图标以 data URI 内联），双击即可用浏览器打开，无需联网、无需本地服务器。 |
 | `assets/` | 下载/合成的图标母版（webp，128~256px） |
-| `endfield_recipes.json` | 原始数据集：267 物品 / 400 配方 / 22 机具（由 1.7 解包数据生成） |
+| `endfield_recipes.json` | 原始数据集：267 物品 / 400 配方 / 23 机具（由 1.7 解包数据生成） |
 | `src/` | 源码：`template.html` / `style.css` / `app.js` / `glyphs.js` |
 | `build_chain.py` | 构建脚本：选默认配方 → 归一化图标 → 内联打包 |
 | `extract_game_data.py` | 从 EndfieldData 的 TableCfg 生成 `endfield_recipes.json` |
@@ -36,7 +36,7 @@ python build_chain.py             # -> endfield_chain.html
 
 构建是**可复现**的：`build_chain.py` + `endfield_recipes.json` + `src/` + `assets/items/`
 在固定依赖版本下产出的 `endfield_chain.html` 逐字节一致（sha256
-`05d35ce6…3d6d`），Windows 本地构建与 Linux CI 构建结果完全相同
+`6b1694f2…487e`），Windows 本地构建与 Linux CI 构建结果完全相同
 （输出固定写为 LF 换行），因此 CI 发布的站点与本地打开的文件是同一份字节。
 
 部署走 GitHub Actions（`.github/workflows/pages.yml`）：推送到 `main` 后自动构建，
@@ -171,7 +171,7 @@ id 和图标规则都不变，只是便于搜索与辨认。
 - 物品图标：1.5 之前的母版来自 gameheads.gg；1.7 新增的 57 个物品里，53 个按官方 id 从
   warfarin.wiki 补齐（`https://static.warfarin.wiki/v4/itemicon/<id>.webp`），4 个耐压罐由合成补齐，
   共 267 个；EndfieldData 本身不含图片
-- 机具图标：手绘 SVG 单色 glyph（22 个），与原生胶囊里的白色机具图标风格一致
+- 机具图标：手绘 SVG 单色 glyph（23 个），与原生胶囊里的白色机具图标风格一致
 - 灌装瓶 / 耐压罐图标：按游戏做法用「瓶身 + 内容物图标」合成
   （`compose_filled.py`，内容物按瓶腹 alpha 质心定位、按瓶体宽度等比缩放，共 78 个）
 
@@ -196,7 +196,7 @@ id 和图标规则都不变，只是便于搜索与辨认。
   显示眼睛或直接终止）。点物品块左缘的眼睛按当前选用配方展开，再点收回；想换配方先点开眼睛，
   再用「其他配方」与「设为默认配方」切换。
 - **拆解机的瓶装拆解配方在构建时剔除**：它们的产出是液体 / 气体，与管道输送重复；
-  扩容反应池里与反应池完全相同的配方、以及 1.7 平衡炉里完全相同的模式副本也一并剔除。
+  扩容反应池里与反应池完全相同的配方、以及 1.7 明晦炉里完全相同的阵列转化副本也一并剔除。
   这些是 `build_chain.py` 的 `filter_recipes()` 有意为之，所以产物内配方数（296）少于
   原始数据集（400）。
 

@@ -6,7 +6,7 @@
   "stats": {
     "items": 267,
     "recipes": 400,
-    "facilities": 22
+    "facilities": 23
   },
   "items": [
     {
@@ -3059,6 +3059,17 @@
       "category": "production",
       "tier": 4,
       "powerConsumption": 50
+    },
+    {
+      "id": "item_port_magic_spawner_1",
+      "names": {
+        "zh": "明晦炉",
+        "en": "Forge of Luminance",
+        "ja": "晦明炉"
+      },
+      "category": "production",
+      "tier": 4,
+      "powerConsumption": 0
     },
     {
       "id": "item_port_mix_pool_1",
@@ -6982,7 +6993,7 @@
     },
     {
       "id": "formation_magic_heng_item_copper_enr_heng_1",
-      "facilityId": "item_port_magic_balancer_1",
+      "facilityId": "item_port_magic_spawner_1",
       "craftingTime": 10,
       "inputs": [
         {
@@ -6999,7 +7010,7 @@
     },
     {
       "id": "formation_magic_heng_item_copper_enr_heng_2",
-      "facilityId": "item_port_magic_balancer_1",
+      "facilityId": "item_port_magic_spawner_1",
       "craftingTime": 10,
       "inputs": [
         {
@@ -7016,7 +7027,7 @@
     },
     {
       "id": "formation_magic_heng_item_xiranite_enr_heng_1",
-      "facilityId": "item_port_magic_balancer_1",
+      "facilityId": "item_port_magic_spawner_1",
       "craftingTime": 10,
       "inputs": [
         {
@@ -7033,7 +7044,7 @@
     },
     {
       "id": "formation_magic_heng_item_xiranite_enr_heng_2",
-      "facilityId": "item_port_magic_balancer_1",
+      "facilityId": "item_port_magic_spawner_1",
       "craftingTime": 10,
       "inputs": [
         {
@@ -7050,7 +7061,7 @@
     },
     {
       "id": "formation_magic_hui_item_copper_hui_1",
-      "facilityId": "item_port_magic_balancer_1",
+      "facilityId": "item_port_magic_spawner_1",
       "craftingTime": 10,
       "inputs": [
         {
@@ -7067,7 +7078,7 @@
     },
     {
       "id": "formation_magic_hui_item_copper_hui_2",
-      "facilityId": "item_port_magic_balancer_1",
+      "facilityId": "item_port_magic_spawner_1",
       "craftingTime": 10,
       "inputs": [
         {
@@ -7084,7 +7095,7 @@
     },
     {
       "id": "formation_magic_hui_item_copper_hui_3",
-      "facilityId": "item_port_magic_balancer_1",
+      "facilityId": "item_port_magic_spawner_1",
       "craftingTime": 10,
       "inputs": [
         {
@@ -7101,7 +7112,7 @@
     },
     {
       "id": "formation_magic_hui_item_copper_hui_4",
-      "facilityId": "item_port_magic_balancer_1",
+      "facilityId": "item_port_magic_spawner_1",
       "craftingTime": 10,
       "inputs": [
         {
@@ -7118,7 +7129,7 @@
     },
     {
       "id": "formation_magic_hui_item_xiranite_hui_1",
-      "facilityId": "item_port_magic_balancer_1",
+      "facilityId": "item_port_magic_spawner_1",
       "craftingTime": 10,
       "inputs": [
         {
@@ -7135,7 +7146,7 @@
     },
     {
       "id": "formation_magic_hui_item_xiranite_hui_2",
-      "facilityId": "item_port_magic_balancer_1",
+      "facilityId": "item_port_magic_spawner_1",
       "craftingTime": 10,
       "inputs": [
         {
@@ -7152,7 +7163,7 @@
     },
     {
       "id": "formation_magic_hui_item_xiranite_hui_3",
-      "facilityId": "item_port_magic_balancer_1",
+      "facilityId": "item_port_magic_spawner_1",
       "craftingTime": 10,
       "inputs": [
         {
@@ -7169,7 +7180,7 @@
     },
     {
       "id": "formation_magic_hui_item_xiranite_hui_4",
-      "facilityId": "item_port_magic_balancer_1",
+      "facilityId": "item_port_magic_spawner_1",
       "craftingTime": 10,
       "inputs": [
         {
@@ -7186,7 +7197,7 @@
     },
     {
       "id": "formation_magic_ming_item_copper_ming_1",
-      "facilityId": "item_port_magic_balancer_1",
+      "facilityId": "item_port_magic_spawner_1",
       "craftingTime": 10,
       "inputs": [
         {
@@ -7203,7 +7214,7 @@
     },
     {
       "id": "formation_magic_ming_item_copper_ming_2",
-      "facilityId": "item_port_magic_balancer_1",
+      "facilityId": "item_port_magic_spawner_1",
       "craftingTime": 10,
       "inputs": [
         {
@@ -7220,7 +7231,7 @@
     },
     {
       "id": "formation_magic_ming_item_copper_ming_3",
-      "facilityId": "item_port_magic_balancer_1",
+      "facilityId": "item_port_magic_spawner_1",
       "craftingTime": 10,
       "inputs": [
         {
@@ -7237,7 +7248,7 @@
     },
     {
       "id": "formation_magic_ming_item_copper_ming_4",
-      "facilityId": "item_port_magic_balancer_1",
+      "facilityId": "item_port_magic_spawner_1",
       "craftingTime": 10,
       "inputs": [
         {
@@ -7254,7 +7265,7 @@
     },
     {
       "id": "formation_magic_ming_item_xiranite_ming_1",
-      "facilityId": "item_port_magic_balancer_1",
+      "facilityId": "item_port_magic_spawner_1",
       "craftingTime": 10,
       "inputs": [
         {
@@ -7271,7 +7282,7 @@
     },
     {
       "id": "formation_magic_ming_item_xiranite_ming_2",
-      "facilityId": "item_port_magic_balancer_1",
+      "facilityId": "item_port_magic_spawner_1",
       "craftingTime": 10,
       "inputs": [
         {
@@ -7288,7 +7299,7 @@
     },
     {
       "id": "formation_magic_ming_item_xiranite_ming_3",
-      "facilityId": "item_port_magic_balancer_1",
+      "facilityId": "item_port_magic_spawner_1",
       "craftingTime": 10,
       "inputs": [
         {
@@ -7305,7 +7316,7 @@
     },
     {
       "id": "formation_magic_ming_item_xiranite_ming_4",
-      "facilityId": "item_port_magic_balancer_1",
+      "facilityId": "item_port_magic_spawner_1",
       "craftingTime": 10,
       "inputs": [
         {

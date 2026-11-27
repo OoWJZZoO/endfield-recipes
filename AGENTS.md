@@ -32,7 +32,7 @@ commit `19d202b`）的 TableCfg 生成 `endfield_recipes.json`，`compose_filled
 | `src/app.js`、`src/style.css`、`src/template.html`、`src/glyphs.js` | 唯一的源码，**所有改动写在这里** |
 | `build_chain.py` | 构建脚本：过滤配方 → 选默认配方 → 归一化图标 → 内联打包 |
 | `endfield_chain.html` | **生成物，但入库**。永远不要直接编辑；改完 `src/` 必须重新构建 |
-| `endfield_recipes.json` | 原始数据集（267 物品 / 400 配方 / 22 机具，由 1.7 解包数据生成） |
+| `endfield_recipes.json` | 原始数据集（267 物品 / 400 配方 / 23 机具，由 1.7 解包数据生成） |
 | `assets/items/*.webp` | 图标母版，构建时读取，入库（341 个） |
 | `README.md` | 面向用户的说明。改界面后容易滞后，动 UI 时顺手核对 |
 
