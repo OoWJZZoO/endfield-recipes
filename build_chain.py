@@ -153,7 +153,9 @@ def icon_uri(path):
     canvas = Image.new('RGBA', (ICON_PX, ICON_PX), (0, 0, 0, 0))
     canvas.paste(im, ((ICON_PX - im.width) // 2, (ICON_PX - im.height) // 2), im)
     buf = io.BytesIO()
-    canvas.save(buf, 'WEBP', quality=82, method=6)
+    # method=6 是最慢的 WebP 压缩档，267 个图标要 3 分钟；method=4 快约 30 倍，
+    # 单图标只大 6% 左右，视觉无差别。
+    canvas.save(buf, 'WEBP', quality=82, method=4)
     return 'data:image/webp;base64,' + base64.b64encode(buf.getvalue()).decode('ascii')
 
 
