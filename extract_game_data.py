@@ -136,7 +136,9 @@ def flatten(groups):
 
 def signature(recipe):
     return (tuple(sorted((x['itemId'], x['amount']) for x in recipe['inputs'])),
-            tuple(sorted((x['itemId'], x['amount']) for x in recipe['outputs'])))
+            tuple(sorted((x['itemId'], x['amount']) for x in recipe['outputs'])),
+            tuple(sorted((x['itemId'], x['amount'], x['probability'])
+                         for x in recipe.get('byproducts') or [])))
 
 
 def build_recipes(tables, facility_of_machine):
@@ -161,6 +163,13 @@ def build_recipes(tables, facility_of_machine):
         }
         if r.get('gasEnv'):
             recipe['requiredGasEnv'] = ENV[r['gasEnv']]
+        bp = r.get('byproduct') or {}
+        if bp.get('id') and bp.get('prob'):
+            recipe['byproducts'] = [{
+                'itemId': bp['id'],
+                'amount': bp['count'],
+                'probability': bp['prob'],
+            }]
         if rid in limited:
             # 只保留「是不是活动限时配方」这一事实，供默认配方排序使用；
             # 具体活动 id 与界面无关，不写进数据集。
@@ -312,7 +321,7 @@ def main():
 
     used = set()
     for r in recipes:
-        for x in r['inputs'] + r['outputs']:
+        for x in r['inputs'] + r['outputs'] + (r.get('byproducts') or []):
             used.add(x['itemId'])
     items = build_items(tables, used, texts)
     facilities = build_facilities(tables, {r['facilityId'] for r in recipes}, texts)

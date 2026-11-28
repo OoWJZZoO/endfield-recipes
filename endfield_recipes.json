@@ -7865,6 +7865,13 @@
           "itemId": "item_gas_copper_bright_clear",
           "amount": 2
         }
+      ],
+      "byproducts": [
+        {
+          "itemId": "item_gas_copper_bright_turbid",
+          "amount": 2,
+          "probability": 50
+        }
       ]
     },
     {

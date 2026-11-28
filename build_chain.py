@@ -38,9 +38,11 @@ def is_gas(item):
 
 
 def recipe_sig(r):
-    """配方指纹：投入 / 产出 / 耗时 / 环境要求全都一样，就算同一条配方"""
+    """配方指纹：投入 / 产出 / 副产物 / 耗时 / 环境要求全都一样，就算同一条配方"""
     return (tuple(sorted((x['itemId'], x['amount']) for x in r['inputs'])),
             tuple(sorted((x['itemId'], x['amount']) for x in r['outputs'])),
+            tuple(sorted((x['itemId'], x['amount'], x['probability'])
+                         for x in r.get('byproducts') or [])),
             r['craftingTime'], r.get('requiredGasEnv') or '')
 
 
@@ -59,7 +61,7 @@ def filter_recipes(recipes, items):
             continue
         if r['facilityId'] == DISMANTLER and any(
                 o['itemId'] in items and (is_liquid(items[o['itemId']]) or is_gas(items[o['itemId']]))
-                for o in r['outputs']):
+                for o in r['outputs'] + (r.get('byproducts') or [])):
             dropped['bottle'] += 1
             continue
         key = (r['facilityId'], recipe_sig(r))
@@ -80,7 +82,7 @@ def load_dataset():
 
     by_output = {}
     for r in recipes:
-        for o in r['outputs']:
+        for o in r['outputs'] + (r.get('byproducts') or []):
             by_output.setdefault(o['itemId'], []).append(r)
 
     def gathered(iid):
@@ -121,7 +123,11 @@ def load_dataset():
             d = min(depth.get(inp['itemId'], INF), 9999)
             total += d
             deepest = max(deepest, d)
-        yield_ = next((o['amount'] for o in r['outputs'] if o['itemId'] == iid), 1) or 1
+        yield_ = next((o['amount'] for o in r['outputs'] if o['itemId'] == iid), None)
+        if yield_ is None:
+            bp = next((o for o in r.get('byproducts') or [] if o['itemId'] == iid), None)
+            yield_ = bp['amount'] * bp['probability'] / 100 if bp else 1
+        yield_ = yield_ or 1
         s += deepest * 1000 + total * 10 + len(r['inputs']) * 5 + r['craftingTime'] * 0.1
         s += (2 / yield_) * 10                # 同等条件下偏好单次产量高的
         return s
@@ -203,6 +209,8 @@ def build_payload():
             't': r['craftingTime'],
             'ins': [{'i': x['itemId'], 'a': x['amount']} for x in r['inputs']],
             'outs': [{'i': x['itemId'], 'a': x['amount']} for x in r['outputs']],
+            'byp': [{'i': x['itemId'], 'a': x['amount'], 'p': x['probability']}
+                    for x in (r.get('byproducts') or [])],
             'req': r.get('requiredGasEnv') or '',      # 需要的气体环境
             'env': r.get('producedGasEnv') or '',      # 气体散布机维持的环境
             'pw': r.get('producedPowerW') or 0,        # 热能池的发电功率

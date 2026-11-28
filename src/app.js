@@ -96,6 +96,7 @@
     REC[r.id] = r;
     if (!r.outs.length) { ENV.push(r); return; }
     r.outs.forEach(o => (BYOUT[o.i] = BYOUT[o.i] || []).push(r));
+    (r.byp || []).forEach(o => (BYOUT[o.i] = BYOUT[o.i] || []).push(r));
     r.ins.forEach(x => (BYIN[x.i] = BYIN[x.i] || []).push(r));
   });
 
@@ -125,7 +126,7 @@
     const kept = {};
     for (const id in store.defaults) {
       const rid = store.defaults[id];
-      if (REC[rid] && REC[rid].outs.some(o => o.i === id)) kept[id] = rid;
+      if (REC[rid] && produces(REC[rid], id)) kept[id] = rid;
     }
     return kept;
   })());
@@ -170,8 +171,15 @@
   const trim = x => Math.abs(x - Math.round(x)) < 1e-6 ? String(Math.round(x)) : String(Math.round(x * 100) / 100);
   const facName = id => (FAC[id] && FAC[id].zh) || id;
   const itemName = id => (ITEMS[id] && ITEMS[id].zh) || id;
-  const mainOut = r => r.outs[0].a;
-  const outAmtOf = (r, itemId) => { const o = r.outs.find(x => x.i === itemId); return (o || r.outs[0]).a; };
+  const produces = (r, itemId) =>
+    r.outs.some(o => o.i === itemId) || (r.byp || []).some(o => o.i === itemId);
+  const outAmtOf = (r, itemId) => {
+    const o = r.outs.find(x => x.i === itemId);
+    if (o) return o.a;
+    const b = (r.byp || []).find(x => x.i === itemId);
+    if (b) return b.a * b.p / 100;               // 概率副产物按期望产量折算
+    return (r.outs[0] || { a: 1 }).a;
+  };
 
   /* ---------------- 构树 ---------------- */
   function build(rootId) {
@@ -254,7 +262,7 @@
   function pickRecipe(itemId) {
     const rId = overrides[itemId];
     const cand = rId ? REC[rId] : null;
-    return (cand && cand.outs.some(o => o.i === itemId)) ? cand : null;
+    return (cand && produces(cand, itemId)) ? cand : null;
   }
 
   /* ---------------- 比例 / 尺寸 ---------------- */
@@ -263,8 +271,8 @@
     return {
       ins: r.ins.map(x => ({ n: itemName(x.i), a: trim(x.a * runs) })),
       outs: r.outs.map(x => ({ n: itemName(x.i), a: trim(x.a * runs), self: x.i === n.itemId })),
-      by: r.outs.filter(x => x.i !== n.itemId).map(x => ({ n: itemName(x.i), a: trim(x.a * runs) })),
-      selfBy: r.outs[0].i !== n.itemId,
+      by: (r.byp || []).map(x => ({ n: itemName(x.i), a: trim(x.a * runs), p: x.p })),
+      selfBy: (r.byp || []).some(x => x.i === n.itemId),
       selfAmt: trim(outAmtOf(r, n.itemId) * runs),
     };
   }
@@ -300,12 +308,17 @@
       // 这里重复总数没有增量信息；同时把耗时从上一行挪下来，跟「秒/次」待在一起。
       const ins = r.ins.map(x => ({ n: itemName(x.i), a: trim(x.a) }));
       const outs = r.outs.map(x => ({ n: itemName(x.i), a: trim(x.a) }));
+      const byp = (r.byp || []).map(x => ({ n: itemName(x.i), a: trim(x.a), p: x.p }));
       const insH = ins.map(x => `<b>${esc(x.n)}</b>×${x.a}`).join(' <span class="ar">+</span> ');
       const outsH = outs.map(x => `<b>${esc(x.n)}</b>×${x.a}`).join(' <span class="ar">+</span> ');
+      const bypText = byp.map(x => x.n + '×' + x.a + '（' + x.p + '%）').join(' + ');
+      const bypH = byp.map(x => `<b>${esc(x.n)}</b>×${x.a}<span class="one">（${x.p}%）</span>`).join(' + ');
       const unit = isArray ? '秒/判定' : '秒/次';
       n.ratioText = ins.map(x => x.n + '×' + x.a).join(' + ') + ' → ' +
-        outs.map(x => x.n + '×' + x.a).join(' + ') + ' · ' + trim(r.t) + unit;
+        outs.map(x => x.n + '×' + x.a).join(' + ') +
+        (byp.length ? ' + ' + bypText : '') + ' · ' + trim(r.t) + unit;
       n.ratioHTML = insH + ' <span class="ar">→</span> ' + outsH +
+        (byp.length ? ' <span class="ar">+</span> ' + bypH : '') +
         ' <span class="ar">·</span> ' + trim(r.t) + unit;
     }
     (n.stack || []).forEach(metrics);
@@ -963,9 +976,12 @@
         p.ins.map(x => `<b>${esc(x.n)}</b>×${x.a}`).join(' <span class="ar">+</span> ') +
         ` <span class="ar">→</span> ` +
         p.outs.map(x => `<b>${esc(x.n)}</b>×${x.a}`).join(' <span class="ar">+</span> ') +
+        (p.by.length ? ' <span class="ar">+</span> ' +
+          p.by.map(x => `<b>${esc(x.n)}</b>×${x.a}<span class="one">（${x.p}%）</span>`).join(' <span class="ar">+</span> ') : '') +
         `<br><span class="one">单次配方 ${trim(r.t)}秒/次</span><br>` +
         `<span class="one">` + esc(r.ins.map(x => itemName(x.i) + '×' + x.a).join(' + ')) + ' → ' +
-        esc(r.outs.map(x => itemName(x.i) + '×' + x.a).join(' + ')) + `</span>` +
+        esc(r.outs.map(x => itemName(x.i) + '×' + x.a).join(' + ')) +
+        ((r.byp || []).length ? ' + ' + esc((r.byp || []).map(x => itemName(x.i) + '×' + x.a + '（' + x.p + '%）').join(' + ')) : '') + `</span>` +
         `</div></div>`);
     }
 
@@ -980,7 +996,7 @@
           (r.req ? `<span class="env" style="background:${envCol(r.req)}">` +
             envGlyph(r.req) + `${esc(envName(r.req))}</span>` : '') +
           `<br>` +
-          `<span class="sub">${esc(r.ins.map(x => itemName(x.i) + '×' + x.a).join(' + '))} → ${esc(it.zh)}×${mainOut(r)}</span>` +
+          `<span class="sub">${esc(r.ins.map(x => itemName(x.i) + '×' + x.a).join(' + '))} → ${esc(it.zh)}×${trim(outAmtOf(r, n.itemId))}</span>` +
 
           `</div></div>`);
       });
