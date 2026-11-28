@@ -1189,35 +1189,63 @@
       CX_ORDER.filter(k => cxCount[k]).map(k => mk(k, FAM[k].n, cxCount[k])).join('');
   }
 
+  /* 网格只构建一次：物品集合在同一份数据里不会变，切分类只切卡片的显隐。
+     这样每次点分类不必重建 267 个节点、重新解码 267 张图标、再让整张网格重排一遍。
+     卡片自带 data-fam，隐藏掉不匹配的卡片后剩下的顺序与「先筛后排」完全一致。 */
+  let cxBuilt = false;
   function buildCodex() {
     buildCodexBar();
-    const rank = id => CX_RANK[id] === undefined ? 1e6 + (ITEMS[id].tier || 0) * 1e4 : CX_RANK[id];
-    const ids = Object.keys(ITEMS)
-      .filter(id => cxFilter === 'all' || familyOf(ITEMS[id]) === cxFilter)
-      .sort((a, b) => rank(a) - rank(b) ||
-        (ITEMS[a].zh || '').localeCompare(ITEMS[b].zh || '', 'zh'));
-    cxGrid.innerHTML = ids.map(id => {
-      const it = ITEMS[id], c = tierColor(it.tier);
-      return `<div class="cx-card" data-id="${esc(id)}" title="${esc(it.zh)} · T${it.tier || 1}">` +
-        `<div class="cx-thumb" style="--fam:${c}">` +
-        `<img src="${ICON.items[id] || PH}" alt="">` +
-        `<div class="cx-name">${esc(it.zh)}</div><div class="bar"></div></div></div>`;
-    }).join('');
-    document.getElementById('cx-note').textContent =
-      `${ids.length} 件物品 · 点击任意物品查看它的制造链路`;
-    if (codex.classList.contains('on')) fitCodexNames();
+    if (!cxBuilt) {
+      const rank = id => CX_RANK[id] === undefined ? 1e6 + (ITEMS[id].tier || 0) * 1e4 : CX_RANK[id];
+      const ids = Object.keys(ITEMS)
+        .sort((a, b) => rank(a) - rank(b) ||
+          (ITEMS[a].zh || '').localeCompare(ITEMS[b].zh || '', 'zh'));
+      cxGrid.innerHTML = ids.map(id => {
+        const it = ITEMS[id], c = tierColor(it.tier);
+        return `<div class="cx-card" data-id="${esc(id)}" data-fam="${familyOf(it)}" title="${esc(it.zh)} · T${it.tier || 1}">` +
+          `<div class="cx-thumb" style="--fam:${c}">` +
+          `<img src="${ICON.items[id] || PH}" alt="" decoding="async">` +
+          `<div class="cx-name">${esc(it.zh)}</div><div class="bar"></div></div></div>`;
+      }).join('');
+      cxBuilt = true;
+    }
+    applyCodexFilter();
   }
 
-  /* 图鉴卡片的名字按可用宽度自动缩字号：长名（如「赤铜瓶（赫铜溶液）」）不再出省略号 */
+  function applyCodexFilter() {
+    const cards = cxGrid.querySelectorAll('.cx-card');
+    let n = 0;
+    for (let i = 0; i < cards.length; i++) {
+      const off = cxFilter !== 'all' && cards[i].dataset.fam !== cxFilter;
+      if (cards[i].hidden !== off) cards[i].hidden = off;
+      if (!off) n++;
+    }
+    document.getElementById('cx-note').textContent =
+      `${n} 件物品 · 点击任意物品查看它的制造链路`;
+  }
+
+  /* 图鉴卡片的名字按可用宽度自动缩字号：长名（如「赤铜瓶（赫铜溶液）」）不再出省略号。
+     先把上一轮的字号统一清掉、再一次性读宽度、最后统一写字号 —— 写读交替会让每张卡
+     各触发一次强制重排（267 张卡就是 267 次布局）。隐藏的卡片宽度为 0，跳过。 */
   function fitCodexNames() {
     const max = 12, min = 7.5;
-    cxGrid.querySelectorAll('.cx-name').forEach(el => {
-      el.style.fontSize = '';
-      const avail = el.clientWidth - 3;
-      if (avail <= 0) return;
-      const w = textW(el.textContent, '700 ' + max + 'px ' + FF);
-      if (w > avail) el.style.fontSize = Math.max(min, max * avail / w).toFixed(1) + 'px';
-    });
+    const els = cxGrid.querySelectorAll('.cx-name');
+    const avail = new Array(els.length);
+    for (let i = 0; i < els.length; i++) els[i].style.fontSize = '';
+    for (let i = 0; i < els.length; i++) avail[i] = els[i].clientWidth - 3;
+    for (let i = 0; i < els.length; i++) {
+      const a = avail[i];
+      if (a <= 0) continue;
+      const w = textW(els[i].textContent, '700 ' + max + 'px ' + FF);
+      if (w > a) els[i].style.fontSize = Math.max(min, max * a / w).toFixed(1) + 'px';
+    }
+  }
+
+  /* 拖窗口时 resize 会连发，字号适配合并到下一帧跑一次 */
+  let cxFitRAF = 0;
+  function queueFitCodex() {
+    if (cxFitRAF) return;
+    cxFitRAF = requestAnimationFrame(() => { cxFitRAF = 0; fitCodexNames(); });
   }
 
   function showCodex() {
@@ -1239,9 +1267,11 @@
 
   cxBar.addEventListener('click', e => {
     const c = e.target.closest('.cx-chip');
-    if (!c) return;
+    if (!c || cxFilter === c.dataset.fam) return;   // 点已选中的分类不做任何重排
     cxFilter = c.dataset.fam;
-    buildCodex();
+    buildCodexBar();
+    applyCodexFilter();
+    fitCodexNames();
     saveStore();
   });
   cxGrid.addEventListener('click', e => {
@@ -1458,7 +1488,7 @@
     }
     c.innerHTML = s + ticks;
   }
-  addEventListener('resize', () => { contours(); apply(); if (codex.classList.contains('on')) fitCodexNames(); });
+  addEventListener('resize', () => { contours(); apply(); if (codex.classList.contains('on')) queueFitCodex(); });
 
   /* ---------------- 工具条 ---------------- */
   document.getElementById('tg-ratio').addEventListener('click', e => {
