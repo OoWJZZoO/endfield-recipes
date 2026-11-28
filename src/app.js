@@ -174,10 +174,12 @@
   const produces = (r, itemId) =>
     r.outs.some(o => o.i === itemId) || (r.byp || []).some(o => o.i === itemId);
   const outAmtOf = (r, itemId) => {
+    const bypP = (r.byp || []).reduce((s, x) => s + x.p, 0);
+    const mainP = r.excl ? Math.max(0, 100 - bypP) : 100;
     const o = r.outs.find(x => x.i === itemId);
-    if (o) return o.a;
+    if (o) return o.a * mainP / 100;
     const b = (r.byp || []).find(x => x.i === itemId);
-    if (b) return b.a * b.p / 100;               // 概率副产物按期望产量折算
+    if (b) return b.a * b.p / 100;               // 概率分支按期望产量折算
     return (r.outs[0] || { a: 1 }).a;
   };
 
@@ -268,9 +270,11 @@
   /* ---------------- 比例 / 尺寸 ---------------- */
   function ratioParts(n) {
     const r = n.recipe, runs = n.runs;
+    const bypP = (r.byp || []).reduce((s, x) => s + x.p, 0);
+    const mainP = r.excl ? Math.max(0, 100 - bypP) : 100;
     return {
       ins: r.ins.map(x => ({ n: itemName(x.i), a: trim(x.a * runs) })),
-      outs: r.outs.map(x => ({ n: itemName(x.i), a: trim(x.a * runs), self: x.i === n.itemId })),
+      outs: r.outs.map(x => ({ n: itemName(x.i), a: trim(x.a * runs), p: mainP, self: x.i === n.itemId })),
       by: (r.byp || []).map(x => ({ n: itemName(x.i), a: trim(x.a * runs), p: x.p })),
       selfBy: (r.byp || []).some(x => x.i === n.itemId),
       selfAmt: trim(outAmtOf(r, n.itemId) * runs),
@@ -314,12 +318,26 @@
       const bypText = byp.map(x => x.n + '×' + x.a + '（' + x.p + '%）').join(' + ');
       const bypH = byp.map(x => `<b>${esc(x.n)}</b>×${x.a}<span class="one">（${x.p}%）</span>`).join(' + ');
       const unit = isArray ? '秒/判定' : '秒/次';
-      n.ratioText = ins.map(x => x.n + '×' + x.a).join(' + ') + ' → ' +
-        outs.map(x => x.n + '×' + x.a).join(' + ') +
-        (byp.length ? ' + ' + bypText : '') + ' · ' + trim(r.t) + unit;
-      n.ratioHTML = insH + ' <span class="ar">→</span> ' + outsH +
-        (byp.length ? ' <span class="ar">+</span> ' + bypH : '') +
-        ' <span class="ar">·</span> ' + trim(r.t) + unit;
+      if (r.excl) {
+        // 互斥概率分支：主产出与 byproduct 不是相加，而是一次只出其中一种
+        const bypP = byp.reduce((s, x) => s + x.p, 0);
+        const mainP = Math.max(0, 100 - bypP);
+        const branches = outs.map(x => ({ n: x.n, a: x.a, p: mainP })).concat(byp);
+        n.ratioText = ins.map(x => x.n + '×' + x.a).join(' + ') + ' → ' +
+          branches.map(x => x.p + '% ' + x.n + '×' + x.a).join(' / ') +
+          ' · ' + trim(r.t) + unit;
+        n.ratioHTML = insH + ' <span class="ar">→</span> ' +
+          branches.map(x => `<span class="one">${x.p}%</span> <b>${esc(x.n)}</b>×${x.a}`)
+            .join(' <span class="ar">/</span> ') +
+          ' <span class="ar">·</span> ' + trim(r.t) + unit;
+      } else {
+        n.ratioText = ins.map(x => x.n + '×' + x.a).join(' + ') + ' → ' +
+          outs.map(x => x.n + '×' + x.a).join(' + ') +
+          (byp.length ? ' + ' + bypText : '') + ' · ' + trim(r.t) + unit;
+        n.ratioHTML = insH + ' <span class="ar">→</span> ' + outsH +
+          (byp.length ? ' <span class="ar">+</span> ' + bypH : '') +
+          ' <span class="ar">·</span> ' + trim(r.t) + unit;
+      }
     }
     (n.stack || []).forEach(metrics);
   }
@@ -972,16 +990,29 @@
     }
     if (n.recipe) {
       const r = n.recipe, p = ratioParts(n);
-      H.push(`<div class="sect"><h4>配方比例</h4><div class="ratio-box">` +
-        p.ins.map(x => `<b>${esc(x.n)}</b>×${x.a}`).join(' <span class="ar">+</span> ') +
-        ` <span class="ar">→</span> ` +
-        p.outs.map(x => `<b>${esc(x.n)}</b>×${x.a}`).join(' <span class="ar">+</span> ') +
-        (p.by.length ? ' <span class="ar">+</span> ' +
-          p.by.map(x => `<b>${esc(x.n)}</b>×${x.a}<span class="one">（${x.p}%）</span>`).join(' <span class="ar">+</span> ') : '') +
+      const bypP = (r.byp || []).reduce((s, x) => s + x.p, 0);
+      const mainP = Math.max(0, 100 - bypP);
+      let ratioHTML;
+      if (r.excl) {
+        const branches = p.outs.map(x => ({ n: x.n, a: x.a, p: mainP })).concat(p.by);
+        ratioHTML = p.ins.map(x => `<b>${esc(x.n)}</b>×${x.a}`).join(' <span class="ar">+</span> ') +
+          ` <span class="ar">→</span> ` +
+          branches.map(x => `<span class="one">${x.p}%</span> <b>${esc(x.n)}</b>×${x.a}`)
+            .join(' <span class="ar">/</span> ');
+      } else {
+        ratioHTML = p.ins.map(x => `<b>${esc(x.n)}</b>×${x.a}`).join(' <span class="ar">+</span> ') +
+          ` <span class="ar">→</span> ` +
+          p.outs.map(x => `<b>${esc(x.n)}</b>×${x.a}`).join(' <span class="ar">+</span> ') +
+          (p.by.length ? ' <span class="ar">+</span> ' +
+            p.by.map(x => `<b>${esc(x.n)}</b>×${x.a}<span class="one">（${x.p}%）</span>`).join(' <span class="ar">+</span> ') : '');
+      }
+      H.push(`<div class="sect"><h4>配方比例</h4><div class="ratio-box">` + ratioHTML +
         `<br><span class="one">单次配方 ${trim(r.t)}秒/次</span><br>` +
         `<span class="one">` + esc(r.ins.map(x => itemName(x.i) + '×' + x.a).join(' + ')) + ' → ' +
+        (r.excl ? mainP + '% ' : '') +
         esc(r.outs.map(x => itemName(x.i) + '×' + x.a).join(' + ')) +
-        ((r.byp || []).length ? ' + ' + esc((r.byp || []).map(x => itemName(x.i) + '×' + x.a + '（' + x.p + '%）').join(' + ')) : '') + `</span>` +
+        ((r.byp || []).length ? (r.excl ? ' / ' : ' + ') +
+          esc((r.byp || []).map(x => (r.excl ? x.p + '% ' : '') + itemName(x.i) + '×' + x.a + (r.excl ? '' : '（' + x.p + '%）')).join(r.excl ? ' / ' : ' + ')) : '') + `</span>` +
         `</div></div>`);
     }
 

@@ -43,6 +43,7 @@ def recipe_sig(r):
             tuple(sorted((x['itemId'], x['amount']) for x in r['outputs'])),
             tuple(sorted((x['itemId'], x['amount'], x['probability'])
                          for x in r.get('byproducts') or [])),
+            bool(r.get('byproductExclusive')),
             r['craftingTime'], r.get('requiredGasEnv') or '')
 
 
@@ -124,7 +125,11 @@ def load_dataset():
             total += d
             deepest = max(deepest, d)
         yield_ = next((o['amount'] for o in r['outputs'] if o['itemId'] == iid), None)
-        if yield_ is None:
+        if yield_ is not None:
+            if r.get('byproductExclusive'):
+                p = sum(o['probability'] for o in r.get('byproducts') or [])
+                yield_ *= max(0, 100 - p) / 100
+        else:
             bp = next((o for o in r.get('byproducts') or [] if o['itemId'] == iid), None)
             yield_ = bp['amount'] * bp['probability'] / 100 if bp else 1
         yield_ = yield_ or 1
@@ -211,6 +216,7 @@ def build_payload():
             'outs': [{'i': x['itemId'], 'a': x['amount']} for x in r['outputs']],
             'byp': [{'i': x['itemId'], 'a': x['amount'], 'p': x['probability']}
                     for x in (r.get('byproducts') or [])],
+            'excl': bool(r.get('byproductExclusive')),
             'req': r.get('requiredGasEnv') or '',      # 需要的气体环境
             'env': r.get('producedGasEnv') or '',      # 气体散布机维持的环境
             'pw': r.get('producedPowerW') or 0,        # 热能池的发电功率

@@ -7872,7 +7872,8 @@
           "amount": 2,
           "probability": 50
         }
-      ]
+      ],
+      "byproductExclusive": true
     },
     {
       "id": "gas_reactor_gas_copper_enr2_1",

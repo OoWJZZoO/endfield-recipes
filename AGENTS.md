@@ -51,8 +51,9 @@ commit `19d202b`）的 TableCfg 生成 `endfield_recipes.json`，`compose_filled
 - 环境是**配方级**属性，不是机具级；同一台机具的不同配方有的需要有的不需要。
 - `facilities[].array` 为 true 的机具（明晦炉）是**范围转化**设备：每 10 秒对范围内传送带
   物品判定一次，台数由阵列覆盖决定，不能套 `machineSplit()` 的「需求次数 ÷ 单台产能」。
-- `byproducts` 是概率副产物，不能并进 `outputs`：目前只有气体反应炉的「清型辉铜气 + 50% 浊型辉铜气」，
-  前端 `BYOUT` 也索引它，否则浊型会没有产出配方；算次数时副产物按 `amount × probability` 折算期望。
+- `byproducts` + `byproductExclusive` 表示**互斥概率分支**，不是额外产出：目前只有气体反应炉的
+  「50% 清型辉铜气×2 / 50% 浊型辉铜气×2」，没有必出产物；算次数时主分支和副产物都按
+  `amount × probability` 折算期望，不能相加。前端 `BYOUT` 也要索引副产物，否则浊型会没有产出配方。
 - 灌装瓶 / 耐压罐在解包表里的 `name` 只有通用瓶身名，`extract_game_data.py` 会按 id 后缀
   把内容物拼进显示名（`赤铜瓶（清水）`）；id、分类、图标规则不变。
 - localStorage 键 `endfield_chain_ui_v1` 内含数据集日期版本，数据集重抓后旧状态自动作废。

@@ -69,6 +69,10 @@ FUEL_FACILITY = 'item_port_power_sta_1'   # 热能池
 VAPORIZER_FACILITY = 'item_port_vaporizer_1'  # 气体散布机
 MAGIC_SPAWNER = 'item_port_magic_spawner_1'   # 明晦炉
 
+# 气体反应炉的 byproduct 是互斥分支，不是额外产出：实测 50% 清型 / 50% 浊型，
+# 没有必出产物。1.7 全表只有这一条 prob > 0，不能据此把 byproduct 统一当额外产出。
+EXCLUSIVE_BYPRODUCT = {'gas_reactor_gas_copper_bright_clear_1'}
+
 
 def git_show(repo, ref, path):
     r = subprocess.run(['git', '-C', repo, 'show', '%s:%s' % (ref, path)],
@@ -138,7 +142,8 @@ def signature(recipe):
     return (tuple(sorted((x['itemId'], x['amount']) for x in recipe['inputs'])),
             tuple(sorted((x['itemId'], x['amount']) for x in recipe['outputs'])),
             tuple(sorted((x['itemId'], x['amount'], x['probability'])
-                         for x in recipe.get('byproducts') or [])))
+                         for x in recipe.get('byproducts') or [])),
+            bool(recipe.get('byproductExclusive')))
 
 
 def build_recipes(tables, facility_of_machine):
@@ -170,6 +175,8 @@ def build_recipes(tables, facility_of_machine):
                 'amount': bp['count'],
                 'probability': bp['prob'],
             }]
+            if rid in EXCLUSIVE_BYPRODUCT:
+                recipe['byproductExclusive'] = True
         if rid in limited:
             # 只保留「是不是活动限时配方」这一事实，供默认配方排序使用；
             # 具体活动 id 与界面无关，不写进数据集。
